@@ -1,0 +1,84 @@
+@startuml
+
+title Class Diagram
+
+class Adress {
+  +string Street
+  +string City
+  +string Country
+  +int PostalCode
+}
+
+class Plug {
+    +string Price
+    +string Type
+    +int Capacity
+    +string ChargingSpeed
+    +int Rating
+    +string Image
+}
+
+class Charger {
+  +Adress Adress
+  +string Name
+  +string WorkTime
+  +string Description
+  +string Image
+  +Plug[] Plugs
+}
+
+class User {
+    +string Username
+    +string Password
+    +string Email
+}
+
+enum VehicleType {
+    CAR
+    BIKE
+    SCOOTER
+}
+
+class Vehicle {
+    +string Name
+    +VehicleType type
+}
+
+class RegisteredUser {
+    +Vehicle[] vehicles
+    +Bonus BonusCategory
+    +boolean Banned
+}
+
+User <|-- RegisteredUser
+User <|-- UnregisteredUser
+User <|-- Administrator
+
+class Charging {
+    +user RegisteredUser
+    +string startTime
+}
+
+class Review {
+    +user RegisteredUser
+    +string Content
+}
+
+class Rate {
+    +user RegisteredUser
+    +charger Charger
+    +int Rate
+}
+
+enum Bonus {
+    BRONZE
+    SILVER
+    GOLD
+    PLATINUM
+}
+
+class Report {
+    +string Content
+}
+
+@enduml
