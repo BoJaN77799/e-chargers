@@ -1,0 +1,9 @@
+{
+	"/echargers": {
+		"target": "https://localhost:50000/",
+		"secure": false,
+		"pathRewrite": {
+			"^/echargers": ""
+		}
+	}
+}

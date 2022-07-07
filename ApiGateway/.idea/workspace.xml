@@ -4,7 +4,30 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a4359a38-3706-42fc-8869-f9310e26cfb7" name="Changes" comment="" />
+    <list default="true" id="a4359a38-3706-42fc-8869-f9310e26cfb7" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/.browserslistrc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/.editorconfig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/angular.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/karma.conf.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/package-lock.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/src/assets/.gitkeep" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/src/environments/environment.prod.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/src/environments/environment.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/src/favicon.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/src/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/src/main.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/src/polyfills.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/src/styles.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/src/test.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/tsconfig.app.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/tsconfig.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/tsconfig.spec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../e-chargers.puml" beforeDir="false" afterPath="$PROJECT_DIR$/../e-chargers.puml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -32,27 +55,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "DefaultGoTemplateProperty": "Go File",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.go.format.on.save.advertiser.fired": "true",
-    "RunOnceActivity.go.formatter.settings.were.checked": "true",
-    "RunOnceActivity.go.migrated.go.modules.settings": "true",
-    "RunOnceActivity.go.modules.go.list.on.any.changes.was.set": "true",
-    "RunOnceActivity.go.watchers.conflict.with.on.save.actions.check.performed": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "configurable..is.expanded": "false",
-    "configurable.GoLibrariesConfigurable.is.expanded": "true",
-    "go.import.settings.migrated": "true",
-    "last_opened_file_path": "C:/Users/Baltazar",
-    "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "settings.editor.selected.configurable": "go.dep"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;DefaultGoTemplateProperty&quot;: &quot;Go File&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.format.on.save.advertiser.fired&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.migrated.go.modules.settings&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.modules.go.list.on.any.changes.was.set&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.watchers.conflict.with.on.save.actions.check.performed&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;configurable..is.expanded&quot;: &quot;false&quot;,
+    &quot;configurable.GoLibrariesConfigurable.is.expanded&quot;: &quot;true&quot;,
+    &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Baltazar&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;go.dep&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="go build ApiGateway" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true">
       <module name="ApiGateway" />

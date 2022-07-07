@@ -31,6 +31,8 @@ class User {
     +string Username
     +string Password
     +string Email
+    +string Fristname
+    +string Lastname
 }
 
 enum VehicleType {
