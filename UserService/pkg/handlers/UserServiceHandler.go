@@ -11,7 +11,7 @@ import (
 )
 
 func HelloWorld(w http.ResponseWriter, r *http.Request) {
-	json.NewEncoder(w).Encode("Hello World")
+	json.NewEncoder(w).Encode("Hello World from UserService")
 }
 
 func (h handler) AddUser(w http.ResponseWriter, r *http.Request) {
