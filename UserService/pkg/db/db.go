@@ -42,8 +42,6 @@ func Init() {
 	Db, err = gorm.Open(dialect, connection)
 	if err != nil {
 		log.Fatal(err)
-	} else {
-		fmt.Println("Connection to DB successfully.")
 	}
 
 	// drop tables if exist

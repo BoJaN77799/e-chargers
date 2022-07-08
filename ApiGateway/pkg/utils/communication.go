@@ -12,6 +12,10 @@ var BaseUserServicePath, _ = roundRobinScheduler.New(
 	&url.URL{Host: "http://localhost:50001/api/users"},
 )
 
+var BaseChargerServicePath, _ = roundRobinScheduler.New(
+	&url.URL{Host: "http://localhost:50002/api/chargers"},
+)
+
 func DelegateResponse(response *http.Response, w http.ResponseWriter) {
 	w.Header().Set("Content-Type", response.Header.Get("Content-Type"))
 	w.Header().Set("Content-Length", response.Header.Get("Content-Length"))
