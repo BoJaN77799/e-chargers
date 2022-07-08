@@ -52,7 +52,7 @@ export class RegistrationComponent implements OnInit {
 
     this.authService.register(regDTO).subscribe((result: any) => {
       this.snackBarService.openSnackBar(result.body);
-      this.router.navigate(["mh-app/auth/login"]);
+      this.router.navigate(["myapp/auth/login"]);
     },
       (err: any) => {
         this.snackBarService.openSnackBar(err.error);

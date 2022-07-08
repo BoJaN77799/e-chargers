@@ -3,14 +3,13 @@ package db
 import (
 	"fmt"
 	"log"
-	"net/url"
 	"user_service/pkg/models"
 
-	"gorm.io/driver/postgres"
-	"gorm.io/gorm"
+	"github.com/jinzhu/gorm"
+	_ "github.com/jinzhu/gorm/dialects/postgres"
 )
 
-type DBConfiguration struct {
+type Configuration struct {
 	User     string
 	Password string
 	Host     string
@@ -18,48 +17,65 @@ type DBConfiguration struct {
 	DBName   string
 }
 
-func Init() *gorm.DB {
-	// dbURL := "postgres://pg:admin@localhost:5432/usersDB"
+var (
+	users = []models.User{
+		{Email: "admin@example.com", Username: "admin", Password: "$2a$12$IVzSpWrAgeWXUak/RIocxOk2k4mGJUAsOh9/.Dzuhl0LmUrdmT64O", Firstname: "Adminko", Lastname: "Adminic", Role: models.Administrator},
+	}
+)
 
-	// dbURL := "host=localhost user=pg password=admin dbname=usersDB port=5432 sslmode=disable"
+var Db *gorm.DB
+var err error
 
-	// db, err := gorm.Open(postgres.Open(dbURL), &gorm.Config{})
+func Init() {
+	conf := CreateConfiguration()
 
-	// if err != nil {
-	// 	log.Fatalln(err)
-	// }
+	connection := fmt.Sprintf(
+		"host=%s user=%s dbname=%s sslmode=disable password=%s port=%d",
+		conf.Host,
+		conf.User,
+		conf.DBName,
+		conf.Password,
+		conf.Port,
+	)
+	dialect := "postgres"
 
-	// db, err := gorm.Open("postgres", "host=localhost port=5432 user=pg dbname=usersDB password=admin")
-	// if err != nil {
-	// 	panic("failed to connect database")
-	// }
+	Db, err = gorm.Open(dialect, connection)
+	if err != nil {
+		log.Fatal(err)
+	} else {
+		fmt.Println("Connection to DB successfully.")
+	}
 
-	var conf DBConfiguration
+	// drop tables if exist
+	DropTables()
+
+	// create tables
+	AutoMigrateTables()
+
+	// populating db
+	InitializeData()
+}
+
+func CreateConfiguration() Configuration {
+	var conf Configuration
 	conf.User = "postgres"
 	conf.Password = "admin"
 	conf.Host = "localhost"
 	conf.Port = 5432
 	conf.DBName = "usersDB"
+	return conf
+}
 
-	dsn := url.URL{
-		User:     url.UserPassword(conf.User, conf.Password),
-		Scheme:   "postgres",
-		Host:     fmt.Sprintf("%s:%d", conf.Host, conf.Port),
-		Path:     conf.DBName,
-		RawQuery: (&url.Values{"sslmode": []string{"disable"}}).Encode(),
+func DropTables() {
+	Db.DropTable("users")
+}
+
+func AutoMigrateTables() {
+	Db.AutoMigrate(&models.User{})
+}
+
+func InitializeData() {
+	for _, user := range users {
+		Db.Create(&user)
 	}
-
-	db, err := gorm.Open(postgres.Open(dsn.String()), &gorm.Config{})
-
-	if err != nil {
-		log.Fatalln(err)
-	}
-
-	// drop tables if exist
-	db.Migrator().DropTable(&models.User{})
-
-	// create table
-	db.AutoMigrate(&models.User{})
-
-	return db
 }

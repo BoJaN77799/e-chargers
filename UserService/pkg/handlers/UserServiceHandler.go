@@ -6,15 +6,18 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"strings"
+	"user_service/pkg/db/repository"
 	"user_service/pkg/models"
 	"user_service/pkg/utils"
 )
 
 func HelloWorld(w http.ResponseWriter, r *http.Request) {
+	utils.OKResponse(w)
 	json.NewEncoder(w).Encode("Hello World from UserService")
 }
 
-func (h handler) AddUser(w http.ResponseWriter, r *http.Request) {
+func AddUser(w http.ResponseWriter, r *http.Request) {
 
 	defer r.Body.Close()
 	body, err := ioutil.ReadAll(r.Body)
@@ -26,23 +29,18 @@ func (h handler) AddUser(w http.ResponseWriter, r *http.Request) {
 	var user models.User
 	json.Unmarshal(body, &user)
 
-	err = utils.CheckUsersInfo(user)
+	_, err = repository.CreateUser(user)
 	if err != nil {
-		w.Header().Add("Content-Type", "application/json")
-		w.WriteHeader(http.StatusBadRequest)
-		json.NewEncoder(w).Encode(err.Error())
+		fmt.Println(err.Error())
+		if strings.Contains(err.Error(), "username") {
+			utils.BadRequestResponse(w, "user with given username already exists")
+		}
+		if strings.Contains(err.Error(), "email") {
+			utils.BadRequestResponse(w, "user with given email already exists")
+		}
 		return
 	}
 
-	// registered user
-	user.Role = models.UserRole(2)
-
-	if result := h.DB.Create(&user); result.Error != nil {
-		fmt.Println(result.Error)
-	}
-
-	w.Header().Add("Content-Type", "application/json")
-	w.WriteHeader(http.StatusCreated)
-	json.NewEncoder(w).Encode("Created")
-
+	utils.CreatedResponse(w)
+	json.NewEncoder(w).Encode("user successfully created")
 }

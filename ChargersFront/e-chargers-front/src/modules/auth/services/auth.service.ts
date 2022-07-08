@@ -29,7 +29,7 @@ export class AuthService {
       responseType: "text"
     };
 
-    return this.http.post<HttpResponse<string>>("echargers/api/users/register", RegistrationDTO, queryParams);
+    return this.http.post<HttpResponse<string>>("echargers/api/users", RegistrationDTO, queryParams);
   }
 
   logout(): Observable<String> {
