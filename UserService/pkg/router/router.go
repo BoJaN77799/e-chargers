@@ -15,6 +15,7 @@ func HandleRequests() {
 	router := mux.NewRouter() // init router
 	router.HandleFunc("/api/users/hello", handlers.HelloWorld).Methods("GET")
 
+	router.HandleFunc("/api/users/login", handlers.Login).Methods("POST")
 	router.HandleFunc("/api/users", handlers.AddUser).Methods("POST")
 
 	log.Fatal(http.ListenAndServe(":50001", router))

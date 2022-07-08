@@ -11,7 +11,7 @@ export class RootLayoutPageComponent {
   constructor(public utilService: UtilService) { }
 
   isRole(role: string): boolean {
-    return this.utilService.isRoleInUserRoles(role);
+    return this.utilService.isRole(role);
   }
 
 }

@@ -22,7 +22,7 @@ export class RoleGuard implements CanActivate {
     // const info = jwt.decodeToken(token);
     const roles: string[] = expectedRoles.split("|");
     for (let i = 0; i < roles.length; i++) {
-      if (this.utilService.isRoleInUserRoles(roles[i]))
+      if (this.utilService.isRole(roles[i]))
         return true;
     }
 

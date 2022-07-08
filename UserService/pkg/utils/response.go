@@ -20,3 +20,8 @@ func OKResponse(w http.ResponseWriter) {
 	w.Header().Add("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 }
+
+func UnauthorizedResponse(w http.ResponseWriter) {
+	w.Header().Add("Content-Type", "application/json")
+	w.WriteHeader(http.StatusUnauthorized)
+}

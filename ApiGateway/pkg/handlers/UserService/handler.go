@@ -24,6 +24,31 @@ func HelloWorld(w http.ResponseWriter, r *http.Request) {
 	utils.DelegateResponse(response, w)
 }
 
+func Login(w http.ResponseWriter, r *http.Request) {
+
+	utils.SetupResponse(&w, r)
+	if r.Method == "OPTIONS" {
+		return
+	}
+
+	var loginDTO models.LoginDTO
+	data, _ := ioutil.ReadAll(r.Body)
+	json.NewDecoder(bytes.NewReader(data)).Decode(&loginDTO)
+
+	req, _ := http.NewRequest(http.MethodPost, utils.BaseUserServicePath.Next().Host+"/login", bytes.NewReader(data))
+	req.Header.Set("Accept", "application/json")
+	req.Header.Set("Content-Type", "application/json")
+	client := &http.Client{}
+	response, err := client.Do(req)
+
+	if err != nil {
+		w.WriteHeader(http.StatusGatewayTimeout)
+		return
+	}
+
+	utils.DelegateResponse(response, w)
+}
+
 func AddUser(w http.ResponseWriter, r *http.Request) {
 
 	utils.SetupResponse(&w, r)

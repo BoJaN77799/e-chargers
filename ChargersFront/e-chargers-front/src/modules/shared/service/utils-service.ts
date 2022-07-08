@@ -13,26 +13,13 @@ export class UtilService {
         return Math.ceil(totalItems / pageSize);
     }
 
-    public getLoggedUserRoles(): string[] {
+    public isRole(role: string): boolean {
         const item = sessionStorage.getItem("user");
 
         if (item) {
             const jwt: JwtHelperService = new JwtHelperService();
-            return jwt.decodeToken(item).roles; // ['oasd','asdsad']
-        }
-        return [];
-    }
-
-    public isRoleInUserRoles(role: string): boolean {
-        const item = sessionStorage.getItem("user");
-
-        if (item) {
-            const jwt: JwtHelperService = new JwtHelperService();
-            const roles: string[] = jwt.decodeToken(item).roles;
-            for (let i = 0; i < roles.length; i++) {
-                if (role === roles[i])
-                    return true;
-            }
+            const roleFromToken: string = jwt.decodeToken(JSON.parse(item).token).role;
+            return role === roleFromToken
         }
         return false;
     }

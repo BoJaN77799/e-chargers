@@ -14,7 +14,8 @@ func HandleRequests() {
 
 	// UserService
 	router.HandleFunc("/api/users/hello", UserService.HelloWorld).Methods("GET")
-	router.HandleFunc("/api/users", UserService.AddUser).Methods("POST")
+	router.HandleFunc("/api/users/login", UserService.Login).Methods("POST") // login
+	router.HandleFunc("/api/users", UserService.AddUser).Methods("POST")     // register
 
 	log.Fatal(http.ListenAndServe(":50000", router))
 }

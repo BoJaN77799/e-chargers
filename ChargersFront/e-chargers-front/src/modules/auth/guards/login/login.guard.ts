@@ -11,15 +11,9 @@ export class LoginGuard implements CanActivate {
 
   canActivate(): boolean {
     if (this.utilService.isLoggedIn()) {
-      if (this.utilService.isRoleInUserRoles("ADMIN")) {
-        this.router.navigate(["mh-app/admin"]);
+      if (this.utilService.isRole("Administrator")) {
+        this.router.navigate(["myapp/admin"]);
       }
-      // else if (this.utilService.isRoleInUserRoles("UNREGISTERED_USER")) {
-      //   this.router.navigate(["mh-app/user"]);
-      // }
-      // else if (this.utilService.isRoleInUserRoles("REGISTERED_USER")) {
-      //   this.router.navigate(["mh-app/user"]);
-      // }
       return false;
     }
     return true;

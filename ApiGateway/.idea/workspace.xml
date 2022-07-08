@@ -5,30 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a4359a38-3706-42fc-8869-f9310e26cfb7" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pkg/models/dtos.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../UserService/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../UserService/pkg/db/repository/users.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../UserService/pkg/utils/passwordHash.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../UserService/pkg/utils/reponse.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/ApiGateway.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ApiGateway.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../UserService/pkg/models/dtos.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pkg/handlers/UserService/handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/handlers/UserService/handler.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/proxy.conf.json" beforeDir="false" afterPath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/proxy.conf.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/src/modules/auth/pages/registration/registration.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/src/modules/auth/pages/registration/registration.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/src/modules/auth/pages/registration/registration.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/src/modules/auth/pages/registration/registration.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/src/modules/auth/services/auth.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/src/modules/auth/services/auth.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pkg/models/dtos.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/models/dtos.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pkg/router/router.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/router/router.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../UserService/.idea/UserService.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../UserService/.idea/UserService.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../UserService/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/../UserService/go.mod" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../UserService/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/../UserService/go.sum" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../UserService/pkg/db/db.go" beforeDir="false" afterPath="$PROJECT_DIR$/../UserService/pkg/db/db.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UserService/pkg/db/repository/users.go" beforeDir="false" afterPath="$PROJECT_DIR$/../UserService/pkg/db/repository/users.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../UserService/pkg/handlers/UserServiceHandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/../UserService/pkg/handlers/UserServiceHandler.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../UserService/pkg/handlers/handlers.go" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../UserService/pkg/models/user.go" beforeDir="false" afterPath="$PROJECT_DIR$/../UserService/pkg/models/user.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../UserService/pkg/router/router.go" beforeDir="false" afterPath="$PROJECT_DIR$/../UserService/pkg/router/router.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../UserService/pkg/utils/userValidator.go" beforeDir="false" afterPath="$PROJECT_DIR$/../UserService/pkg/utils/userValidator.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UserService/pkg/utils/reponse.go" beforeDir="false" afterPath="$PROJECT_DIR$/../UserService/pkg/utils/response.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,32 +46,32 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "DefaultGoTemplateProperty": "Go File",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.go.format.on.save.advertiser.fired": "true",
-    "RunOnceActivity.go.formatter.settings.were.checked": "true",
-    "RunOnceActivity.go.migrated.go.modules.settings": "true",
-    "RunOnceActivity.go.modules.go.list.on.any.changes.was.set": "true",
-    "RunOnceActivity.go.watchers.conflict.with.on.save.actions.check.performed": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "configurable..is.expanded": "false",
-    "configurable.GoLibrariesConfigurable.is.expanded": "true",
-    "go.import.settings.migrated": "true",
-    "last_opened_file_path": "C:/Users/Baltazar/Documents/GitHub/e-chargers/UserService",
-    "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "settings.editor.selected.configurable": "go.dep"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;DefaultGoTemplateProperty&quot;: &quot;Go File&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.format.on.save.advertiser.fired&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.migrated.go.modules.settings&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.modules.go.list.on.any.changes.was.set&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.watchers.conflict.with.on.save.actions.check.performed&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;configurable..is.expanded&quot;: &quot;false&quot;,
+    &quot;configurable.GoLibrariesConfigurable.is.expanded&quot;: &quot;true&quot;,
+    &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Baltazar/Documents/GitHub/e-chargers/UserService&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;go.dep&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "postgresql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;postgresql&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Baltazar\Documents\GitHub\e-chargers\UserService\pkg\db" />
@@ -139,16 +128,5 @@
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/../UserService/pkg/handlers/UserServiceHandler.go</url>
-          <line>33</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

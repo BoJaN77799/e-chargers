@@ -7,3 +7,8 @@ type UserDTO struct {
 	Firstname string `json:"firstname"`
 	Lastname  string `json:"lastname"`
 }
+
+type LoginDTO struct {
+	Username string `json:"username"`
+	Password string `json:"password"`
+}

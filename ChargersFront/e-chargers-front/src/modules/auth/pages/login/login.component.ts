@@ -48,23 +48,15 @@ export class LoginComponent implements OnInit {
       const token = JSON.stringify(result);
       sessionStorage.setItem("user", token);
 
-      if (this.utilService.isRoleInUserRoles("ROLE_ADMIN")) {
-        this.router.navigate(["mh-app/admin/users-view"]);
+      if (this.utilService.isRole("Administrator")) {
+        this.router.navigate(["myapp/admin/home"]);
       }
-      else if (this.utilService.isRoleInUserRoles("ROLE_OWNER")) {
-        this.router.navigate(["mh-app/user/user-home-page"]);
+      if (this.utilService.isRole("RegisteredUser")) {
+        this.router.navigate(["myapp/user/home"])
       }
-      else if (this.utilService.isRoleInUserRoles("ROLE_TENANT")) {
-        this.router.navigate(["mh-app/user/user-home-page"]);
-      }
-      else if (this.utilService.isRoleInUserRoles("ROLE_UNASSIGNED")) {
-        this.router.navigate(["mh-app/user/user-home-page"]);
-
-      }
-
     },
       (err: any) => {
-        this.snackBarService.openSnackBar(err.error.exception);
+        this.snackBarService.openSnackBar(err.error);
       }
     );
   }

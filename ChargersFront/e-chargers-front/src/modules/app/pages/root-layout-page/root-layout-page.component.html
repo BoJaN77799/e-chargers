@@ -1,11 +1,11 @@
 <div>
   <div class="col">
-    <app-header-admin *ngIf="isRole('ROLE_ADMIN')"></app-header-admin>
+    <app-header-admin *ngIf="isRole('Administrator')"></app-header-admin>
   </div>
-  <!-- <div class="col">
-    <app-header-user *ngIf="isRole('REGISTERED') || isRole('ROLE_TENANT') || isRole('ROLE_UNASSIGNED')">
+  <div class="col">
+    <app-header-user *ngIf="isRole('RegisteredUser')">
     </app-header-user>
-  </div> -->
+  </div>
 
   <div class="container-fluid" style="height: 100%;">
     <div class="row">
