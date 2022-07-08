@@ -12,9 +12,7 @@ class Adress {
 class Plug {
     +string Price
     +string Type
-    +int Capacity
     +string ChargingSpeed
-    +int Rating
     +string Image
 }
 
@@ -23,7 +21,9 @@ class Charger {
   +string Name
   +string WorkTime
   +string Description
+  +int Capacity
   +string Image
+  +int Rating
   +Plug[] Plugs
 }
 
