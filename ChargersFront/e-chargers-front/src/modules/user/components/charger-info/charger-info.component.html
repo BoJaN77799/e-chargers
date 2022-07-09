@@ -5,8 +5,24 @@
     <div [hidden]="charger === undefined">
         <img src="assets/img/marker-green-small.png">
         <p>{{charger?.name}}</p>
-        <br>
-        <p>{{charger?.capacity}}</p>
-        <br>
-    </div>    
+        <p>{{charger?.work_time}}</p>
+        <p>{{charger?.address?.street}} - {{charger?.address?.city}} - {{charger?.address?.country}} -
+            {{charger?.address?.postal_code}}</p>
+        <p>{{charger?.description}}</p>
+        <p>Plugs:</p>
+        <table>
+            <thead>
+                <th>Type</th>
+                <th>Price (per h)</th>
+                <th>Charge speed</th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let plug of charger?.plugs">
+                    <td>{{plug.type}}</td>
+                    <td>{{plug.price_per_hour}}</td>
+                    <td>{{plug.charging_speed}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>

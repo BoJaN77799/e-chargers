@@ -15,6 +15,9 @@ export class UserHomeComponent implements OnInit {
 
   selectedCharger: ChargerDTO | undefined
 
+  // search
+  searchOpened: boolean = true
+
   constructor(private chargerService: ChargerService) {
     this.chargers = []
     this.chargersToMap = []
@@ -41,6 +44,10 @@ export class UserHomeComponent implements OnInit {
 
   setSelectedCharger(charger: ChargerDTO) {
     this.selectedCharger = charger;
+  }
+
+  toggleSearch() {
+    this.searchOpened = !this.searchOpened;
   }
 
 }

@@ -6,8 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="a454bf53-eb52-496a-a731-e05fe6bbae90" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pkg/router/router.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/router/router.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pkg/utils/communication.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/utils/communication.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ChargerService/pkg/db/db.go" beforeDir="false" afterPath="$PROJECT_DIR$/../ChargerService/pkg/db/db.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/src/modules/user/components/charger-info/charger-info.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/src/modules/user/components/charger-info/charger-info.component.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

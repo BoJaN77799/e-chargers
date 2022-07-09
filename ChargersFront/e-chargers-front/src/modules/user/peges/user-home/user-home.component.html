@@ -1,7 +1,10 @@
-<p style="visibility: hidden;">user-home works!</p>
+<button class="btn btn-success search-button" (click)="toggleSearch()">{{searchOpened ? "Close search":
+    "Search"}}</button>
+
 <div class="row">
     <div class="col-3">
-        <app-charger-info [charger]="selectedCharger"></app-charger-info>
+        <app-charger-info [hidden]="searchOpened" [charger]="selectedCharger"></app-charger-info>
+        <app-search-chargers [hidden]="!searchOpened"></app-search-chargers>
     </div>
     <div class="col-9">
         <app-map-page [chargers]="chargersToMap" (selectedChargerEvent)="setSelectedCharger($event) "></app-map-page>
