@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/modules/auth/services/auth.service';
 import { SnackBarService } from 'src/modules/shared/service/snack-bar.service';
 import { UtilService } from 'src/modules/shared/service/utils-service';
 
@@ -9,10 +10,18 @@ import { UtilService } from 'src/modules/shared/service/utils-service';
 })
 export class HeaderAdminComponent implements OnInit {
 
-  constructor() { }
+  constructor(private authService: AuthService) {
+  }
 
   ngOnInit(): void {
-    return;
+  }
+
+  logout(): void {
+    this.authService.logout().subscribe((result) => {
+      console.log(result);
+    });
+
+    sessionStorage.removeItem("user");
   }
 
 }

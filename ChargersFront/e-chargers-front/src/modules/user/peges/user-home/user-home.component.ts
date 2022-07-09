@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Coordinates } from 'src/modules/shared/model/coordinates';
+import { ChargerDTO } from 'src/modules/shared/model/chargerDTO';
+import { ChargerService } from '../../service/chargerService';
 
 @Component({
   selector: 'app-user-home',
@@ -7,9 +10,37 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserHomeComponent implements OnInit {
 
-  constructor() { }
+  chargers: ChargerDTO[]
+  chargersToMap: ChargerDTO[]
+
+  selectedCharger: ChargerDTO | undefined
+
+  constructor(private chargerService: ChargerService) {
+    this.chargers = []
+    this.chargersToMap = []
+  }
 
   ngOnInit(): void {
+    this.loadChargers();
+  }
+
+  loadChargers() {
+    this.chargerService.getAllChargers().subscribe(
+      (response) => {
+        console.log(response.body)
+        this.chargers = response.body as ChargerDTO[]
+        this.chargers.forEach(chargerForMap => {
+          this.chargersToMap.push(chargerForMap)
+        });
+      },
+      (err) => {
+        console.log(err.error)
+      }
+    )
+  }
+
+  setSelectedCharger(charger: ChargerDTO) {
+    this.selectedCharger = charger;
   }
 
 }

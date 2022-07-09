@@ -15,7 +15,7 @@ export class RoleGuard implements CanActivate {
     const token = sessionStorage.getItem("user");
 
     if (!token) {
-      this.router.navigate(["myapp/auth/login"]);
+      this.router.navigate(["myapp/user/home"]);
       return false;
     }
 

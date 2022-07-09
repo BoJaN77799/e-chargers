@@ -5,38 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a454bf53-eb52-496a-a731-e05fe6bbae90" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/pkg/handlers/ChargerService/handler.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/ApiGateway.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ApiGateway.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmd/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pkg/handlers/UserService/handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/handlers/UserService/handler.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pkg/models/dtos.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/models/dtos.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pkg/router/router.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/router/router.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pkg/utils/communication.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/utils/communication.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ChargerService/cmd/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/../ChargerService/cmd/main.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../ChargerService/pkg/db/db.go" beforeDir="false" afterPath="$PROJECT_DIR$/../ChargerService/pkg/db/db.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ChargerService/pkg/db/repository/chargers.go" beforeDir="false" afterPath="$PROJECT_DIR$/../ChargerService/pkg/db/repository/chargers.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ChargerService/pkg/handlers/chargersHandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/../ChargerService/pkg/handlers/chargersHandler.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ChargerService/pkg/models/charger.go" beforeDir="false" afterPath="$PROJECT_DIR$/../ChargerService/pkg/models/charger.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ChargerService/pkg/models/dtos.go" beforeDir="false" afterPath="$PROJECT_DIR$/../ChargerService/pkg/models/dtos.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ChargerService/pkg/router/router.go" beforeDir="false" afterPath="$PROJECT_DIR$/../ChargerService/pkg/router/router.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ChargerService/pkg/utils/chargerValidator.go" beforeDir="false" afterPath="$PROJECT_DIR$/../ChargerService/pkg/utils/chargerValidator.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ChargerService/pkg/utils/response.go" beforeDir="false" afterPath="$PROJECT_DIR$/../ChargerService/pkg/utils/response.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../UserService/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../UserService/.idea/UserService.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../UserService/.idea/UserService.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../UserService/.idea/dataSources.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../UserService/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../UserService/cmd/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/../UserService/cmd/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../UserService/pkg/db/db.go" beforeDir="false" afterPath="$PROJECT_DIR$/../UserService/pkg/db/db.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../UserService/pkg/db/repository/users.go" beforeDir="false" afterPath="$PROJECT_DIR$/../UserService/pkg/db/repository/users.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../UserService/pkg/handlers/UserServiceHandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/../UserService/pkg/handlers/UserServiceHandler.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../UserService/pkg/models/dtos.go" beforeDir="false" afterPath="$PROJECT_DIR$/../UserService/pkg/models/dtos.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../UserService/pkg/models/user.go" beforeDir="false" afterPath="$PROJECT_DIR$/../UserService/pkg/models/user.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../UserService/pkg/router/router.go" beforeDir="false" afterPath="$PROJECT_DIR$/../UserService/pkg/router/router.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../UserService/pkg/utils/passwordHash.go" beforeDir="false" afterPath="$PROJECT_DIR$/../UserService/pkg/utils/passwordHash.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../UserService/pkg/utils/response.go" beforeDir="false" afterPath="$PROJECT_DIR$/../UserService/pkg/utils/response.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../UserService/pkg/utils/userValidator.go" beforeDir="false" afterPath="$PROJECT_DIR$/../UserService/pkg/utils/userValidator.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

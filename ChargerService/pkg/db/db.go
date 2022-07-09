@@ -21,7 +21,7 @@ var (
 	addresses = []models.Address{
 		{Street: "Bulevar cara Lazara 7", City: "Novi Sad", Country: "Serbia", PostalCode: 21000, Latitude: 45.244630, Longitude: 19.845820},
 		{Street: "Bulevar Oslobođenja 119", City: "Novi Sad", Country: "Serbia", PostalCode: 21000, Latitude: 45.245199, Longitude: 19.842804},
-		{Street: "Bulevar cara Lazara 119", City: "Novi Sad", Country: "Serbia", PostalCode: 21000, Latitude: 45.270740, Longitude: 19.832450},
+		{Street: "Sentandrejski put 24a", City: "Novi Sad", Country: "Serbia", PostalCode: 21000, Latitude: 45.270740, Longitude: 19.832450},
 	}
 )
 

@@ -6,6 +6,10 @@
     <app-header-user *ngIf="isRole('RegisteredUser')">
     </app-header-user>
   </div>
+  <div class="col">
+    <app-header-common *ngIf="!isRole('RegisteredUser') || !isRole('Administrator')">
+    </app-header-common>
+  </div>
 
   <div class="container-fluid" style="height: 100%;">
     <div class="row">

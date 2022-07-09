@@ -6,8 +6,6 @@ export const UserRoutes: Routes = [
   {
     path: "home",
     pathMatch: "full",
-    component: UserHomeComponent,
-    canActivate: [RoleGuard],
-    data: { expectedRoles: "RegisteredUser" },
+    component: UserHomeComponent
   },
 ];

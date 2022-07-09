@@ -10,10 +10,13 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 // import { DateFormatPipe } from './pipes/date-format.pipe';
 import { MatTableModule } from '@angular/material/table';
 import { Interceptor } from './interceptors/interceptor.interceptor';
+import { MapPageComponent } from './pages/map-page/map-page.component';
 
 @NgModule({
   declarations: [
 
+
+    MapPageComponent
   ],
   imports: [
     CommonModule,
@@ -21,6 +24,7 @@ import { Interceptor } from './interceptors/interceptor.interceptor';
     MatTableModule
   ],
   exports: [
+    MapPageComponent
   ],
   providers: [
     SnackBarService,

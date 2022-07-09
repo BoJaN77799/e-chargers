@@ -1,0 +1,12 @@
+<div>
+    <div [hidden]="charger != undefined">
+        <p> Select one charger</p>
+    </div>
+    <div [hidden]="charger === undefined">
+        <img src="assets/img/marker-green-small.png">
+        <p>{{charger?.name}}</p>
+        <br>
+        <p>{{charger?.capacity}}</p>
+        <br>
+    </div>    
+</div>

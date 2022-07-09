@@ -1,4 +1,5 @@
 import { AfterViewInit, Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/modules/auth/services/auth.service';
 
 @Component({
@@ -10,17 +11,18 @@ export class HeaderCommonComponent implements AfterViewInit {
 
   constructor(
     private authService: AuthService,
+    private router: Router
   ) { }
 
   ngAfterViewInit(): void {
   }
 
-  logout(): void {
-    this.authService.logout().subscribe((result) => {
-      console.log(result);
-    });
+  login(): void {
+    this.router.navigate(["myapp/auth/login"])
+  }
 
-    sessionStorage.removeItem("user");
+  pushToHome() {
+    this.router.navigate(["myapp/user/home"])
   }
 
 }

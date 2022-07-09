@@ -1,1 +1,9 @@
-<p>user-home works!</p>
+<p style="visibility: hidden;">user-home works!</p>
+<div class="row">
+    <div class="col-3">
+        <app-charger-info [charger]="selectedCharger"></app-charger-info>
+    </div>
+    <div class="col-9">
+        <app-map-page [chargers]="chargersToMap" (selectedChargerEvent)="setSelectedCharger($event) "></app-map-page>
+    </div>
+</div>
