@@ -1,5 +1,5 @@
 export interface SearchDTO {
-    searchField: string
+    name: string
     workTimeFrom: number,
     workTimeTo: number,
     capacity: number,

@@ -39,7 +39,6 @@ export class MapPageComponent implements OnInit {
   loadChargers() {
     this.chargerService.getAllChargers().subscribe(
       (response) => {
-        console.log(response.body)
         this.chargers = response.body as ChargerDTO[]
         this.initMap()
       },

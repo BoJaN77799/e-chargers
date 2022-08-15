@@ -23,27 +23,33 @@ func CreateCharger(charger models.Charger) (models.Charger, error) {
 func GetAllChargers() []models.Charger {
 	var chargers []models.Charger
 
-	db.Db.Preload("Plugs").Preload("Address").Find(&chargers)
+	db.Db.Preload("Address").Find(&chargers)
 
 	return chargers
 }
 
-// func FindUserByUsernameAndPassword(chargername string, password string) (models.User, error) {
-// 	var charger models.User
+func SearchChargers(search models.SearchDTO) []models.Charger {
 
-// 	db.Db.Table("chargers").Where("chargername = ?", chargername).First(&charger)
+	var chargers []models.Charger
 
-// 	if charger.Id == 0 {
-// 		return charger, errors.New("invalid chargername")
-// 	}
+	db.Db.Preload("Address").Where(
+		"name like ?"+
+			"AND NOT ((work_time_from >= ? AND work_time_from >= ?) OR (work_time_to <= ? AND work_time_to <= ?))"+
+			"AND capacity <= ?"+
+			"AND price_per_hour BETWEEN ? AND  ?"+
+			"AND charging_speed_per_minute BETWEEN ? AND ?"+
+			"AND plugs like ?",
+		"%"+search.Name+"%",
+		search.WorkTimeFrom,
+		search.WorkTimeTo,
+		search.WorkTimeFrom,
+		search.WorkTimeTo,
+		search.Capacity,
+		search.PricePerHourFrom,
+		search.PricePerHourTo,
+		search.ChargingSpeedFrom,
+		search.ChargingSpeedTo,
+		"%"+search.Type+"%").Find(&chargers)
 
-// 	if !utils.CheckPasswordHash(password, charger.Password) {
-// 		return charger, errors.New(fmt.Sprintf("wrong password for chargername '%s'", charger.Username))
-// 	}
-
-// 	//if time.Now().Before(charger.BannedUntil) {
-// 	//	return charger, errors.New("You are banned until: " + charger.BannedUntil.String())
-// 	//}
-
-// 	return charger, nil
-// }
+	return chargers
+}

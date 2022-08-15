@@ -16,7 +16,7 @@ export class UserHomeComponent implements OnInit {
   selectedCharger: ChargerDTO | undefined
 
   // search
-  searchOpened: boolean = true
+  searchOpened: boolean = false
 
   constructor(private chargerService: ChargerService) {
     this.chargers = []
@@ -30,8 +30,9 @@ export class UserHomeComponent implements OnInit {
   loadChargers() {
     this.chargerService.getAllChargers().subscribe(
       (response) => {
-        console.log(response.body)
         this.chargers = response.body as ChargerDTO[]
+        console.log(this.chargers)
+        this.selectedCharger = this.chargers[0]
         this.chargers.forEach(chargerForMap => {
           this.chargersToMap.push(chargerForMap)
         });
@@ -44,10 +45,16 @@ export class UserHomeComponent implements OnInit {
 
   setSelectedCharger(charger: ChargerDTO) {
     this.selectedCharger = charger;
+    this.searchOpened = false;
   }
 
   toggleSearch() {
     this.searchOpened = !this.searchOpened;
+  }
+
+  changeChargers(chargers: ChargerDTO[]) {
+    console.log(chargers)
+    this.chargersToMap = chargers;
   }
 
 }

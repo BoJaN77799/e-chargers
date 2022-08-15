@@ -18,6 +18,7 @@ func HandleRequests() {
 
 	router.HandleFunc("/api/chargers", handlers.AddCharger).Methods("POST")
 	router.HandleFunc("/api/chargers", handlers.FindAllChargers).Methods("GET")
+	router.HandleFunc("/api/chargers/search", handlers.SearchChargers).Methods("POST")
 
 	log.Fatal(http.ListenAndServe(":50002", router))
 }

@@ -55,3 +55,27 @@ func FindAllChargers(w http.ResponseWriter, r *http.Request) {
 	utils.OKResponse(w)
 	json.NewEncoder(w).Encode(chargersDTO)
 }
+
+func SearchChargers(w http.ResponseWriter, r *http.Request) {
+
+	defer r.Body.Close()
+	body, err := ioutil.ReadAll(r.Body)
+
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	var searchDTO models.SearchDTO
+	json.Unmarshal(body, &searchDTO)
+
+	var chargersDTO []models.ChargerDTO
+
+	chargers := repository.SearchChargers(searchDTO)
+
+	for _, charger := range chargers {
+		chargersDTO = append(chargersDTO, charger.ToDTO())
+	}
+
+	utils.OKResponse(w)
+	json.NewEncoder(w).Encode(chargersDTO)
+}

@@ -3,15 +3,15 @@
 
     <div class="row" style="font-size: 13px">
         <mat-form-field class="example-form-field" appearance="outline" style="width: 100%; height:10%">
-            <mat-label>Charger name / Adress</mat-label>
-            <input id="searchFieldInput" matInput type="text" formControlName="searchField">
-            <button id="clearSearchField" *ngIf="searchFormGroup.controls['searchField'].value" matSuffix
-                mat-icon-button aria-label="Clear" (click)="searchFormGroup.controls['searchField'].setValue('')">
+            <mat-label>Charger name</mat-label>
+            <input id="nameInput" matInput type="text" formControlName="name">
+            <button id="clearName" *ngIf="searchFormGroup.controls['name'].value" matSuffix
+                mat-icon-button aria-label="Clear" (click)="searchFormGroup.controls['name'].setValue('')">
                 <mat-icon>close</mat-icon>
             </button>
         </mat-form-field>
         <small
-            *ngIf="(searchFormGroup.controls['searchField'].touched || searchFormGroup.controls['searchField'].dirty)">Invalid
+            *ngIf="(searchFormGroup.controls['name'].touched || searchFormGroup.controls['name'].dirty)">Invalid
             search input
         </small>
     </div>
@@ -51,13 +51,13 @@
         <div class="col-6" style="font-size: 13px">
             <mat-form-field class="example-form-field" appearance="outline" style="width: 100%">
                 <mat-label>From</mat-label>
-                <input matInput type="number" formControlName="pricePerHourFrom" min="50" max="700">
+                <input matInput type="number" formControlName="pricePerHourFrom" min="1" max="20" step="50">
             </mat-form-field>
         </div>
         <div class="col-6" style="font-size: 13px">
             <mat-form-field class="example-form-field" appearance="outline" style="width: 100%">
                 <mat-label>To</mat-label>
-                <input matInput type="number" formControlName="pricePerHourTo" min="50" max="700">
+                <input matInput type="number" formControlName="pricePerHourTo" min="1" max="20" step="50">
             </mat-form-field>
         </div>
     </div>

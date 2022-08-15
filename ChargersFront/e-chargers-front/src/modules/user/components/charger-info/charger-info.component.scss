@@ -2,3 +2,70 @@ th,
 td {
     border: 1px solid
 }
+
+.not-selected {
+    height: 600px;
+    line-height: 600px;
+    text-align: center;
+}
+
+.cover-img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+}
+
+.label {
+    font-size: 18px;
+    color: green;
+    display: inline;
+    font-weight: 500;
+}
+
+.smirk-content {
+    padding: 0;
+    margin: 0;
+}
+
+.charger-name {
+    font-size: 36px;
+    color: green;
+    font-weight: 500;
+}
+
+table {
+    border-collapse: collapse;
+    border: none !important;
+    margin:0;
+    padding: 0;
+}
+
+td {
+    border: none;
+    min-width: 130px;
+    padding: 7px;
+    text-align: center;
+}
+
+
+th {
+    background-color: rgba(0, 128, 0, 0.158);
+    border: none;
+    padding: 7px;
+    color: green;
+    text-align: center;
+}
+
+table tr:nth-child(odd) td {
+    background-color: rgba(0, 128, 0, 0.082);
+}
+
+table tr:nth-child(even) td {
+    background-color:rgba(0, 128, 0, 0.062);
+}
+
+
+.scroll-div {
+    overflow-y: scroll;
+    overflow-x: hidden;
+}

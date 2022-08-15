@@ -26,41 +26,42 @@ var (
 )
 
 var (
-	plugs = []models.Plug{
-		{PricePerHour: "300 RSD", Type: "Type 2", ChargingSpeedPerMinute: "22kW"},
-		{PricePerHour: "500 RSD", Type: "Type 2", ChargingSpeedPerMinute: "26kW"},
-		{PricePerHour: "350 RSD", Type: "Type 2", ChargingSpeedPerMinute: "22kW"},
-	}
-)
-
-var (
 	chargers = []models.Charger{
 		{
-			Name:        "Procredit Bank",
-			Address:     addresses[0],
-			WorkTime:    "07-20",
-			Description: "WiFi, Park, Shopping, EV Parking",
-			Capacity:    2,
-			Rating:      3.5,
-			Plugs:       []models.Plug{plugs[0]},
+			Name:                   "Procredit Bank",
+			Address:                addresses[0],
+			WorkTimeFrom:           7,
+			WorkTimeTo:             20,
+			Description:            "WiFi, Park, Shopping, EV Parking",
+			Capacity:               2,
+			Rating:                 3.5,
+			Plugs:                  "Type 1, Type 2, Type 3",
+			PricePerHour:           10,
+			ChargingSpeedPerMinute: 22,
 		},
 		{
-			Name:        "Promenada Shopping Mall",
-			Address:     addresses[1],
-			WorkTime:    "10-22",
-			Description: "WiFi, Food, Shopping, Free Parking",
-			Capacity:    4,
-			Rating:      4.3,
-			Plugs:       []models.Plug{plugs[1]},
+			Name:                   "Promenada Shopping Mall",
+			Address:                addresses[1],
+			WorkTimeFrom:           10,
+			WorkTimeTo:             22,
+			Description:            "WiFi, Food, Shopping, Free Parking",
+			Capacity:               4,
+			Rating:                 4.3,
+			Plugs:                  "Type 1, Type 2",
+			PricePerHour:           15,
+			ChargingSpeedPerMinute: 26,
 		},
 		{
-			Name:        "JKP Cistoca",
-			Address:     addresses[2],
-			WorkTime:    "07-16",
-			Description: "EV Parking",
-			Capacity:    3,
-			Rating:      2.5,
-			Plugs:       []models.Plug{plugs[2]},
+			Name:                   "JKP Cistoca",
+			Address:                addresses[2],
+			WorkTimeFrom:           7,
+			WorkTimeTo:             16,
+			Description:            "EV Parking",
+			Capacity:               3,
+			Rating:                 2.5,
+			Plugs:                  "Type 1, Type 3",
+			PricePerHour:           12,
+			ChargingSpeedPerMinute: 18,
 		},
 	}
 )
@@ -108,14 +109,11 @@ func CreateConfiguration() Configuration {
 
 func DropTables() {
 	Db.DropTableIfExists("addresses")
-	Db.DropTableIfExists("plugs")
 	Db.DropTableIfExists("chargers")
-	Db.DropTableIfExists("charger_plugs")
 }
 
 func AutoMigrateTables() {
 	Db.AutoMigrate(&models.Address{})
-	Db.AutoMigrate(&models.Plug{})
 	Db.AutoMigrate(&models.Charger{})
 }
 

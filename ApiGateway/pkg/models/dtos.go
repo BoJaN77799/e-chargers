@@ -22,13 +22,6 @@ type AddressDTO struct {
 	Latitude   float32 `json:"latitude"`
 }
 
-type PlugDTO struct {
-	PricePerHour           string `json:"price_per_hour"`
-	Type                   string `json:"type"`
-	ChargingSpeedPerMinute string `json:"charging_speed"`
-	//Image string   `json:"image" gorm:"not null"`
-}
-
 type ChargerDTO struct {
 	Name        string     `json:"name"`
 	Address     AddressDTO `json:"address"`
@@ -36,6 +29,18 @@ type ChargerDTO struct {
 	Capacity    int        `json:"capacity"`
 	Description string     `json:"description"`
 	Rating      float32    `json:"rating"`
-	Plugs       []PlugDTO  `json:"plugs"`
+	Plugs       string     `json:"plugs"`
 	//Image string   `json:"image" gorm:"not null"`
+}
+
+type SearchDTO struct {
+	Name              string `json:"name"`
+	WorkTimeFrom      int    `json:"workTimeFrom"`
+	WorkTimeTo        int    `json:"workTimeTo"`
+	Capacity          int    `json:"capacity"`
+	PricePerHourFrom  int    `json:"pricePerHourFrom"`
+	PricePerHourTo    int    `json:"pricePerHourTo"`
+	Type              string `json:"type"`
+	ChargingSpeedFrom int    `json:"chargingSpeedFrom"`
+	ChargingSpeedTo   int    `json:"chargingSpeedTo"`
 }

@@ -19,7 +19,7 @@ type Configuration struct {
 
 var (
 	users = []models.User{
-		{Email: "admin@example.com", Username: "admin", Password: "$2a$12$IVzSpWrAgeWXUak/RIocxOk2k4mGJUAsOh9/.Dzuhl0LmUrdmT64O", Firstname: "Adminko", Lastname: "Adminic", Role: models.Administrator},
+		{Email: "admin@example.com", Username: "admin", Password: "$2a$12$QxDPTEbONfGxoUvxIx5oW.ge3anxohFaFU3Nq1AMMbyYei0jOY.9i", Firstname: "Adminko", Lastname: "Adminic", Role: models.Administrator},
 	}
 )
 

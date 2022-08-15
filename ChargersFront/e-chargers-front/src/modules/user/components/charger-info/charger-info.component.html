@@ -1,28 +1,131 @@
 <div>
     <div [hidden]="charger != undefined">
-        <p> Select one charger</p>
+        <p class="not-selected"> Please select charger from map</p>
     </div>
     <div [hidden]="charger === undefined">
-        <img src="assets/img/marker-green-small.png">
-        <p>{{charger?.name}}</p>
-        <p>{{charger?.work_time}}</p>
-        <p>{{charger?.address?.street}} - {{charger?.address?.city}} - {{charger?.address?.country}} -
-            {{charger?.address?.postal_code}}</p>
-        <p>{{charger?.description}}</p>
-        <p>Plugs:</p>
-        <table>
-            <thead>
-                <th>Type</th>
-                <th>Price (per h)</th>
-                <th>Charge speed</th>
-            </thead>
-            <tbody>
-                <tr *ngFor="let plug of charger?.plugs">
-                    <td>{{plug.type}}</td>
-                    <td>{{plug.price_per_hour}}</td>
-                    <td>{{plug.charging_speed}}</td>
-                </tr>
-            </tbody>
-        </table>
+        <img class="cover-img" src="assets/img/marker-green-small.png">
+        <div>
+            <p class="charger-name">{{charger?.name}}</p>
+        </div>
+        <div>
+            <p class="label">Working hours</p>
+            <p class="working-hours content">{{charger?.work_time}}</p>
+        </div>
+        <div>
+            <p class="label">Address</p>
+            <p class="smirk-content"> {{charger?.address?.street}} </p>
+            <p class="smirk-content"> {{charger?.address?.postal_code}} {{charger?.address?.city}},
+                {{charger?.address?.country}} </p>
+
+        </div>
+        <div>
+            <p></p>
+            <p class="label">Description</p>
+            <p> {{charger?.description}}</p>
+        </div>
+
+        <div>
+            <p class="label">Plugs</p>
+            <table>
+                <thead>
+                    <th>Type</th>
+                    <th>Price (per h)</th>
+                    <th>Charge speed</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let plug of charger?.plugs">
+                        <td style="font-weight: 550">{{plug}}</td>
+                        <td>{{charger?.price_per_hour}}</td>
+                        <td>{{charger?.charging_speed}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- <div>
+            <p class="label">Plugs</p>
+            <table>
+                <thead>
+                    <th>Type</th>
+                    <th>Price (per h)</th>
+                    <th>Charge speed</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let plug of charger?.plugs">
+                        <td>{{plug.type}}</td>
+                        <td>{{plug.price_per_hour}}</td>
+                        <td>{{plug.charging_speed}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <p class="label">Plugs</p>
+            <table>
+                <thead>
+                    <th>Type</th>
+                    <th>Price (per h)</th>
+                    <th>Charge speed</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let plug of charger?.plugs">
+                        <td>{{plug.type}}</td>
+                        <td>{{plug.price_per_hour}}</td>
+                        <td>{{plug.charging_speed}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <p class="label">Plugs</p>
+            <table>
+                <thead>
+                    <th>Type</th>
+                    <th>Price (per h)</th>
+                    <th>Charge speed</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let plug of charger?.plugs">
+                        <td>{{plug.type}}</td>
+                        <td>{{plug.price_per_hour}}</td>
+                        <td>{{plug.charging_speed}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <p class="label">Plugs</p>
+            <table>
+                <thead>
+                    <th>Type</th>
+                    <th>Price (per h)</th>
+                    <th>Charge speed</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let plug of charger?.plugs">
+                        <td>{{plug.type}}</td>
+                        <td>{{plug.price_per_hour}}</td>
+                        <td>{{plug.charging_speed}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <p class="label">Plugs</p>
+            <table>
+                <thead>
+                    <th>Type</th>
+                    <th>Price (per h)</th>
+                    <th>Charge speed</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let plug of charger?.plugs">
+                        <td>{{plug.type}}</td>
+                        <td>{{plug.price_per_hour}}</td>
+                        <td>{{plug.charging_speed}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div> -->
     </div>
 </div>

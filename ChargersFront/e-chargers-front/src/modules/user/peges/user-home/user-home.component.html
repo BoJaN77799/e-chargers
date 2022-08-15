@@ -2,9 +2,9 @@
     "Search"}}</button>
 
 <div class="row">
-    <div class="col-3">
+    <div class="col-3 scroll-div">
         <app-charger-info [hidden]="searchOpened" [charger]="selectedCharger"></app-charger-info>
-        <app-search-chargers [hidden]="!searchOpened"></app-search-chargers>
+        <app-search-chargers [hidden]="!searchOpened" (searchedChargersEvent)="changeChargers($event)"></app-search-chargers>
     </div>
     <div class="col-9">
         <app-map-page [chargers]="chargersToMap" (selectedChargerEvent)="setSelectedCharger($event) "></app-map-page>

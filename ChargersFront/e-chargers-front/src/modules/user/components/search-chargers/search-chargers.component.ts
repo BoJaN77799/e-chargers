@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ChargerDTO } from 'src/modules/shared/model/chargerDTO';
 import { SnackBarService } from 'src/modules/shared/service/snack-bar.service';
 import { SearchDTO } from '../../model/searchDTO';
+import { ChargerService } from '../../service/chargerService';
 
 @Component({
   selector: 'app-search-chargers',
@@ -10,16 +12,19 @@ import { SearchDTO } from '../../model/searchDTO';
 })
 export class SearchChargersComponent implements OnInit {
 
+  @Output()
+  searchedChargersEvent = new EventEmitter<ChargerDTO[]>();
+
   public searchFormGroup: FormGroup;
 
-  constructor(private fb: FormBuilder, private snackBarService: SnackBarService) {
+  constructor(private fb: FormBuilder, private snackBarService: SnackBarService, private chargerService: ChargerService) {
     this.searchFormGroup = this.fb.group({
-      searchField: ['', Validators.required],
+      name: ['', Validators.required],
       workTimeFrom: ['00'],
       workTimeTo: [24],
       capacity: [10],
-      pricePerHourFrom: [50],
-      pricePerHourTo: [700],
+      pricePerHourFrom: [1],
+      pricePerHourTo: [20],
       type: ['', Validators.required],
       chargingSpeedFrom: [5],
       chargingSpeedTo: [35],
@@ -39,7 +44,7 @@ export class SearchChargersComponent implements OnInit {
       return
 
     let searchDTO: SearchDTO = {
-      "searchField": this.searchFormGroup.get('searchField')?.value,
+      "name": this.searchFormGroup.get('name')?.value,
       "workTimeFrom": Number(this.searchFormGroup.get('workTimeFrom')?.value),
       "workTimeTo": this.searchFormGroup.get('workTimeTo')?.value,
       "capacity": this.searchFormGroup.get('capacity')?.value,
@@ -53,6 +58,16 @@ export class SearchChargersComponent implements OnInit {
     console.log(searchDTO);
 
     this.snackBarService.openSnackBar("Sve dobro")
+
+    this.chargerService.search(searchDTO).subscribe(
+      (response) => {
+        console.log(response.body as ChargerDTO[])
+        this.searchedChargersEvent.emit(response.body as ChargerDTO[])
+      },
+      (err) => {
+        this.snackBarService.openSnackBar(err.error)
+      }
+    )
 
   }
 

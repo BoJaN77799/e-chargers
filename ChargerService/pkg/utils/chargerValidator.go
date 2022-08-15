@@ -20,8 +20,8 @@ func CheckChargersInfo(charger *models.Charger) error {
 		return errors.New("charger name is empty")
 	}
 
-	if len(charger.WorkTime) == 0 {
-		return errors.New("charger name is empty")
+	if charger.WorkTimeFrom < 0 || charger.WorkTimeTo > 24 {
+		return errors.New("charger work time is out of bounds (00, 24)")
 	}
 
 	if len(charger.Description) == 0 {
@@ -34,12 +34,6 @@ func CheckChargersInfo(charger *models.Charger) error {
 
 	if len(charger.Plugs) == 0 {
 		return errors.New("charger is without plugs")
-	}
-
-	err = CheckPlugsInfo(charger.Plugs)
-
-	if err != nil {
-		return err
 	}
 
 	return nil
@@ -69,34 +63,6 @@ func CheckAddressInfo(address models.Address) error {
 
 	if address.Longitude < -180 || address.Longitude > 180 {
 		return errors.New(fmt.Sprintf("address longitude is out of bounds (%d, %d)", -180, 180))
-	}
-
-	return nil
-}
-
-func CheckPlugsInfo(plugs []models.Plug) error {
-
-	for _, plug := range plugs {
-		err := CheckPlugInfo(plug)
-		if err != nil {
-			return err
-		}
-	}
-	return nil
-}
-
-func CheckPlugInfo(plug models.Plug) error {
-
-	if len(plug.PricePerHour) == 0 {
-		return errors.New("charger price is empty")
-	}
-
-	if len(plug.Type) == 0 {
-		return errors.New("plug type is empty")
-	}
-
-	if len(plug.ChargingSpeedPerMinute) == 0 {
-		return errors.New("plug charging speed per minute is empty")
 	}
 
 	return nil

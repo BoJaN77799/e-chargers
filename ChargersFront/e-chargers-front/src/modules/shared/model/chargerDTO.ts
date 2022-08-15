@@ -7,11 +7,6 @@ export interface AdressDTO {
     longitude: number
 }
 
-export interface PlugDTO {
-    price_per_hour: string
-    type: string
-    charging_speed: string
-}
 
 export interface ChargerDTO {
     name: string
@@ -19,5 +14,7 @@ export interface ChargerDTO {
     work_time: string,
     capacity: number,
     description: string,
-    plugs: PlugDTO[]
+    plugs: string[],
+    price_per_hour: string,
+    charging_speed: string
 }
