@@ -33,7 +33,7 @@ func FindUserByUsernameAndPassword(username string, password string) (models.Use
 
 	db.Db.Table("users").Where("username = ?", username).First(&user)
 
-	if user.Id == 0 {
+	if user.ID == 0 {
 		return user, errors.New("invalid username")
 	}
 
@@ -46,4 +46,67 @@ func FindUserByUsernameAndPassword(username string, password string) (models.Use
 	//}
 
 	return user, nil
+}
+
+func FindUserByUsername(username string) (models.User, error) {
+	var user models.User
+
+	db.Db.Table("users").Where("username = ?", username).First(&user)
+
+	if user.ID == 0 {
+		return user, errors.New("invalid username")
+	}
+
+	return user, nil
+}
+
+func CreateVehicle(vehicleDTO models.VehicleDTO) (models.Vehicle, error) {
+
+	var err error
+
+	var user models.User
+	user, err = FindUserByUsername(vehicleDTO.Username)
+
+	var vehicle models.Vehicle
+	vehicle.Name = vehicleDTO.Name
+	vehicle.VehicleType = models.ParseString(vehicleDTO.VehicleType)
+	vehicle.UserID = user.ID
+
+	if err != nil {
+		return vehicle, errors.New("user with given username doesn't exist")
+	}
+
+	err = utils.CheckVehicleInfo(vehicle)
+	if err != nil {
+		return vehicle, err
+	}
+
+	if result := db.Db.Create(&vehicle); result.Error != nil {
+		return vehicle, result.Error
+	}
+
+	return vehicle, nil
+}
+
+func GetAllVehicles(userId uint) []models.Vehicle {
+	var vehicles []models.Vehicle
+
+	db.Db.Table("vehicles").Where("user_id = ?", userId).Find(&vehicles)
+
+	return vehicles
+}
+
+func DeleteVehicle(name string) error {
+
+	var vehicle models.Vehicle
+
+	db.Db.Table("vehicles").Where("name = ?", name).Find(&vehicle)
+
+	if vehicle.ID <= 0 {
+		return errors.New("vehicle with given name doesn't exist")
+	}
+
+	db.Db.Delete(&vehicle)
+
+	return nil
 }

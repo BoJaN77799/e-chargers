@@ -20,6 +20,16 @@ type Configuration struct {
 var (
 	users = []models.User{
 		{Email: "admin@example.com", Username: "admin", Password: "$2a$12$QxDPTEbONfGxoUvxIx5oW.ge3anxohFaFU3Nq1AMMbyYei0jOY.9i", Firstname: "Adminko", Lastname: "Adminic", Role: models.Administrator},
+		{Email: "boksimus@example.com", Username: "boksi", Password: "$2a$12$QxDPTEbONfGxoUvxIx5oW.ge3anxohFaFU3Nq1AMMbyYei0jOY.9i", Firstname: "Boksi", Lastname: "Mus", Role: models.RegisteredUser},
+		{Email: "velja_zajecar@example.com", Username: "velja", Password: "$2a$12$QxDPTEbONfGxoUvxIx5oW.ge3anxohFaFU3Nq1AMMbyYei0jOY.9i", Firstname: "Velja", Lastname: "Tomic", Role: models.RegisteredUser},
+	}
+)
+
+var (
+	vehicles = []models.Vehicle{
+		{Name: "Skutercic", VehicleType: models.SCOOTER, UserID: 2},
+		{Name: "Tesla Model 2", VehicleType: models.CAR, UserID: 2},
+		{Name: "Tesla Model 3", VehicleType: models.CAR, UserID: 3},
 	}
 )
 
@@ -65,15 +75,19 @@ func CreateConfiguration() Configuration {
 }
 
 func DropTables() {
-	Db.DropTable("users")
+	Db.DropTable("users", "vehicles")
 }
 
 func AutoMigrateTables() {
-	Db.AutoMigrate(&models.User{})
+	Db.AutoMigrate(&models.User{}, &models.Vehicle{})
 }
 
 func InitializeData() {
 	for _, user := range users {
 		Db.Create(&user)
+	}
+
+	for _, vehicle := range vehicles {
+		Db.Create(&vehicle)
 	}
 }

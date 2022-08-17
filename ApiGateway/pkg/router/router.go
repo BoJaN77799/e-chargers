@@ -17,6 +17,9 @@ func HandleRequests() {
 	router.HandleFunc("/api/users/hello", UserService.HelloWorld).Methods("GET")
 	router.HandleFunc("/api/users/login", UserService.Login).Methods("POST") // login
 	router.HandleFunc("/api/users", UserService.AddUser).Methods("POST")     // register
+	router.HandleFunc("/api/users/vehicles", UserService.AddVehicle).Methods("POST")
+	router.HandleFunc("/api/users/vehicles/{username}", UserService.GetVehicles).Methods("GET")
+	router.HandleFunc("/api/users/vehicles/{name}", UserService.DeleteVehicle).Methods("DELETE")
 
 	// ChargerService
 	router.HandleFunc("/api/chargers", ChargerService.AddCharger).Methods("POST")

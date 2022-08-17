@@ -38,3 +38,12 @@ func checkRegexPattern(regex string, value string) bool {
 	result, _ := regexp.MatchString(regex, value)
 	return result
 }
+
+func CheckVehicleInfo(vehicle models.Vehicle) error {
+
+	if len(vehicle.Name) == 0 {
+		return errors.New("name is empty")
+	}
+
+	return nil
+}
