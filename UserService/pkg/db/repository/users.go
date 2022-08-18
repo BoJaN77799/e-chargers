@@ -60,6 +60,25 @@ func FindUserByUsername(username string) (models.User, error) {
 	return user, nil
 }
 
+func CheckUserOwnership(username string, vehicleId uint) (models.User, error) {
+	var user models.User
+
+	db.Db.Table("users").Where("username = ?", username).First(&user)
+
+	if user.ID == 0 {
+		return user, errors.New("invalid username")
+	}
+
+	var vehicle models.Vehicle
+	db.Db.Table("vehicles").Where("user_id = ? AND id = ?", user.ID, vehicleId).Find(&vehicle)
+
+	if vehicle.ID == 0 {
+		return user, errors.New("user with given username isn't owner of given vehicle")
+	}
+
+	return user, nil
+}
+
 func CreateVehicle(vehicleDTO models.VehicleDTO) (models.Vehicle, error) {
 
 	var err error

@@ -22,6 +22,7 @@ var (
 		{Email: "admin@example.com", Username: "admin", Password: "$2a$12$QxDPTEbONfGxoUvxIx5oW.ge3anxohFaFU3Nq1AMMbyYei0jOY.9i", Firstname: "Adminko", Lastname: "Adminic", Role: models.Administrator},
 		{Email: "boksimus@example.com", Username: "boksi", Password: "$2a$12$QxDPTEbONfGxoUvxIx5oW.ge3anxohFaFU3Nq1AMMbyYei0jOY.9i", Firstname: "Boksi", Lastname: "Mus", Role: models.RegisteredUser},
 		{Email: "velja_zajecar@example.com", Username: "velja", Password: "$2a$12$QxDPTEbONfGxoUvxIx5oW.ge3anxohFaFU3Nq1AMMbyYei0jOY.9i", Firstname: "Velja", Lastname: "Tomic", Role: models.RegisteredUser},
+		{Email: "mire_kralj@example.com", Username: "mire", Password: "$2a$12$QxDPTEbONfGxoUvxIx5oW.ge3anxohFaFU3Nq1AMMbyYei0jOY.9i", Firstname: "Mire", Lastname: "Kralj", Role: models.RegisteredUser},
 	}
 )
 
@@ -30,6 +31,7 @@ var (
 		{Name: "Skutercic", VehicleType: models.SCOOTER, UserID: 2},
 		{Name: "Tesla Model 2", VehicleType: models.CAR, UserID: 2},
 		{Name: "Tesla Model 3", VehicleType: models.CAR, UserID: 3},
+		{Name: "Tesla Model 4", VehicleType: models.CAR, UserID: 4},
 	}
 )
 

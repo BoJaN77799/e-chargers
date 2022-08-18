@@ -5,22 +5,43 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3ee43a6f-8681-4b3d-8c8b-776e3b6d299b" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../ReservationService/cmd/main.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ReservationService/go.mod" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ReservationService/go.sum" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ReservationService/pkg/db/db.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ReservationService/pkg/db/repository/reservations.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ReservationService/pkg/db/repository/utils.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ReservationService/pkg/handlers/reservationsHandler.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ReservationService/pkg/models/dtos.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ReservationService/pkg/models/reservation.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ReservationService/pkg/router/router.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ReservationService/pkg/utils/reservationValidator.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ReservationService/pkg/utils/response.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/ApiGateway.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ApiGateway.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pkg/handlers/UserService/handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/handlers/UserService/handler.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pkg/models/dtos.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/models/dtos.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pkg/router/router.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/router/router.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ChargerService/pkg/db/repository/chargers.go" beforeDir="false" afterPath="$PROJECT_DIR$/../ChargerService/pkg/db/repository/chargers.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ChargerService/pkg/handlers/chargersHandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/../ChargerService/pkg/handlers/chargersHandler.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ChargerService/pkg/models/charger.go" beforeDir="false" afterPath="$PROJECT_DIR$/../ChargerService/pkg/models/charger.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ChargerService/pkg/models/dtos.go" beforeDir="false" afterPath="$PROJECT_DIR$/../ChargerService/pkg/models/dtos.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ChargerService/pkg/router/router.go" beforeDir="false" afterPath="$PROJECT_DIR$/../ChargerService/pkg/router/router.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../UserService/pkg/db/db.go" beforeDir="false" afterPath="$PROJECT_DIR$/../UserService/pkg/db/db.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../UserService/pkg/db/repository/users.go" beforeDir="false" afterPath="$PROJECT_DIR$/../UserService/pkg/db/repository/users.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../UserService/pkg/handlers/UserServiceHandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/../UserService/pkg/handlers/UserServiceHandler.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../UserService/pkg/models/dtos.go" beforeDir="false" afterPath="$PROJECT_DIR$/../UserService/pkg/models/dtos.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../UserService/pkg/models/user.go" beforeDir="false" afterPath="$PROJECT_DIR$/../UserService/pkg/models/user.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../UserService/pkg/router/router.go" beforeDir="false" afterPath="$PROJECT_DIR$/../UserService/pkg/router/router.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../UserService/pkg/utils/userValidator.go" beforeDir="false" afterPath="$PROJECT_DIR$/../UserService/pkg/utils/userValidator.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Go File" />
+      </list>
+    </option>
   </component>
   <component name="GOROOT" url="file://B:/GoLang" />
   <component name="Git.Settings">
@@ -33,13 +54,17 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2DS77cWrzt46CGJeBPevq59UeCT" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;DefaultGoTemplateProperty&quot;: &quot;Go File&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.go.format.on.save.advertiser.fired&quot;: &quot;true&quot;,
@@ -52,8 +77,8 @@
     &quot;configurable.GoLibrariesConfigurable.is.expanded&quot;: &quot;true&quot;,
     &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
     &quot;go.sdk.automatically.set&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Baltazar/Documents/GitHub/e-chargers/ChargerService/cmd/main.go&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;go.vgo&quot;
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Baltazar/Documents/GitHub/e-chargers/ReservationService&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;go.autoimport&quot;
   },
   &quot;keyToStringList&quot;: {
     &quot;DatabaseDriversLRU&quot;: [
@@ -65,6 +90,7 @@
     <configuration name="e-chargers" type="CompoundRunConfigurationType">
       <toRun name="go build ApiGateway" type="GoApplicationRunConfiguration" />
       <toRun name="go build ChargerService" type="GoApplicationRunConfiguration" />
+      <toRun name="go build ReservationService" type="GoApplicationRunConfiguration" />
       <toRun name="go build UserService" type="GoApplicationRunConfiguration" />
       <method v="2" />
     </configuration>
@@ -92,6 +118,15 @@
       <filePath value="$PROJECT_DIR$/../ChargerService/cmd/main.go" />
       <method v="2" />
     </configuration>
+    <configuration name="go build ReservationService" type="GoApplicationRunConfiguration" factoryName="Go Application">
+      <module name="ReservationService" />
+      <working_directory value="$PROJECT_DIR$/../ReservationService" />
+      <kind value="PACKAGE" />
+      <package value="reservation_service/cmd" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$/../ReservationService/cmd/main.go" />
+      <method v="2" />
+    </configuration>
     <configuration name="go build UserService" type="GoApplicationRunConfiguration" factoryName="Go Application">
       <module name="UserService" />
       <working_directory value="$PROJECT_DIR$" />
@@ -114,11 +149,26 @@
       <item itemvalue="Go Build.go build ApiGateway" />
       <item itemvalue="Go Build.go build ChargerService" />
       <item itemvalue="Go Build.go build UserService" />
+      <item itemvalue="Go Build.go build ReservationService" />
     </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>
@@ -128,8 +178,13 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
           <url>file://$PROJECT_DIR$/../UserService/pkg/db/repository/users.go</url>
-          <line>102</line>
-          <option name="timeStamp" value="3" />
+          <line>74</line>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/../UserService/pkg/handlers/UserServiceHandler.go</url>
+          <line>162</line>
+          <option name="timeStamp" value="12" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

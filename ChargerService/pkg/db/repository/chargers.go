@@ -53,3 +53,11 @@ func SearchChargers(search models.SearchDTO) []models.Charger {
 
 	return chargers
 }
+
+func GetChargerById(chargerId uint) models.Charger {
+	var charger models.Charger
+
+	db.Db.Preload("Address").Where("id = ?", chargerId).Find(&charger)
+
+	return charger
+}

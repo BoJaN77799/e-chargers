@@ -13,7 +13,7 @@ type ChargerDTO struct {
 	Name                   string     `json:"name"`
 	Address                AddressDTO `json:"address"`
 	WorkTime               string     `json:"work_time"`
-	Capacity               int        `json:"capacity"`
+	Capacity               uint       `json:"capacity"`
 	Description            string     `json:"description"`
 	Rating                 float32    `json:"rating"`
 	Plugs                  []string   `json:"plugs"`

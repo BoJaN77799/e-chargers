@@ -85,7 +85,7 @@ type Vehicle struct {
 	gorm.Model
 	Name        string      `json:"name" gorm:"unique;not null"`
 	VehicleType VehicleType `json:"vehicle_type" gorm:"not null"`
-	UserID      uint
+	UserID      uint        `json:"user_id"`
 }
 
 func (vehicle *Vehicle) ToDTO() VehicleDTO {

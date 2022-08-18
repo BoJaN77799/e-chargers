@@ -8,6 +8,7 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"strconv"
 	"strings"
 	"time"
 	"user_service/pkg/db/repository"
@@ -145,4 +146,27 @@ func DeleteVehicle(w http.ResponseWriter, r *http.Request) {
 
 	utils.OKResponse(w)
 	json.NewEncoder(w).Encode("vehicle with name: " + name + " successfully deleted")
+}
+
+func CheckIfUserExist(w http.ResponseWriter, r *http.Request) {
+
+	params := mux.Vars(r)
+	username, _ := params["username"]
+	vehicleId, _ := params["vehicleId"]
+
+	vehicleIdUint, err := strconv.ParseUint(vehicleId, 10, 32)
+
+	if err != nil {
+		utils.BadRequestResponse(w, "vehicleId isn't proper uint")
+		return
+	}
+	_, err = repository.CheckUserOwnership(username, uint(vehicleIdUint))
+
+	if err != nil {
+		utils.BadRequestResponse(w, err.Error())
+		return
+	}
+
+	utils.OKResponse(w)
+	json.NewEncoder(w).Encode(fmt.Sprintf("user with username: %s exist", username))
 }

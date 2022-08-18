@@ -23,7 +23,7 @@ type Charger struct {
 	Address                Address `json:"address" gorm:"foreignKey:Id"`
 	WorkTimeFrom           int     `json:"work_time_from"  gorm:"not-null"`
 	WorkTimeTo             int     `json:"work_time_to"  gorm:"not-null"`
-	Capacity               int     `json:"capacity" gorm:"not-null"`
+	Capacity               uint    `json:"capacity" gorm:"not-null"`
 	Description            string  `json:"description" gorm:"not null"`
 	Rating                 float32 `json:"rating"`
 	Plugs                  string  `json:"plugs"  gorm:"not-null"`
