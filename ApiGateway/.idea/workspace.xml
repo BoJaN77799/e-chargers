@@ -4,17 +4,7 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3ee43a6f-8681-4b3d-8c8b-776e3b6d299b" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ChargerService/pkg/handlers/chargersHandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/../ChargerService/pkg/handlers/chargersHandler.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ChargerService/pkg/models/charger.go" beforeDir="false" afterPath="$PROJECT_DIR$/../ChargerService/pkg/models/charger.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ChargerService/pkg/models/dtos.go" beforeDir="false" afterPath="$PROJECT_DIR$/../ChargerService/pkg/models/dtos.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ChargerService/pkg/router/router.go" beforeDir="false" afterPath="$PROJECT_DIR$/../ChargerService/pkg/router/router.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ReservationService/pkg/db/repository/reservations.go" beforeDir="false" afterPath="$PROJECT_DIR$/../ReservationService/pkg/db/repository/reservations.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ReservationService/pkg/handlers/reservationsHandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/../ReservationService/pkg/handlers/reservationsHandler.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ReservationService/pkg/models/reservation.go" beforeDir="false" afterPath="$PROJECT_DIR$/../ReservationService/pkg/models/reservation.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ReservationService/pkg/router/router.go" beforeDir="false" afterPath="$PROJECT_DIR$/../ReservationService/pkg/router/router.go" afterDir="false" />
-    </list>
+    <list default="true" id="3ee43a6f-8681-4b3d-8c8b-776e3b6d299b" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -29,6 +19,11 @@
   </component>
   <component name="GOROOT" url="file://$PROJECT_DIR$/../../../GoLang" />
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$/.." value="develop" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="GoLibraries">
