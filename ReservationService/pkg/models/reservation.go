@@ -18,7 +18,7 @@ func (reservation *Reservation) ToDTO() ReservationDTO {
 		Username:  reservation.Username,
 		ChargerId: reservation.ChargerId,
 		DateFrom:  reservation.DateFrom,
-		Duration:  (reservation.DateTo - reservation.DateFrom) * 1000 * 60,
+		Duration:  (reservation.DateTo - reservation.DateFrom) / 1000 / 60,
 	}
 }
 

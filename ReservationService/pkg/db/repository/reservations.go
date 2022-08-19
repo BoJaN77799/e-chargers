@@ -161,3 +161,18 @@ func CancelReservation(username string, chargerId uint, vehicleId uint) error {
 
 	return nil
 }
+
+func GetAllReservationsInPeriod(dateFromUInt64 uint64, dateToUInt64 uint64) []models.Reservation {
+
+	var reservations []models.Reservation
+
+	db.Db.Table("reservations").Where(
+		"NOT ((date_from >= ? AND date_from >= ?) OR (date_to <= ? AND date_to <= ?))",
+		dateFromUInt64,
+		dateToUInt64,
+		dateFromUInt64,
+		dateToUInt64,
+	).Find(&reservations)
+
+	return reservations
+}

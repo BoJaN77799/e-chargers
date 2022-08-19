@@ -22,5 +22,7 @@ func HandleRequests() {
 
 	router.HandleFunc("/api/chargers/exist/{chargerId}", handlers.CheckIfExistCharger).Methods("GET")
 
+	router.HandleFunc("/api/chargers/report/{chargerId}", handlers.FindChargerReport).Methods("GET")
+
 	log.Fatal(http.ListenAndServe(":50002", router))
 }

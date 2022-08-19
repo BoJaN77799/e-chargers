@@ -33,3 +33,11 @@ type SearchDTO struct {
 	ChargingSpeedFrom int    `json:"chargingSpeedFrom"`
 	ChargingSpeedTo   int    `json:"chargingSpeedTo"`
 }
+
+type ChargerReportDTO struct {
+	Name                   string  `json:"name"`
+	Capacity               uint    `json:"capacity"`
+	Rating                 float32 `json:"rating"`
+	ChargingSpeedPerMinute int     `json:"charging_speed"`
+	PricePerHour           int     `json:"price_per_hour"`
+}

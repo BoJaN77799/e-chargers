@@ -56,3 +56,13 @@ func (charger *Charger) ToDTO() ChargerDTO {
 		ChargingSpeedPerMinute: fmt.Sprintf("%d kW/Min", charger.ChargingSpeedPerMinute),
 	}
 }
+
+func (charger *Charger) ToReportDTO() ChargerReportDTO {
+	return ChargerReportDTO{
+		Name:                   charger.Name,
+		Capacity:               charger.Capacity,
+		Rating:                 charger.Rating,
+		PricePerHour:           charger.PricePerHour,
+		ChargingSpeedPerMinute: charger.ChargingSpeedPerMinute,
+	}
+}

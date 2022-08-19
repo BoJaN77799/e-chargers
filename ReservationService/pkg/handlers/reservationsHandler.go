@@ -9,6 +9,7 @@ import (
 	"reservation_service/pkg/db/repository"
 	"reservation_service/pkg/models"
 	"reservation_service/pkg/utils"
+	"strconv"
 )
 
 func AddReservation(w http.ResponseWriter, r *http.Request) {
@@ -65,19 +66,6 @@ func FindAllReservationsFromUser(w http.ResponseWriter, r *http.Request) {
 
 func CancelReservation(w http.ResponseWriter, r *http.Request) {
 
-	//params := mux.Vars(r)
-	//username, _ := params["username"]
-	//charger, _ := params["chargerId"]
-	//chargerId, err := strconv.ParseUint(charger, 10, 32)
-	//
-	//vehicle, _ := params["vehicleId"]
-	//vehicleId, err := strconv.ParseUint(vehicle, 10, 32)
-
-	//if err != nil {
-	//	utils.BadRequestResponse(w, "charger id isn't proper uint")
-	//	return
-	//}
-
 	defer r.Body.Close()
 	body, err := ioutil.ReadAll(r.Body)
 
@@ -97,4 +85,34 @@ func CancelReservation(w http.ResponseWriter, r *http.Request) {
 
 	utils.OKResponse(w)
 	json.NewEncoder(w).Encode("reservation successfully canceled")
+}
+
+func FindAllReservationsInPeriod(w http.ResponseWriter, r *http.Request) {
+
+	var reservationsDTO []models.ReservationDTO
+
+	params := mux.Vars(r)
+	dateFrom, _ := params["date_from"]
+	dateTo, _ := params["date_to"]
+
+	dateFromUInt64, err := strconv.ParseUint(dateFrom, 10, 64)
+
+	if err != nil {
+		utils.BadRequestResponse(w, "dateFrom is not valid")
+		return
+	}
+	dateToUInt64, err := strconv.ParseUint(dateTo, 10, 64)
+
+	if err != nil {
+		utils.BadRequestResponse(w, "dateTo is not valid")
+		return
+	}
+	reservations := repository.GetAllReservationsInPeriod(dateFromUInt64, dateToUInt64)
+
+	for _, reservation := range reservations {
+		reservationsDTO = append(reservationsDTO, reservation.ToDTO())
+	}
+
+	utils.OKResponse(w)
+	json.NewEncoder(w).Encode(reservationsDTO)
 }
