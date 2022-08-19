@@ -148,7 +148,7 @@ func DeleteVehicle(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode("vehicle with name: " + name + " successfully deleted")
 }
 
-func CheckIfUserExist(w http.ResponseWriter, r *http.Request) {
+func CheckIfUserExistWithVehicle(w http.ResponseWriter, r *http.Request) {
 
 	params := mux.Vars(r)
 	username, _ := params["username"]
@@ -161,6 +161,22 @@ func CheckIfUserExist(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	_, err = repository.CheckUserOwnership(username, uint(vehicleIdUint))
+
+	if err != nil {
+		utils.BadRequestResponse(w, err.Error())
+		return
+	}
+
+	utils.OKResponse(w)
+	json.NewEncoder(w).Encode(fmt.Sprintf("user with username: %s exist", username))
+}
+
+func CheckIfUserExist(w http.ResponseWriter, r *http.Request) {
+
+	params := mux.Vars(r)
+	username, _ := params["username"]
+
+	_, err := repository.FindUserByUsername(username)
 
 	if err != nil {
 		utils.BadRequestResponse(w, err.Error())

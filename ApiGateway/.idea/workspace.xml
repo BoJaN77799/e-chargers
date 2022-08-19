@@ -4,7 +4,13 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3ee43a6f-8681-4b3d-8c8b-776e3b6d299b" name="Changes" comment="" />
+    <list default="true" id="3ee43a6f-8681-4b3d-8c8b-776e3b6d299b" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/ApiGateway.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ApiGateway.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UserService/pkg/handlers/UserServiceHandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/../UserService/pkg/handlers/UserServiceHandler.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UserService/pkg/router/router.go" beforeDir="false" afterPath="$PROJECT_DIR$/../UserService/pkg/router/router.go" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -40,35 +46,36 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;DefaultGoTemplateProperty&quot;: &quot;Go File&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.format.on.save.advertiser.fired&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.migrated.go.modules.settings&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.modules.go.list.on.any.changes.was.set&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.watchers.conflict.with.on.save.actions.check.performed&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;configurable..is.expanded&quot;: &quot;false&quot;,
-    &quot;configurable.GoLibrariesConfigurable.is.expanded&quot;: &quot;true&quot;,
-    &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
-    &quot;go.sdk.automatically.set&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;B:/GitHub/e-chargers/ApiGateway&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;go.autoimport&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "DefaultGoTemplateProperty": "Go File",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.go.format.on.save.advertiser.fired": "true",
+    "RunOnceActivity.go.formatter.settings.were.checked": "true",
+    "RunOnceActivity.go.migrated.go.modules.settings": "true",
+    "RunOnceActivity.go.modules.go.list.on.any.changes.was.set": "true",
+    "RunOnceActivity.go.watchers.conflict.with.on.save.actions.check.performed": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "configurable..is.expanded": "false",
+    "configurable.GoLibrariesConfigurable.is.expanded": "true",
+    "go.import.settings.migrated": "true",
+    "go.sdk.automatically.set": "true",
+    "last_opened_file_path": "B:/GitHub/e-chargers/RecensionService",
+    "settings.editor.selected.configurable": "go.autoimport"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;postgresql&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "postgresql"
     ]
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="Compound.e-chargers">
     <configuration name="e-chargers" type="CompoundRunConfigurationType">
       <toRun name="go build ApiGateway" type="GoApplicationRunConfiguration" />
       <toRun name="go build ChargerService" type="GoApplicationRunConfiguration" />
+      <toRun name="go build RecensionService" type="GoApplicationRunConfiguration" />
       <toRun name="go build ReservationService" type="GoApplicationRunConfiguration" />
       <toRun name="go build UserService" type="GoApplicationRunConfiguration" />
       <method v="2" />
@@ -95,6 +102,15 @@
       <kind value="FILE" />
       <directory value="$PROJECT_DIR$" />
       <filePath value="$PROJECT_DIR$/../ChargerService/cmd/main.go" />
+      <method v="2" />
+    </configuration>
+    <configuration name="go build RecensionService" type="GoApplicationRunConfiguration" factoryName="Go Application">
+      <module name="RecensionService" />
+      <working_directory value="$PROJECT_DIR$/../RecensionService" />
+      <kind value="PACKAGE" />
+      <package value="recension_service/cmd" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$/../RecensionService/cmd/main.go" />
       <method v="2" />
     </configuration>
     <configuration name="go build ReservationService" type="GoApplicationRunConfiguration" factoryName="Go Application">
@@ -129,6 +145,7 @@
       <item itemvalue="Go Build.go build ChargerService" />
       <item itemvalue="Go Build.go build UserService" />
       <item itemvalue="Go Build.go build ReservationService" />
+      <item itemvalue="Go Build.go build RecensionService" />
     </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -159,11 +176,6 @@
           <url>file://$PROJECT_DIR$/../UserService/pkg/db/repository/users.go</url>
           <line>74</line>
           <option name="timeStamp" value="9" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/../UserService/pkg/handlers/UserServiceHandler.go</url>
-          <line>162</line>
-          <option name="timeStamp" value="12" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

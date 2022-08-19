@@ -8,5 +8,6 @@
     <orderEntry type="module" module-name="ChargerService" />
     <orderEntry type="module" module-name="UserService" />
     <orderEntry type="module" module-name="ReservationService" />
+    <orderEntry type="module" module-name="RecensionService" />
   </component>
 </module>

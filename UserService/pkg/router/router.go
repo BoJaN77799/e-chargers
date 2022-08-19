@@ -21,7 +21,8 @@ func HandleRequests() {
 	router.HandleFunc("/api/users/vehicles/{username}", handlers.GetVehicles).Methods("GET")
 	router.HandleFunc("/api/users/vehicles/{name}", handlers.DeleteVehicle).Methods("DELETE")
 
-	router.HandleFunc("/api/users/exist/{username}/{vehicleId}", handlers.CheckIfUserExist).Methods("GET")
+	router.HandleFunc("/api/users/exist/{username}/{vehicleId}", handlers.CheckIfUserExistWithVehicle).Methods("GET")
+	router.HandleFunc("/api/users/exist/{username}", handlers.CheckIfUserExist).Methods("GET")
 
 	log.Fatal(http.ListenAndServe(":50001", router))
 }
