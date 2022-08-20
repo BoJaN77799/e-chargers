@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateReservationComponent } from 'src/modules/reservation/components/create-reservation/create-reservation.component';
 import { ChargerDTO } from 'src/modules/shared/model/chargerDTO';
+import { UtilService } from '../../service/utils-service';
 
 @Component({
   selector: 'app-charger-info',
@@ -13,7 +14,7 @@ export class ChargerInfoComponent implements OnInit {
   @Input()
   charger: ChargerDTO | undefined
 
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog, private utilService: UtilService) { }
 
   ngOnInit(): void {
   }
@@ -27,6 +28,10 @@ export class ChargerInfoComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
     });
+  }
+
+  isRole(role: string): boolean {
+    return this.utilService.isRole(role);
   }
 
 }

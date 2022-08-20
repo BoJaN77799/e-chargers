@@ -5,13 +5,11 @@ import (
 	"charger_service/pkg/models"
 	"charger_service/pkg/utils"
 	"encoding/json"
-	"fmt"
 	"github.com/gorilla/mux"
 	"io/ioutil"
 	"log"
 	"net/http"
 	"strconv"
-	"strings"
 )
 
 func HelloWorld(w http.ResponseWriter, r *http.Request) {
@@ -33,15 +31,12 @@ func AddCharger(w http.ResponseWriter, r *http.Request) {
 
 	_, err = repository.CreateCharger(charger)
 	if err != nil {
-		fmt.Println(err.Error())
-		if strings.Contains(err.Error(), "username") {
-			utils.BadRequestResponse(w, "user with given username already exists")
-		}
-		if strings.Contains(err.Error(), "email") {
-			utils.BadRequestResponse(w, "user with given email already exists")
-		}
+		utils.BadRequestResponse(w, err.Error())
 		return
 	}
+
+	utils.OKResponse(w)
+	json.NewEncoder(w).Encode("charger successfully created")
 }
 
 func FindAllChargers(w http.ResponseWriter, r *http.Request) {

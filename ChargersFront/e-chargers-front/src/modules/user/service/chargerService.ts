@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ChargerDTO } from 'src/modules/shared/model/chargerDTO';
+import { Charger, ChargerDTO } from 'src/modules/shared/model/chargerDTO';
 import { SearchDTO } from '../model/searchDTO';
 
 @Injectable({
@@ -45,5 +45,18 @@ export class ChargerService {
 
         return this.http.get<HttpResponse<ChargerDTO>>("echargers/api/chargers/" + charger_id, queryParams);
     }
+
+    create(charger: Charger): Observable<HttpResponse<string>> {
+        let queryParams = {};
+
+        queryParams = {
+            headers: this.headers,
+            observe: "response",
+            responseType: "text"
+        };
+
+        return this.http.post<HttpResponse<string>>("echargers/api/chargers", charger, queryParams);
+    }
+
 
 }

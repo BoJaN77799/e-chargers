@@ -1,19 +1,17 @@
-import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import 'ol/ol.css';
 import Map from 'ol/Map';
 import View from 'ol/View';
 import { OSM } from 'ol/source';
 import Tile from 'ol/layer/Tile';
 import { fromLonLat, transform } from 'ol/proj';
-import { Style, Icon, Stroke } from 'ol/style'
-import { Feature, Overlay } from 'ol';
+import { Style, Icon } from 'ol/style'
+import { Feature } from 'ol';
 import { Point } from 'ol/geom'
 import VectorSource from 'ol/source/Vector';
 import VectorLayer from 'ol/layer/Vector';
-import { Coordinates } from '../../model/coordinates';
 import { ChargerDTO } from '../../model/chargerDTO';
 import { ChargerService } from 'src/modules/user/service/chargerService';
-import { map } from 'rxjs';
 
 @Component({
   selector: 'app-map-page',
@@ -40,7 +38,7 @@ export class MapPageComponent implements OnInit {
     this.chargerService.getAllChargers().subscribe(
       (response) => {
         this.chargers = response.body as ChargerDTO[]
-        this.initMap()
+        this.initMap(this.chargers)
       },
       (err) => {
         console.log(err.error)
@@ -48,12 +46,12 @@ export class MapPageComponent implements OnInit {
     )
   }
 
-  initMap() {
+  initMap(chargers: ChargerDTO[]) {
 
     var featureList = [];
 
-    for (let idx = 0; idx < this.chargers.length; idx++) {
-      const charger = this.chargers[idx];
+    for (let idx = 0; idx < chargers.length; idx++) {
+      const charger = chargers[idx];
 
       let feature = new Feature({
         geometry: new Point(fromLonLat([charger.address.longitude, charger.address.latitude]))
@@ -91,7 +89,7 @@ export class MapPageComponent implements OnInit {
       this.map.forEachFeatureAtPixel(e.pixel,
         (feature, layer) => {
           console.log(feature.get('name'))
-          let selectedCharger = this.findChargerByName(feature.get('name'))
+          let selectedCharger = this.findChargerByName(feature.get('name'), chargers)
           if (selectedCharger)
             this.selectedChargerEvent.emit(selectedCharger)
         })
@@ -116,9 +114,9 @@ export class MapPageComponent implements OnInit {
     this.map.getView().setZoom(15);
   }
 
-  findChargerByName(name: string): ChargerDTO | undefined {
-    for (let idx = 0; idx < this.chargers.length; idx++) {
-      const element = this.chargers[idx];
+  findChargerByName(name: string, chargers: ChargerDTO[]): ChargerDTO | undefined {
+    for (let idx = 0; idx < chargers.length; idx++) {
+      const element = chargers[idx];
       if (element.name == name)
         return element
     }

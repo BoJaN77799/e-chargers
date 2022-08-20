@@ -45,6 +45,7 @@
             <p class="label">Charging speed</p>
             <p>{{charger?.charging_speed}}</p>
         </div>
-        <button class="btn btn-success" (click)="openReservationDialog()">Reservation</button>
+        <button [hidden]="!isRole('RegisteredUser')" class="btn btn-success"
+            (click)="openReservationDialog()">Reservation</button>
     </div>
 </div>

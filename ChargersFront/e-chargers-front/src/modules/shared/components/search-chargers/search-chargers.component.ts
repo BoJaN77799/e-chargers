@@ -2,8 +2,8 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ChargerDTO } from 'src/modules/shared/model/chargerDTO';
 import { SnackBarService } from 'src/modules/shared/service/snack-bar.service';
-import { SearchDTO } from '../../model/searchDTO';
-import { ChargerService } from '../../service/chargerService';
+import { SearchDTO } from 'src/modules/user/model/searchDTO';
+import { ChargerService } from 'src/modules/user/service/chargerService';
 
 @Component({
   selector: 'app-search-chargers',

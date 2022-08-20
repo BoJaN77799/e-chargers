@@ -6,20 +6,26 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Interceptor } from './interceptors/interceptor.interceptor';
 import { MapPageComponent } from './pages/map-page/map-page.component';
 import { MaterialExampleModule } from 'src/material.module';
+import { ChargerInfoComponent } from './components/charger-info/charger-info.component';
+import { SearchChargersComponent } from './components/search-chargers/search-chargers.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
-
-
+    ChargerInfoComponent,
+    SearchChargersComponent,
     MapPageComponent
   ],
   imports: [
     CommonModule,
-    MaterialExampleModule
+    MaterialExampleModule,
+    ReactiveFormsModule
   ],
   exports: [
     MapPageComponent,
-    MaterialExampleModule
+    MaterialExampleModule,
+    SearchChargersComponent,
+    ChargerInfoComponent
   ],
   providers: [
     SnackBarService,
