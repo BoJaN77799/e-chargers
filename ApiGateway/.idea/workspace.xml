@@ -5,26 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3ee43a6f-8681-4b3d-8c8b-776e3b6d299b" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/pkg/handlers/ReportsService/handler.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ChargerService/pkg/handlers/chargersHandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/../ChargerService/pkg/handlers/chargersHandler.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pkg/handlers/ReservationService/handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/handlers/ReservationService/handler.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pkg/router/router.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/router/router.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pkg/utils/communication.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/utils/communication.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/src/modules/admin/admin.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/src/modules/admin/admin.module.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/src/modules/admin/admin.routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/src/modules/admin/admin.routes.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/src/modules/admin/pages/admin-home/admin-home.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/src/modules/admin/pages/admin-home/admin-home.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/src/modules/admin/pages/admin-home/admin-home.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/src/modules/admin/pages/admin-home/admin-home.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/src/modules/admin/pages/admin-home/admin-home.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/src/modules/admin/pages/admin-home/admin-home.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/src/modules/app/components/headers/header-admin/header-admin.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/src/modules/app/components/headers/header-admin/header-admin.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/src/modules/shared/model/chargerDTO.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/src/modules/shared/model/chargerDTO.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/src/modules/shared/pages/map-page/map-page.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/src/modules/shared/pages/map-page/map-page.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/src/modules/shared/service/utils-service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/src/modules/shared/service/utils-service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/src/modules/shared/shared.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/src/modules/shared/shared.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/src/modules/user/components/charger-info/charger-info.component.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/src/modules/user/components/charger-info/charger-info.component.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/src/modules/user/components/charger-info/charger-info.component.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/src/modules/user/components/search-chargers/search-chargers.component.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/src/modules/user/components/search-chargers/search-chargers.component.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/src/modules/user/components/search-chargers/search-chargers.component.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/src/modules/user/service/chargerService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/src/modules/user/service/chargerService.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/src/modules/user/user.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/src/modules/user/user.module.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

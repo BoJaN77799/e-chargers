@@ -20,6 +20,10 @@ var BaseReservationServicePath, _ = roundRobinScheduler.New(
 	&url.URL{Host: "http://localhost:50003/api/reservations"},
 )
 
+var BaseReportsServicePath, _ = roundRobinScheduler.New(
+	&url.URL{Host: "http://localhost:50003/api/reports"},
+)
+
 func DelegateResponse(response *http.Response, w http.ResponseWriter) {
 	w.Header().Set("Content-Type", response.Header.Get("Content-Type"))
 	w.Header().Set("Content-Length", response.Header.Get("Content-Length"))

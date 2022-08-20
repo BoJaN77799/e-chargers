@@ -6,11 +6,13 @@ import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CreateChargerComponent } from './pages/create-charger/create-charger.component';
+import { ReportsComponent } from './pages/reports/reports.component';
 
 @NgModule({
   declarations: [
     AdminHomeComponent,
-    CreateChargerComponent
+    CreateChargerComponent,
+    ReportsComponent
   ],
   imports: [
     CommonModule,
