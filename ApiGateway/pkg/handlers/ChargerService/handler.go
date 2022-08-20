@@ -1,7 +1,7 @@
 package ChargerService
 
 import (
-	"ApiGateway/pkg/models"
+	"ApiGateway/pkg/models/ChargerService"
 	"ApiGateway/pkg/utils"
 	"bytes"
 	"encoding/json"
@@ -16,7 +16,7 @@ func AddCharger(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	var chargerDTO models.ChargerDTO
+	var chargerDTO ChargerService.ChargerDTO
 	data, _ := ioutil.ReadAll(r.Body)
 	json.NewDecoder(bytes.NewReader(data)).Decode(&chargerDTO)
 
@@ -58,7 +58,7 @@ func SearchChargers(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	var searchDTO models.SearchDTO
+	var searchDTO ChargerService.SearchDTO
 	data, _ := ioutil.ReadAll(r.Body)
 	json.NewDecoder(bytes.NewReader(data)).Decode(&searchDTO)
 

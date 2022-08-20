@@ -1,7 +1,7 @@
 package UserService
 
 import (
-	"ApiGateway/pkg/models"
+	"ApiGateway/pkg/models/UserService"
 	"ApiGateway/pkg/utils"
 	"bytes"
 	"encoding/json"
@@ -32,7 +32,7 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	var loginDTO models.LoginDTO
+	var loginDTO UserService.LoginDTO
 	data, _ := ioutil.ReadAll(r.Body)
 	json.NewDecoder(bytes.NewReader(data)).Decode(&loginDTO)
 
@@ -57,7 +57,7 @@ func AddUser(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	var userDTO models.UserDTO
+	var userDTO UserService.UserDTO
 	data, _ := ioutil.ReadAll(r.Body)
 	json.NewDecoder(bytes.NewReader(data)).Decode(&userDTO)
 
@@ -82,7 +82,7 @@ func AddVehicle(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	var vehicleDTO models.VehicleDTO
+	var vehicleDTO UserService.VehicleDTO
 	data, _ := ioutil.ReadAll(r.Body)
 	json.NewDecoder(bytes.NewReader(data)).Decode(&vehicleDTO)
 

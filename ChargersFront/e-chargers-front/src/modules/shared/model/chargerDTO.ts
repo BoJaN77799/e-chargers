@@ -9,6 +9,7 @@ export interface AdressDTO {
 
 
 export interface ChargerDTO {
+    id: number
     name: string
     address: AdressDTO
     work_time: string,

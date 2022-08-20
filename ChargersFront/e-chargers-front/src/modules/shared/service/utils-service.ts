@@ -28,7 +28,8 @@ export class UtilService {
         const item = sessionStorage.getItem("user");
         if (item) {
             const jwt: JwtHelperService = new JwtHelperService();
-            return jwt.decodeToken(item).sub;
+            const userToken = JSON.parse(item);
+            return jwt.decodeToken(userToken['token']).username;
         }
         return "";
     }

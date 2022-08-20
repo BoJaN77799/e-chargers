@@ -5,7 +5,31 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3ee43a6f-8681-4b3d-8c8b-776e3b6d299b" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/pkg/handlers/ReservationService/handler.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pkg/models/ChargerService/dtos.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pkg/models/ReservationService/dtos.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pkg/models/UserService/dtos.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pkg/handlers/ChargerService/handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/handlers/ChargerService/handler.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pkg/handlers/UserService/handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/handlers/UserService/handler.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pkg/models/dtos.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pkg/router/router.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/router/router.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pkg/utils/communication.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/utils/communication.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ChargerService/pkg/models/charger.go" beforeDir="false" afterPath="$PROJECT_DIR$/../ChargerService/pkg/models/charger.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ChargerService/pkg/models/dtos.go" beforeDir="false" afterPath="$PROJECT_DIR$/../ChargerService/pkg/models/dtos.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/src/modules/shared/model/chargerDTO.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/src/modules/shared/model/chargerDTO.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/src/modules/shared/service/utils-service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/src/modules/shared/service/utils-service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/src/modules/user/components/charger-info/charger-info.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/src/modules/user/components/charger-info/charger-info.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/src/modules/user/components/charger-info/charger-info.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/src/modules/user/components/charger-info/charger-info.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/src/modules/user/components/search-chargers/search-chargers.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/src/modules/user/components/search-chargers/search-chargers.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/src/modules/user/user.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/src/modules/user/user.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RecensionService/pkg/router/router.go" beforeDir="false" afterPath="$PROJECT_DIR$/../RecensionService/pkg/router/router.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ReservationService/pkg/db/repository/reservations.go" beforeDir="false" afterPath="$PROJECT_DIR$/../ReservationService/pkg/db/repository/reservations.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ReservationService/pkg/models/dtos.go" beforeDir="false" afterPath="$PROJECT_DIR$/../ReservationService/pkg/models/dtos.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UserService/pkg/models/dtos.go" beforeDir="false" afterPath="$PROJECT_DIR$/../UserService/pkg/models/dtos.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UserService/pkg/models/user.go" beforeDir="false" afterPath="$PROJECT_DIR$/../UserService/pkg/models/user.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

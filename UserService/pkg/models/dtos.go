@@ -11,6 +11,7 @@ type UserTokenState struct {
 }
 
 type VehicleDTO struct {
+	Id          uint   `json:"id"`
 	Name        string `json:"name"`
 	VehicleType string `json:"vehicle_type"`
 	Username    string `json:"username"`

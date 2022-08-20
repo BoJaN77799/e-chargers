@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { CreateReservationComponent } from 'src/modules/reservation/components/create-reservation/create-reservation.component';
 import { ChargerDTO } from 'src/modules/shared/model/chargerDTO';
 
 @Component({
@@ -11,9 +13,20 @@ export class ChargerInfoComponent implements OnInit {
   @Input()
   charger: ChargerDTO | undefined
 
-  constructor() { }
+  constructor(public dialog: MatDialog) { }
 
   ngOnInit(): void {
+  }
+
+  openReservationDialog(): void {
+    const dialogRef = this.dialog.open(CreateReservationComponent, {
+      data: this.charger,
+      width: '60%',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+    });
   }
 
 }

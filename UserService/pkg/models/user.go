@@ -90,6 +90,7 @@ type Vehicle struct {
 
 func (vehicle *Vehicle) ToDTO() VehicleDTO {
 	return VehicleDTO{
+		Id:          vehicle.ID,
 		Name:        vehicle.Name,
 		VehicleType: vehicle.VehicleType.String(),
 	}

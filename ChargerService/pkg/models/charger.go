@@ -45,6 +45,7 @@ func (address *Address) ToDTO() AddressDTO {
 
 func (charger *Charger) ToDTO() ChargerDTO {
 	return ChargerDTO{
+		Id:                     charger.ID,
 		Name:                   charger.Name,
 		Address:                charger.Address.ToDTO(),
 		WorkTime:               fmt.Sprintf("%dh - %dh", charger.WorkTimeFrom, charger.WorkTimeTo),

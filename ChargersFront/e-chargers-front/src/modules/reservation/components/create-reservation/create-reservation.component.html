@@ -1,0 +1,49 @@
+<form class="row p-4 align-items-center justify-content-center" [formGroup]="reservationForm"
+    (keydown.enter)="$event.preventDefault()">
+    <div style="text-align: center;">
+        <h1>Reservation</h1>
+    </div>
+    <div class="row" style="font-size: 13px">
+        <mat-form-field class="example-form-field" appearance="outline">
+            <mat-label>Enter reservation date</mat-label>
+            <input matInput formControlName="date_from" type="datetime-local">
+        </mat-form-field>
+        <small *ngIf="(reservationForm.controls['date_from'].touched 
+            && reservationForm.controls['date_from'].dirty)">Invalid
+            date
+        </small>
+        <small *ngIf="(reservationForm.controls['date_from'].errors?.['invalidDate'])">Date need to be at least 90
+            minutes
+            from now
+        </small>
+    </div>
+
+    <div class="row">
+        <mat-form-field appearance="fill" style="width: 100%;">
+            <mat-label>Select your vehicle</mat-label>
+            <mat-select id='food-type' formControlName="vehicle">
+                <mat-option *ngFor="let vehicle of vehicles" [value]="vehicle.id">
+                    {{vehicle.name}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <div class="row">
+        <mat-form-field class="example-form-field" appearance="outline" style="width: 100%">
+            <mat-label>Duration</mat-label>
+            <input matInput type="number" formControlName="duration" min="15" max="90">
+        </mat-form-field>
+        <small *ngIf="(reservationForm.controls['duration'].errors?.['min'])">
+            Minimum charging period is 15 minutes.
+        </small>
+        <small *ngIf="(reservationForm.controls['duration'].errors?.['max'])">
+            Maximum charging period is 90 minutes.
+        </small>
+    </div>
+
+    <div class="row">
+        <button class="btn btn-success" type="submit" [disabled]="!reservationForm.valid" (click)="submit()"> Make
+            reservation
+        </button>
+    </div>
+</form>

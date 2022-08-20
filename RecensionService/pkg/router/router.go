@@ -20,5 +20,5 @@ func HandleRequests() {
 	router.HandleFunc("/api/recensions/{username}", handlers.FindAllRecensionsFromUser).Methods("GET")
 	router.HandleFunc("/api/recensions", handlers.CancelRecension).Methods("DELETE")
 
-	log.Fatal(http.ListenAndServe(":50003", router))
+	log.Fatal(http.ListenAndServe(":50005", router))
 }

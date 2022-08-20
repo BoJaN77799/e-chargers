@@ -10,6 +10,7 @@ type AddressDTO struct {
 }
 
 type ChargerDTO struct {
+	Id                     uint       `json:"id"`
 	Name                   string     `json:"name"`
 	Address                AddressDTO `json:"address"`
 	WorkTime               string     `json:"work_time"`

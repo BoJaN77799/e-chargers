@@ -8,6 +8,7 @@ import { ChargerInfoComponent } from './components/charger-info/charger-info.com
 import { SearchChargersComponent } from './components/search-chargers/search-chargers.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialExampleModule } from 'src/material.module';
+import { ReservationModule } from '../reservation/reservation.module';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { MaterialExampleModule } from 'src/material.module';
     RouterModule.forChild(UserRoutes),
     SharedModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ReservationModule
   ]
 })
 export class UserModule { }

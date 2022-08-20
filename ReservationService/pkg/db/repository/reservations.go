@@ -2,7 +2,6 @@ package repository
 
 import (
 	"errors"
-	"fmt"
 	"reservation_service/pkg/db"
 	"reservation_service/pkg/models"
 	"reservation_service/pkg/utils"
@@ -19,7 +18,6 @@ func CreateReservation(reservationDTO models.ReservationDTO) (models.Reservation
 
 	// verify user username and his vehicle id
 	err = VerifyUserUsernameAndVehicle(reservationDTO.Username, reservationDTO.VehicleId)
-	fmt.Println("aaaa")
 	if err != nil {
 		return reservation, err
 	}
