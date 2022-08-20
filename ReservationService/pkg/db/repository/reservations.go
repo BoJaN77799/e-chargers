@@ -16,22 +16,25 @@ func CreateReservation(reservationDTO models.ReservationDTO) (models.Reservation
 		return reservation, err
 	}
 
+	var user models.UserReservationDTO
 	// verify user username and his vehicle id
-	err = VerifyUserUsernameAndVehicle(reservationDTO.Username, reservationDTO.VehicleId)
+	user, err = VerifyUserUsernameAndVehicle(reservationDTO.Username, reservationDTO.VehicleId)
 	if err != nil {
 		return reservation, err
 	}
 
 	// verify charger id and get charger capacity
-	var capacity uint
-	capacity, err = VerifyChargerId(reservationDTO.ChargerId)
+	var charger models.ChargerReservationDTO
+	charger, err = VerifyChargerId(reservationDTO.ChargerId)
 	if err != nil {
 		return reservation, err
 	}
 
 	reservation.Username = reservationDTO.Username
-	reservation.ChargerId = reservationDTO.ChargerId
+	reservation.ChargerId = charger.Id
+	reservation.ChargerName = charger.Name
 	reservation.VehicleId = reservationDTO.VehicleId
+	reservation.VehicleName = user.Vehicles[0].Name
 	reservation.DateFrom = reservationDTO.DateFrom
 	reservation.DateTo = reservationDTO.DateFrom + reservationDTO.Duration*1000*60
 
@@ -47,7 +50,7 @@ func CreateReservation(reservationDTO models.ReservationDTO) (models.Reservation
 		return reservation, err
 	}
 
-	err = CheckChargerCapacity(&reservation, capacity)
+	err = CheckChargerCapacity(&reservation, charger.Capacity)
 
 	if err != nil {
 		return reservation, err
@@ -146,10 +149,10 @@ func GetAllReservationsFromUser(username string) []models.Reservation {
 	return reservations
 }
 
-func CancelReservation(username string, chargerId uint, vehicleId uint) error {
+func CancelReservation(id uint) error {
 	var reservation models.Reservation
 
-	db.Db.Table("reservations").Where("username = ? AND charger_id = ? AND vehicle_id = ?", username, chargerId, vehicleId).Find(&reservation)
+	db.Db.Table("reservations").Where("id = ?", id).Find(&reservation)
 
 	if reservation.ID == 0 {
 		return errors.New("user with given username doesn't have any reservations on charger with given id with this vehicle")

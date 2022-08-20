@@ -25,12 +25,13 @@ func HandleRequests() {
 	router.HandleFunc("/api/chargers", ChargerService.AddCharger).Methods("POST")
 	router.HandleFunc("/api/chargers", ChargerService.GetAllChargers).Methods("GET")
 	router.HandleFunc("/api/chargers/search", ChargerService.SearchChargers).Methods("POST")
+	router.HandleFunc("/api/chargers/{chargerId}", ChargerService.GetChargerById).Methods("GET")
 
 	// ReservationService
 	router.HandleFunc("/api/reservations", ReservationService.AddReservation).Methods("POST")
 	router.HandleFunc("/api/reservations", ReservationService.FindAllReservations).Methods("GET")
 	router.HandleFunc("/api/reservations/{username}", ReservationService.FindAllReservationsFromUser).Methods("GET")
-	router.HandleFunc("/api/reservations", ReservationService.CancelReservation).Methods("DELETE")
+	router.HandleFunc("/api/reservations/{id}", ReservationService.CancelReservation).Methods("DELETE")
 
 	log.Fatal(http.ListenAndServe(":50000", router))
 }

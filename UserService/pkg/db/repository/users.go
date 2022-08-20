@@ -76,6 +76,8 @@ func CheckUserOwnership(username string, vehicleId uint) (models.User, error) {
 		return user, errors.New("user with given username isn't owner of given vehicle")
 	}
 
+	user.Vehicles = append(user.Vehicles, vehicle)
+
 	return user, nil
 }
 

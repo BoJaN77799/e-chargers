@@ -16,3 +16,8 @@ type VehicleDTO struct {
 	VehicleType string `json:"vehicle_type"`
 	Username    string `json:"username"`
 }
+
+type UserReservationDTO struct {
+	Username string `json:"username" gorm:"unique;not-null"`
+	Vehicles []VehicleDTO
+}

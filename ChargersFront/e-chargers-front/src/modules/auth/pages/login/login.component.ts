@@ -49,10 +49,10 @@ export class LoginComponent implements OnInit {
       sessionStorage.setItem("user", token);
 
       if (this.utilService.isRole("Administrator")) {
-        this.router.navigate(["myapp/admin/home"]);
+        this.router.navigate(["myapp/admin/homepage"]);
       }
       if (this.utilService.isRole("RegisteredUser")) {
-        this.router.navigate(["myapp/user/home"])
+        this.router.navigate(["myapp/user/homepage"])
       }
     },
       (err: any) => {

@@ -35,4 +35,15 @@ export class ChargerService {
         return this.http.post<HttpResponse<ChargerDTO[]>>("echargers/api/chargers/search", searchDTO, queryParams);
     }
 
+    getChargerById(charger_id: number): Observable<HttpResponse<ChargerDTO>> {
+        let queryParams = {};
+
+        queryParams = {
+            headers: this.headers,
+            observe: "response"
+        };
+
+        return this.http.get<HttpResponse<ChargerDTO>>("echargers/api/chargers/" + charger_id, queryParams);
+    }
+
 }

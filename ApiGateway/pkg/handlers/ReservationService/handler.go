@@ -73,26 +73,24 @@ func FindAllReservationsFromUser(w http.ResponseWriter, r *http.Request) {
 
 func CancelReservation(w http.ResponseWriter, r *http.Request) {
 
-	// TODO Implement CancelReservation.... ne moze preko DTO mora preko pathVariabli
-	//utils.SetupResponse(&w, r)
-	//if r.Method == "OPTIONS" {
-	//	return
-	//}
-	//
-	//var cancelReservationDTO ReservationService.CancelReservationDTO
-	//data, _ := ioutil.ReadAll(r.Body)
-	//json.NewDecoder(bytes.NewReader(data)).Decode(&cancelReservationDTO)
-	//
-	//req, _ := http.NewRequest(http.MethodDelete, utils.BaseReservationServicePath.Next().Host, cancelReservationDTO)
-	//req.Header.Set("Accept", "application/json")
-	//req.Header.Set("Content-Type", "application/json")
-	//client := &http.Client{}
-	//response, err := client.Do(req)
-	//
-	//if err != nil {
-	//	w.WriteHeader(http.StatusGatewayTimeout)
-	//	return
-	//}
-	//
-	//utils.DelegateResponse(response, w)
+	utils.SetupResponse(&w, r)
+	if r.Method == "OPTIONS" {
+		return
+	}
+
+	params := mux.Vars(r)
+	id, _ := params["id"]
+
+	req, _ := http.NewRequest(http.MethodDelete, utils.BaseReservationServicePath.Next().Host+"/"+id, nil)
+	req.Header.Set("Accept", "application/json")
+	req.Header.Set("Content-Type", "application/json")
+	client := &http.Client{}
+	response, err := client.Do(req)
+
+	if err != nil {
+		w.WriteHeader(http.StatusGatewayTimeout)
+		return
+	}
+
+	utils.DelegateResponse(response, w)
 }

@@ -101,7 +101,7 @@ func CheckIfExistCharger(w http.ResponseWriter, r *http.Request) {
 	}
 
 	utils.OKResponse(w)
-	json.NewEncoder(w).Encode(charger.Capacity)
+	json.NewEncoder(w).Encode(charger.ToReservationDTO())
 }
 
 func FindChargerReport(w http.ResponseWriter, r *http.Request) {
@@ -124,4 +124,26 @@ func FindChargerReport(w http.ResponseWriter, r *http.Request) {
 
 	utils.OKResponse(w)
 	json.NewEncoder(w).Encode(charger.ToReportDTO())
+}
+
+func GetChargerByID(w http.ResponseWriter, r *http.Request) {
+
+	params := mux.Vars(r)
+	chargerId, _ := params["chargerId"]
+
+	chargerIdUint, err := strconv.ParseUint(chargerId, 10, 32)
+	if err != nil {
+		utils.BadRequestResponse(w, "chargerId isn't proper uint")
+		return
+	}
+
+	charger := repository.GetChargerById(uint(chargerIdUint))
+
+	if charger.ID == 0 {
+		utils.BadRequestResponse(w, "charger with given id doesn't exist")
+		return
+	}
+
+	utils.OKResponse(w)
+	json.NewEncoder(w).Encode(charger.ToDTO())
 }

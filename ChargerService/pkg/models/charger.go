@@ -19,7 +19,7 @@ type Address struct {
 
 type Charger struct {
 	gorm.Model
-	Name                   string  `json:"name" gorm:"not-null"`
+	Name                   string  `json:"name" gorm:"unique;not-null"`
 	Address                Address `json:"address" gorm:"foreignKey:Id"`
 	WorkTimeFrom           int     `json:"work_time_from"  gorm:"not-null"`
 	WorkTimeTo             int     `json:"work_time_to"  gorm:"not-null"`
@@ -65,5 +65,13 @@ func (charger *Charger) ToReportDTO() ChargerReportDTO {
 		Rating:                 charger.Rating,
 		PricePerHour:           charger.PricePerHour,
 		ChargingSpeedPerMinute: charger.ChargingSpeedPerMinute,
+	}
+}
+
+func (charger *Charger) ToReservationDTO() ChargerReservationDTO {
+	return ChargerReservationDTO{
+		Id:       charger.ID,
+		Name:     charger.Name,
+		Capacity: charger.Capacity,
 	}
 }

@@ -160,7 +160,8 @@ func CheckIfUserExistWithVehicle(w http.ResponseWriter, r *http.Request) {
 		utils.BadRequestResponse(w, "vehicleId isn't proper uint")
 		return
 	}
-	_, err = repository.CheckUserOwnership(username, uint(vehicleIdUint))
+	var user models.User
+	user, err = repository.CheckUserOwnership(username, uint(vehicleIdUint))
 
 	if err != nil {
 		utils.BadRequestResponse(w, err.Error())
@@ -168,7 +169,7 @@ func CheckIfUserExistWithVehicle(w http.ResponseWriter, r *http.Request) {
 	}
 
 	utils.OKResponse(w)
-	json.NewEncoder(w).Encode(fmt.Sprintf("user with username: %s exist", username))
+	json.NewEncoder(w).Encode(user)
 }
 
 func CheckIfUserExist(w http.ResponseWriter, r *http.Request) {

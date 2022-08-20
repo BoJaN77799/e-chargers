@@ -42,3 +42,9 @@ type ChargerReportDTO struct {
 	ChargingSpeedPerMinute int     `json:"charging_speed"`
 	PricePerHour           int     `json:"price_per_hour"`
 }
+
+type ChargerReservationDTO struct {
+	Id       uint   `json:"id"`
+	Name     string `json:"charger_name"`
+	Capacity uint   `json:"capacity"`
+}

@@ -7,7 +7,7 @@
     </app-header-user>
   </div>
   <div class="col">
-    <app-header-common *ngIf="!isRole('RegisteredUser') || !isRole('Administrator')">
+    <app-header-common *ngIf="!isRole('RegisteredUser') && !isRole('Administrator')">
     </app-header-common>
   </div>
 

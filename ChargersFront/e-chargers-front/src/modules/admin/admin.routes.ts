@@ -4,7 +4,7 @@ import { AdminHomeComponent } from "./pages/admin-home/admin-home.component";
 
 export const AdminRoutes: Routes = [
   {
-    path: "home",
+    path: "homepage",
     pathMatch: "full",
     component: AdminHomeComponent,
     canActivate: [RoleGuard],

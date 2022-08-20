@@ -24,4 +24,27 @@ export class ReservationService {
 
         return this.http.post<HttpResponse<string>>("echargers/api/reservations", reservationDTO, queryParams);
     }
+
+    getAllReservationsOfUser(username: string): Observable<HttpResponse<ReservationDTO[]>> {
+        let queryParams = {};
+
+        queryParams = {
+            headers: this.headers,
+            observe: "response",
+        };
+
+        return this.http.get<HttpResponse<ReservationDTO[]>>("echargers/api/reservations/" + username, queryParams);
+    }
+
+    cancelReservation(id: number): Observable<HttpResponse<string>> {
+        let queryParams = {};
+
+        queryParams = {
+            headers: this.headers,
+            observe: "response",
+            responseType: "text"
+        };
+
+        return this.http.delete<HttpResponse<string>>("echargers/api/reservations/" + id, queryParams);
+    }
 }

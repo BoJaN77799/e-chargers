@@ -6,7 +6,7 @@ import { ChargerDTO } from 'src/modules/shared/model/chargerDTO';
 import { SnackBarService } from 'src/modules/shared/service/snack-bar.service';
 import { UtilService } from 'src/modules/shared/service/utils-service';
 import { VehicleDTO } from 'src/modules/user/model/vehicleDTO';
-import { UserHomeComponent } from 'src/modules/user/peges/user-home/user-home.component';
+import { UserHomeComponent } from 'src/modules/user/pages/user-home/user-home.component';
 import { VehicleService } from 'src/modules/user/service/vehicleService';
 import { ReservationService } from '../../service/reservationService';
 import * as moment from 'moment';
@@ -60,9 +60,12 @@ export class CreateReservationComponent implements OnInit {
   submit() {
 
     let reservationDTO: ReservationDTO = {
+      "id": 0,
       "username": this.utilService.getLoggedUsername(),
       "charger_id": this.charger.id,
+      "charger_name": this.charger.name,
       "vehicle_id": this.reservationForm.get('vehicle')?.value,
+      "vehicle_name": "",
       "date_from": moment(this.reservationForm.get('date_from')?.value).valueOf(),
       "duration": this.reservationForm.get('duration')?.value,
     }

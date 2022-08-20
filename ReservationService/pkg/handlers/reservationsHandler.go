@@ -66,17 +66,17 @@ func FindAllReservationsFromUser(w http.ResponseWriter, r *http.Request) {
 
 func CancelReservation(w http.ResponseWriter, r *http.Request) {
 
-	defer r.Body.Close()
-	body, err := ioutil.ReadAll(r.Body)
+	params := mux.Vars(r)
+	id, _ := params["id"]
+
+	idUint, err := strconv.ParseUint(id, 10, 32)
 
 	if err != nil {
-		log.Fatalln(err)
+		utils.BadRequestResponse(w, err.Error())
+		return
 	}
 
-	var cancelReservation models.CancelReservation
-	json.Unmarshal(body, &cancelReservation)
-
-	err = repository.CancelReservation(cancelReservation.Username, cancelReservation.ChargerId, cancelReservation.VehicleId)
+	err = repository.CancelReservation(uint(idUint))
 
 	if err != nil {
 		utils.BadRequestResponse(w, err.Error())

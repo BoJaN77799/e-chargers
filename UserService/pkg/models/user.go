@@ -95,3 +95,18 @@ func (vehicle *Vehicle) ToDTO() VehicleDTO {
 		VehicleType: vehicle.VehicleType.String(),
 	}
 }
+
+func (user *User) ToDTO() UserReservationDTO {
+	return UserReservationDTO{
+		Username: user.Username,
+		Vehicles: vehiclesToDto(user.Vehicles),
+	}
+}
+
+func vehiclesToDto(vehicles []Vehicle) []VehicleDTO {
+	var vehiclesDTO []VehicleDTO
+	for _, vehicle := range vehicles {
+		vehiclesDTO = append(vehiclesDTO, vehicle.ToDTO())
+	}
+	return vehiclesDTO
+}
