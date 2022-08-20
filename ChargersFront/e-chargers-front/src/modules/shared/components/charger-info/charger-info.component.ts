@@ -22,7 +22,7 @@ export class ChargerInfoComponent implements OnInit {
   openReservationDialog(): void {
     const dialogRef = this.dialog.open(CreateReservationComponent, {
       data: this.charger,
-      width: '60%',
+      width: '30%',
     });
 
     dialogRef.afterClosed().subscribe(result => {

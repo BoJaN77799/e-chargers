@@ -83,4 +83,15 @@ export class UserReservationsComponent implements OnInit {
     return moment(date).format("YYYY-MM-DD HH:mm")
   }
 
+  checkIfDisabled(reservation: ReservationDTO) {
+    let now = moment((new Date()).getTime());
+    let endCharging = moment(reservation.date_from + reservation.duration * 60 * 1000)
+
+    if (now < endCharging) {
+      return true;
+    }
+
+    return false;
+  }
+
 }

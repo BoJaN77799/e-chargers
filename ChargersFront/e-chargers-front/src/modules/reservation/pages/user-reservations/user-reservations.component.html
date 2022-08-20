@@ -1,4 +1,4 @@
-<p class="title">{{loggedUsername}}'s electric charging</p>
+<h2 class="title">{{loggedUsername}}'s electric charging reservations</h2>
 <div class="row">
     <table id='order-items' mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
 
@@ -26,10 +26,14 @@
         </ng-container>
 
         <ng-container matColumnDef="button">
-            <th mat-header-cell *matHeaderCellDef sortActionDescription="Sort by priority"> Duration
+            <th mat-header-cell *matHeaderCellDef sortActionDescription="Sort by priority">
             </th>
-            <td mat-cell *matCellDef="let element"><button (click)="cancelReservation(element)">Cancel</button> </td>
+            <td class="btn-td" mat-cell *matCellDef="let element">
+                <button class="cancel" (click)="cancelReservation(element)">Cancel reservation</button> 
+                <button class="review" [disabled]="checkIfDisabled(element)">Add a review</button> 
+            </td>
         </ng-container>
+
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;" style="cursor: initial;">

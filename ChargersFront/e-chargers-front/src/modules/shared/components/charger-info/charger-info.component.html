@@ -8,9 +8,12 @@
 
         <div>
             <p class="charger-name">{{charger?.name}}</p>
+            <button class="reviews-btn">Read reviews</button>
         </div>
 
+
         <div>
+            <p></p>
             <p class="label">Working hours</p>
             <p class="working-hours content">{{charger?.work_time}}</p>
         </div>
@@ -36,16 +39,20 @@
 
         <div>
             <p></p>
-            <p class="label">Price</p>
-            <p>{{charger?.price_per_hour}}</p>
-        </div>
-
-        <div>
-            <p></p>
             <p class="label">Charging speed</p>
             <p>{{charger?.charging_speed}}</p>
         </div>
-        <button [hidden]="!isRole('RegisteredUser')" class="btn btn-success"
-            (click)="openReservationDialog()">Reservation</button>
+
+        <div class="box">
+
+            <div class="inline-div">
+                <p class="label">Price</p>
+                <p>{{charger?.price_per_hour}}</p>
+            </div>
+
+            <div class="inline-div">
+                <button class="btn btn-success target-btn" (click)="openReservationDialog()">Make a reservation</button>
+            </div>
+        </div>
     </div>
 </div>
