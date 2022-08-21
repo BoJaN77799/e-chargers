@@ -12,6 +12,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CreateReviewComponent } from './components/create-review/create-review.component';
 import { RecensionListComponent } from './components/recension-list/recension-list.component';
 import { RecensionComponent } from './components/recension/recension.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { RecensionComponent } from './components/recension/recension.component';
     MapPageComponent,
     CreateReviewComponent,
     RecensionListComponent,
-    RecensionComponent
+    RecensionComponent,
+    ProfileComponent
   ],
   imports: [
     CommonModule,

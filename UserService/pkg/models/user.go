@@ -117,6 +117,7 @@ func vehiclesToDto(vehicles []Vehicle) []VehicleDTO {
 
 func (user *User) ToUserProfileDTO() UserProfileDTO {
 	return UserProfileDTO{
+		Username:  user.Username,
 		Email:     user.Email,
 		Firstname: user.Firstname,
 		Lastname:  user.Lastname,

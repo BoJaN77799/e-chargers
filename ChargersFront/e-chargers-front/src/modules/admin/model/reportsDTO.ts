@@ -1,3 +1,5 @@
+import { VehicleDTO } from "src/modules/user/model/vehicleDTO"
+
 export interface Report {
     date_from: number,
     date_to: number,
@@ -28,4 +30,13 @@ export interface UserReportDTO {
     banned: boolean
     banned_at: number
     banned_until: number
+}
+
+export interface UserProfileDTO {
+    username: string
+    email: string
+    firstname: string
+    lastname: string
+    strikes: number
+    vechicles: VehicleDTO[]
 }

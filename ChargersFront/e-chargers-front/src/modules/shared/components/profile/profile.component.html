@@ -1,0 +1,35 @@
+<img src="assets/img/logo.png">
+<div class="data">
+
+    <h2>My profile</h2>
+    <div class="row">
+        <div class="col-6">
+            <p class="label">First Name</p>
+            <p class="data">{{user?.firstname}}</p>
+        </div>
+
+        <div class="col-6">
+            <p class="label">Last Name</p>
+            <p class="data">{{user?.lastname}}</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-6">
+            <p class="label">Email</p>
+            <p class="data">{{user?.email}}</p>
+        </div>
+
+        <div class="col-6">
+            <p class="label">Username</p>
+            <p class="data">{{user?.username}}</p>
+        </div>
+    </div>
+
+    <div *ngIf="checkStrikes()">
+        <p class="alert">Be avare of your language Harry !
+            <br> You might be banned soon !
+        </p>
+    </div>
+
+</div>

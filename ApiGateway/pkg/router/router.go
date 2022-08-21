@@ -24,6 +24,7 @@ func HandleRequests() {
 	router.HandleFunc("/api/users/vehicles/{name}", UserService.DeleteVehicle).Methods("DELETE")
 	router.HandleFunc("/api/users/strike/{username}", UserService.StrikeUser).Methods("GET")
 	router.HandleFunc("/api/users", UserService.FindAllUsers).Methods("GET")
+	router.HandleFunc("/api/users/{username}", UserService.GetUserInfo).Methods("GET")
 
 	// ChargerService
 	router.HandleFunc("/api/chargers", ChargerService.AddCharger).Methods("POST")

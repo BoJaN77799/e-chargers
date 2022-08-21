@@ -1,6 +1,6 @@
 export interface VehicleDTO {
     id: number,
     name: string
-    vehicleType: string
+    vehicle_type: string
     username: string
 }

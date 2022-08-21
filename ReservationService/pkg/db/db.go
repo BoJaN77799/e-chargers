@@ -43,8 +43,8 @@ var (
 			ChargerName: "JKP Cistoca",
 			VehicleId:   2,
 			VehicleName: "Tesla Model 2",
-			DateFrom:    1664116200000,
-			DateTo:      1664116200000 + 60*60*1000,
+			DateFrom:    1661085000000,
+			DateTo:      1661087400000,
 		},
 	}
 )

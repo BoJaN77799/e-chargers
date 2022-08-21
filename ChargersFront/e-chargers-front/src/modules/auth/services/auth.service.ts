@@ -4,11 +4,13 @@ import { Observable } from "rxjs";
 import { Login } from "../models/login";
 import { Token } from "../models/token";
 import { RegistrationDTO } from "../models/registration";
+import { UserProfileDTO } from "src/modules/admin/model/reportsDTO";
 
 @Injectable({
   providedIn: "root",
 })
 export class AuthService {
+
   private headers = new HttpHeaders({ "Content-Type": "application/json" });
 
   constructor(private http: HttpClient) { }
@@ -44,5 +46,16 @@ export class AuthService {
       headers: this.headers,
       responseType: "json",
     });
+  }
+
+  getUserInfo(username: string): Observable<HttpResponse<UserProfileDTO>> {
+    let queryParams = {};
+
+    queryParams = {
+      headers: this.headers,
+      observe: "response"
+    };
+
+    return this.http.get<HttpResponse<UserProfileDTO>>("echargers/api/users/" + username, queryParams);
   }
 }

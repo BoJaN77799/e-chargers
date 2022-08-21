@@ -25,4 +25,28 @@ export class VehicleService {
         return this.http.get<HttpResponse<VehicleDTO[]>>("echargers/api/users/vehicles/" + username, queryParams);
     }
 
+    save(vehicle: VehicleDTO) {
+        let queryParams = {};
+
+        queryParams = {
+            headers: this.headers,
+            observe: "response",
+            responseType: "text"
+        };
+
+        return this.http.post<HttpResponse<string>>("echargers/api/users/vehicles", vehicle, queryParams);
+    }
+
+    remove(name: string) {
+        let queryParams = {};
+
+        queryParams = {
+            headers: this.headers,
+            observe: "response",
+            responseType: "text"
+        };
+
+        return this.http.delete<HttpResponse<string>>("echargers/api/users/vehicles/" + name, queryParams);
+    }
+
 }

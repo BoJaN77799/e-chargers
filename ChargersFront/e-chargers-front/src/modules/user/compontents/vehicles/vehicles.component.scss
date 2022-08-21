@@ -1,0 +1,94 @@
+h2 {
+    margin-top: 20px;
+}
+
+.data {
+    top: 0;
+    left: 0;
+    text-align: center;
+    position: relative;
+}
+
+.table {
+    margin-top: 70px;
+    position: relative;
+    height: 300px;
+    transform: translate(0, -10%);
+}
+
+.label {
+    font-size: 14px;
+    color: green;
+    display: inline;
+    font-weight: 500;
+}
+
+.content {
+    padding: 0;
+    margin: 0;
+    font-size: 16px;
+}
+
+.alert {
+    color: red;
+    font-size: small;
+    margin: 0;
+    padding: 0;
+}
+
+
+table {
+    position: absolute;
+    transform: translate(-50%, 0);
+    width: 80%;
+    left: 50%;
+    text-align: center;
+}
+
+th {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 13px;
+    text-align: center !important;
+}
+
+.btn-td {
+    width: 25%;
+    padding: 0;
+}
+
+
+button {
+    border: 0;
+    background: transparent;
+}
+
+button:focus {
+    outline: none;
+    border: none;
+}
+
+.cancel {
+    color: red;
+}
+
+.main {
+    width: 40%;
+}
+
+.add {
+    color: white;
+    font-weight: bold;
+    background-color: green;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+
+}
+
+.forma {
+    transform: translate(0, -45%);
+}
