@@ -3,6 +3,7 @@ package repository
 import (
 	"errors"
 	"fmt"
+	"time"
 	"user_service/pkg/db"
 	"user_service/pkg/models"
 	"user_service/pkg/utils"
@@ -41,9 +42,9 @@ func FindUserByUsernameAndPassword(username string, password string) (models.Use
 		return user, errors.New(fmt.Sprintf("wrong password for username '%s'", user.Username))
 	}
 
-	//if time.Now().Before(user.BannedUntil) {
-	//	return user, errors.New("You are banned until: " + user.BannedUntil.String())
-	//}
+	if user.Banned {
+		return user, errors.New("user with give credentials is banned")
+	}
 
 	return user, nil
 }
@@ -130,4 +131,34 @@ func DeleteVehicle(name string) error {
 	db.Db.Delete(&vehicle)
 
 	return nil
+}
+
+func StrikeUser(username string) (models.User, error) {
+	var user models.User
+
+	db.Db.Table("users").Where("username = ?", username).First(&user)
+
+	if user.ID == 0 {
+		return user, errors.New("invalid username")
+	}
+	if user.Strikes == 3 {
+		return user, errors.New("this user is already banned by 3 committed strikes")
+	}
+
+	if user.Strikes+1 == 3 {
+		user.Strikes += 1
+		user.Banned = true
+		user.BannedAt = uint64(time.Now().UnixMilli())
+		user.BannedUntil = uint64(time.Now().AddDate(0, 1, 0).UnixMilli())
+		db.Db.Save(user)
+		return user, errors.New("user is banned during 3 strikes")
+	} else {
+		user.Strikes += 1
+		db.Db.Save(user)
+		if user.Strikes == 1 {
+			return user, errors.New(fmt.Sprintf("user %s has now 1 strike", user.Username))
+		} else {
+			return user, errors.New(fmt.Sprintf("user %s has now %d strikes", user.Username, user.Strikes))
+		}
+	}
 }

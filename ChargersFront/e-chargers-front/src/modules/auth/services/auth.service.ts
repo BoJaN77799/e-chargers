@@ -38,4 +38,11 @@ export class AuthService {
       responseType: "json",
     });
   }
+
+  strikeUser(username: string): Observable<HttpResponse<string>> {
+    return this.http.get<HttpResponse<string>>("echargers/api/users/strike/" + username, {
+      headers: this.headers,
+      responseType: "json",
+    });
+  }
 }

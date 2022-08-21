@@ -120,6 +120,26 @@ func GetVehicles(w http.ResponseWriter, r *http.Request) {
 	utils.DelegateResponse(response, w)
 }
 
+func StrikeUser(w http.ResponseWriter, r *http.Request) {
+
+	utils.SetupResponse(&w, r)
+	if r.Method == "OPTIONS" {
+		return
+	}
+
+	params := mux.Vars(r)
+	username, _ := params["username"]
+
+	response, err := http.Get(utils.BaseUserServicePath.Next().Host + "/strike/" + username)
+
+	if err != nil {
+		w.WriteHeader(http.StatusGatewayTimeout)
+		return
+	}
+
+	utils.DelegateResponse(response, w)
+}
+
 func DeleteVehicle(w http.ResponseWriter, r *http.Request) {
 
 	utils.SetupResponse(&w, r)

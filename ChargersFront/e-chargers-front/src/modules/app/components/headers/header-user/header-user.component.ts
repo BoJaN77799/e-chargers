@@ -16,9 +16,9 @@ export class HeaderUserComponent implements OnInit {
   }
 
   logout(): void {
-    this.authService.logout().subscribe((result) => {
-      console.log(result);
-    });
+    // this.authService.logout().subscribe((result) => {
+    //   console.log(result);
+    // });
 
     sessionStorage.removeItem("user");
   }

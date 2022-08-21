@@ -10,6 +10,7 @@ import { MaxLengthValidator } from 'src/modules/shared/validators/MaxLengthValid
 import { MinLengthPasswordValidator } from 'src/modules/shared/validators/MinLengthPasswordValidator';
 import { PasswordValidator } from 'src/modules/shared/validators/PasswordValidator';
 import { Login } from '../../models/login';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-login',
@@ -56,7 +57,13 @@ export class LoginComponent implements OnInit {
       }
     },
       (err: any) => {
-        this.snackBarService.openSnackBar(err.error);
+        if ((err.error as string).includes("banned")) {
+          let banned_until_index = (err.error as string).lastIndexOf('l')
+          let banned_until = (err.error as string).substring(banned_until_index + 2)
+          console.log(banned_until)
+          this.snackBarService.openSnackBar("you are banned until " + moment(Number(banned_until)).format("YYYY-MM-DD HH:mm"))
+        } else
+          this.snackBarService.openSnackBar(err.error);
       }
     );
   }

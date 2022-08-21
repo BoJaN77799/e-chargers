@@ -30,13 +30,17 @@ func (e UserRole) String() string {
 
 type User struct {
 	gorm.Model
-	Username  string   `json:"username" gorm:"unique;not-null"`
-	Password  string   `json:"password" gorm:"not null"`
-	Email     string   `json:"email"  gorm:"unique;not-null"`
-	Firstname string   `json:"firstname" gorm:"not null"`
-	Lastname  string   `json:"lastname" gorm:"not null"`
-	Role      UserRole `json:"userRole" gorm:"not null"`
-	Vehicles  []Vehicle
+	Username    string   `json:"username" gorm:"unique;not-null"`
+	Password    string   `json:"password" gorm:"not null"`
+	Email       string   `json:"email"  gorm:"unique;not-null"`
+	Firstname   string   `json:"firstname" gorm:"not null"`
+	Lastname    string   `json:"lastname" gorm:"not null"`
+	Role        UserRole `json:"userRole" gorm:"not null"`
+	Vehicles    []Vehicle
+	Strikes     uint   `json:"strikes" gorm:"not-null"`
+	Banned      bool   `json:"banned" gorm:"not-null"`
+	BannedAt    uint64 `json:"banned_at"`
+	BannedUntil uint64 `json:"banned_until"`
 }
 
 type Claims struct {
@@ -109,4 +113,14 @@ func vehiclesToDto(vehicles []Vehicle) []VehicleDTO {
 		vehiclesDTO = append(vehiclesDTO, vehicle.ToDTO())
 	}
 	return vehiclesDTO
+}
+
+func (user *User) ToUserProfileDTO() UserProfileDTO {
+	return UserProfileDTO{
+		Email:     user.Email,
+		Firstname: user.Firstname,
+		Lastname:  user.Lastname,
+		Strikes:   user.Strikes,
+		Vehicles:  vehiclesToDto(user.Vehicles),
+	}
 }

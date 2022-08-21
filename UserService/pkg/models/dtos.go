@@ -21,3 +21,14 @@ type UserReservationDTO struct {
 	Username string `json:"username" gorm:"unique;not-null"`
 	Vehicles []VehicleDTO
 }
+
+type UserProfileDTO struct {
+	Email       string `json:"email"`
+	Firstname   string `json:"firstname"`
+	Lastname    string `json:"lastname"`
+	Vehicles    []VehicleDTO
+	Strikes     uint   `json:"strikes"`
+	Banned      bool   `json:"banned"`
+	BannedAt    uint64 `json:"banned_at"`
+	BannedUntil uint64 `json:"banned_until"`
+}

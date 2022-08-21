@@ -19,10 +19,10 @@ type Configuration struct {
 
 var (
 	users = []models.User{
-		{Email: "admin@example.com", Username: "admin", Password: "$2a$12$QxDPTEbONfGxoUvxIx5oW.ge3anxohFaFU3Nq1AMMbyYei0jOY.9i", Firstname: "Adminko", Lastname: "Adminic", Role: models.Administrator},
-		{Email: "boksimus@example.com", Username: "boksi", Password: "$2a$12$QxDPTEbONfGxoUvxIx5oW.ge3anxohFaFU3Nq1AMMbyYei0jOY.9i", Firstname: "Boksi", Lastname: "Mus", Role: models.RegisteredUser},
-		{Email: "velja_zajecar@example.com", Username: "velja", Password: "$2a$12$QxDPTEbONfGxoUvxIx5oW.ge3anxohFaFU3Nq1AMMbyYei0jOY.9i", Firstname: "Velja", Lastname: "Tomic", Role: models.RegisteredUser},
-		{Email: "mire_kralj@example.com", Username: "mire", Password: "$2a$12$QxDPTEbONfGxoUvxIx5oW.ge3anxohFaFU3Nq1AMMbyYei0jOY.9i", Firstname: "Mire", Lastname: "Kralj", Role: models.RegisteredUser},
+		{Email: "admin@example.com", Username: "admin", Password: "$2a$12$QxDPTEbONfGxoUvxIx5oW.ge3anxohFaFU3Nq1AMMbyYei0jOY.9i", Firstname: "Adminko", Lastname: "Adminic", Role: models.Administrator, Strikes: 0, Banned: false},
+		{Email: "boksimus@example.com", Username: "boksi", Password: "$2a$12$QxDPTEbONfGxoUvxIx5oW.ge3anxohFaFU3Nq1AMMbyYei0jOY.9i", Firstname: "Boksi", Lastname: "Mus", Role: models.RegisteredUser, Strikes: 0, Banned: false},
+		{Email: "velja_zajecar@example.com", Username: "velja", Password: "$2a$12$QxDPTEbONfGxoUvxIx5oW.ge3anxohFaFU3Nq1AMMbyYei0jOY.9i", Firstname: "Velja", Lastname: "Tomic", Role: models.RegisteredUser, Strikes: 0, Banned: false},
+		{Email: "mire_kralj@example.com", Username: "mire", Password: "$2a$12$QxDPTEbONfGxoUvxIx5oW.ge3anxohFaFU3Nq1AMMbyYei0jOY.9i", Firstname: "Mire", Lastname: "Kralj", Role: models.RegisteredUser, Strikes: 3, Banned: true, BannedAt: 1661000100000, BannedUntil: 1663678500000},
 	}
 )
 

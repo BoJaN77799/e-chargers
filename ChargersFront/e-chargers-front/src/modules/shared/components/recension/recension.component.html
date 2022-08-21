@@ -1,5 +1,6 @@
 <div>
     <p>Review from: {{recension?.username}}</p>
+    <button (click)="strikeUser(recension?.username)">Strike</button>
     <ul>
         <li>Reviewed at: {{formatDate(recension?.date)}}</li>
         <li>Review content: {{recension?.content}}</li>

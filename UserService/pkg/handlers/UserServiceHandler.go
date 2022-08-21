@@ -32,6 +32,11 @@ func Login(w http.ResponseWriter, r *http.Request) {
 	user, err := repository.FindUserByUsernameAndPassword(loginDTO.Username, loginDTO.Password)
 
 	if err != nil {
+		if strings.Contains(err.Error(), "banned") {
+			utils.UnauthorizedResponse(w)
+			json.NewEncoder(w).Encode(fmt.Sprintf("you are banned by strikes until %d", user.BannedUntil))
+			return
+		}
 		utils.UnauthorizedResponse(w)
 		json.NewEncoder(w).Encode(err.Error())
 		return
@@ -186,4 +191,36 @@ func CheckIfUserExist(w http.ResponseWriter, r *http.Request) {
 
 	utils.OKResponse(w)
 	json.NewEncoder(w).Encode(fmt.Sprintf("user with username: %s exist", username))
+}
+
+func GetUsersInfo(w http.ResponseWriter, r *http.Request) {
+
+	params := mux.Vars(r)
+	username, _ := params["username"]
+
+	user, err := repository.FindUserByUsername(username)
+
+	if err != nil {
+		utils.BadRequestResponse(w, err.Error())
+		return
+	}
+
+	utils.OKResponse(w)
+	json.NewEncoder(w).Encode(user.ToUserProfileDTO())
+}
+
+func StrikeUser(w http.ResponseWriter, r *http.Request) {
+
+	params := mux.Vars(r)
+	username, _ := params["username"]
+
+	message, err := repository.StrikeUser(username)
+
+	if err != nil {
+		utils.BadRequestResponse(w, err.Error())
+		return
+	}
+
+	utils.OKResponse(w)
+	json.NewEncoder(w).Encode(message)
 }
