@@ -24,5 +24,15 @@ export class ReviewService {
         return this.http.post<HttpResponse<string>>("echargers/api/recensions", reveiw, queryParams);
     }
 
+    getAllReviewsOfCharger(charger_id: number): Observable<HttpResponse<ReviewDTO[]>> {
+        let queryParams = {};
+
+        queryParams = {
+            headers: this.headers,
+            observe: "response"
+        };
+
+        return this.http.get<HttpResponse<ReviewDTO[]>>("echargers/api/recensions/charger/" + charger_id, queryParams);
+    }
 
 }

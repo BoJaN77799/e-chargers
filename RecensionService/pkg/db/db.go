@@ -35,6 +35,13 @@ var (
 		},
 		{
 			Username:  "boksi",
+			ChargerId: 1,
+			Date:      1664116200000 + 200*60*1000,
+			Content:   "Fine charger. Speed can be better",
+			Rate:      4,
+		},
+		{
+			Username:  "boksi",
 			ChargerId: 3,
 			Date:      1664116200000 + 60*60*1000,
 			Content:   "You sons of a glitch, repair this charger idiots",

@@ -5,6 +5,7 @@ import (
 	"ApiGateway/pkg/utils"
 	"bytes"
 	"encoding/json"
+	"github.com/gorilla/mux"
 	"io/ioutil"
 	"net/http"
 )
@@ -25,6 +26,26 @@ func AddRecension(w http.ResponseWriter, r *http.Request) {
 	req.Header.Set("Content-Type", "application/json")
 	client := &http.Client{}
 	response, err := client.Do(req)
+
+	if err != nil {
+		w.WriteHeader(http.StatusGatewayTimeout)
+		return
+	}
+
+	utils.DelegateResponse(response, w)
+}
+
+func FindAllRecensionsOfCharger(w http.ResponseWriter, r *http.Request) {
+
+	utils.SetupResponse(&w, r)
+	if r.Method == "OPTIONS" {
+		return
+	}
+
+	params := mux.Vars(r)
+	chargerId, _ := params["charger_id"]
+
+	response, err := http.Get(utils.BaseRecensionsServicePath.Next().Host + "/charger/" + chargerId)
 
 	if err != nil {
 		w.WriteHeader(http.StatusGatewayTimeout)

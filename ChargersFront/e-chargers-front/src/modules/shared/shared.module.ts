@@ -10,13 +10,17 @@ import { ChargerInfoComponent } from './components/charger-info/charger-info.com
 import { SearchChargersComponent } from './components/search-chargers/search-chargers.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CreateReviewComponent } from './components/create-review/create-review.component';
+import { RecensionListComponent } from './components/recension-list/recension-list.component';
+import { RecensionComponent } from './components/recension/recension.component';
 
 @NgModule({
   declarations: [
     ChargerInfoComponent,
     SearchChargersComponent,
     MapPageComponent,
-    CreateReviewComponent
+    CreateReviewComponent,
+    RecensionListComponent,
+    RecensionComponent
   ],
   imports: [
     CommonModule,

@@ -106,3 +106,11 @@ func GetAllRecensionsInPeriod(dateFromUInt64 uint64, dateToUInt64 uint64) []mode
 
 	return recensions
 }
+
+func GetAllRecensionsOfCharger(chargerId uint) []models.Recension {
+	var recensions []models.Recension
+
+	db.Db.Table("recensions").Where("charger_id = ?", chargerId).Find(&recensions)
+
+	return recensions
+}

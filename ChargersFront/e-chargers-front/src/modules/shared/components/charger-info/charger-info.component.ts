@@ -1,7 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateReservationComponent } from 'src/modules/reservation/components/create-reservation/create-reservation.component';
 import { ChargerDTO } from 'src/modules/shared/model/chargerDTO';
+import { ReviewDTO } from '../../model/reviewDTO';
+import { ReviewService } from '../../service/reviewService';
 import { UtilService } from '../../service/utils-service';
 
 @Component({
@@ -9,14 +11,19 @@ import { UtilService } from '../../service/utils-service';
   templateUrl: './charger-info.component.html',
   styleUrls: ['./charger-info.component.scss']
 })
-export class ChargerInfoComponent implements OnInit {
+export class ChargerInfoComponent {
 
   @Input()
   charger: ChargerDTO | undefined
 
-  constructor(public dialog: MatDialog, private utilService: UtilService) { }
+  reviewsVisible = false
+  recensions: ReviewDTO[];
 
-  ngOnInit(): void {
+  constructor(
+    public dialog: MatDialog,
+    private utilService: UtilService,
+    private reviewssService: ReviewService) {
+    this.recensions = [];
   }
 
   openReservationDialog(): void {
@@ -32,6 +39,27 @@ export class ChargerInfoComponent implements OnInit {
 
   isRole(role: string): boolean {
     return this.utilService.isRole(role);
+  }
+
+  loadRecensions() {
+    if (this.recensions.length === 0) {
+      console.log(this.charger)
+      if (this.charger)
+        this.reviewssService.getAllReviewsOfCharger(this.charger.id).subscribe(
+          (response) => {
+            this.recensions = response.body as ReviewDTO[]
+            console.log(this.recensions)
+          },
+          (err) => {
+            console.log(err.error)
+          }
+        )
+    }
+  }
+
+  toggleReviews() {
+    this.loadRecensions();
+    this.reviewsVisible = !this.reviewsVisible
   }
 
 }

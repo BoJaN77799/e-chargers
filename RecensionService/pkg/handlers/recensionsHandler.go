@@ -9,6 +9,7 @@ import (
 	"recension_service/pkg/db/repository"
 	"recension_service/pkg/models"
 	"recension_service/pkg/utils"
+	"strconv"
 )
 
 func AddRecension(w http.ResponseWriter, r *http.Request) {
@@ -84,4 +85,25 @@ func CancelRecension(w http.ResponseWriter, r *http.Request) {
 
 	utils.OKResponse(w)
 	json.NewEncoder(w).Encode("recension successfully canceled")
+}
+
+func FindAllRecensionsOfCharger(w http.ResponseWriter, r *http.Request) {
+
+	var recensionsDTO []models.RecensionDTO
+	params := mux.Vars(r)
+	charger, _ := params["charger_id"]
+
+	chargerId, err := strconv.ParseUint(charger, 10, 32)
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+	recensions := repository.GetAllRecensionsOfCharger(uint(chargerId))
+
+	for _, recension := range recensions {
+		recensionsDTO = append(recensionsDTO, recension.ToDTO())
+	}
+
+	utils.OKResponse(w)
+	json.NewEncoder(w).Encode(recensionsDTO)
 }

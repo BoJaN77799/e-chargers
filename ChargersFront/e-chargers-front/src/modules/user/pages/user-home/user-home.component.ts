@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Coordinates } from 'src/modules/shared/model/coordinates';
 import { ChargerDTO } from 'src/modules/shared/model/chargerDTO';
 import { ChargerService } from '../../service/chargerService';
+import { ChargerInfoComponent } from 'src/modules/shared/components/charger-info/charger-info.component';
 
 @Component({
   selector: 'app-user-home',
@@ -17,6 +18,8 @@ export class UserHomeComponent implements OnInit {
 
   // search
   searchOpened: boolean = false
+
+  @ViewChild(ChargerInfoComponent) chargerInfoComponent!: ChargerInfoComponent;
 
   constructor(private chargerService: ChargerService) {
     this.chargers = []
@@ -46,6 +49,8 @@ export class UserHomeComponent implements OnInit {
   setSelectedCharger(charger: ChargerDTO) {
     this.selectedCharger = charger;
     this.searchOpened = false;
+    this.chargerInfoComponent.recensions = [];
+    this.chargerInfoComponent.reviewsVisible = false;
   }
 
   toggleSearch() {

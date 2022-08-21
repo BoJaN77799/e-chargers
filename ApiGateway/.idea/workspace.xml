@@ -5,18 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3ee43a6f-8681-4b3d-8c8b-776e3b6d299b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/pkg/handlers/RecensionService/handler.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pkg/models/RecensionService/dtos.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pkg/handlers/ReportsService/handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/handlers/ReportsService/handler.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pkg/handlers/RecensionService/handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/handlers/RecensionService/handler.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pkg/router/router.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/router/router.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pkg/utils/communication.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/utils/communication.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/src/modules/reservation/pages/user-reservations/user-reservations.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/src/modules/reservation/pages/user-reservations/user-reservations.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/src/modules/reservation/pages/user-reservations/user-reservations.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/src/modules/reservation/pages/user-reservations/user-reservations.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/src/modules/reservation/reservation.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/src/modules/reservation/reservation.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/src/modules/shared/service/reviewService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/src/modules/shared/service/reviewService.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/src/modules/shared/shared.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/src/modules/shared/shared.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RecensionService/pkg/db/db.go" beforeDir="false" afterPath="$PROJECT_DIR$/../RecensionService/pkg/db/db.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../RecensionService/pkg/db/repository/recensions.go" beforeDir="false" afterPath="$PROJECT_DIR$/../RecensionService/pkg/db/repository/recensions.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RecensionService/pkg/models/dtos.go" beforeDir="false" afterPath="$PROJECT_DIR$/../RecensionService/pkg/models/dtos.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RecensionService/pkg/handlers/recensionsHandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/../RecensionService/pkg/handlers/recensionsHandler.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RecensionService/pkg/router/router.go" beforeDir="false" afterPath="$PROJECT_DIR$/../RecensionService/pkg/router/router.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -190,9 +187,19 @@
           <option name="timeStamp" value="14" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/pkg/handlers/ReportsService/handler.go</url>
-          <line>18</line>
-          <option name="timeStamp" value="16" />
+          <url>file://$PROJECT_DIR$/../RecensionService/pkg/db/repository/recensions.go</url>
+          <line>112</line>
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/../RecensionService/pkg/handlers/recensionsHandler.go</url>
+          <line>91</line>
+          <option name="timeStamp" value="20" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/../RecensionService/pkg/handlers/recensionsHandler.go</url>
+          <line>51</line>
+          <option name="timeStamp" value="21" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

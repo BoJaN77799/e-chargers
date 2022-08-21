@@ -40,6 +40,7 @@ func HandleRequests() {
 
 	//RecensionsService
 	router.HandleFunc("/api/recensions", RecensionService.AddRecension).Methods("POST")
+	router.HandleFunc("/api/recensions/charger/{charger_id}", RecensionService.FindAllRecensionsOfCharger).Methods("GET")
 
 	log.Fatal(http.ListenAndServe(":50000", router))
 }
