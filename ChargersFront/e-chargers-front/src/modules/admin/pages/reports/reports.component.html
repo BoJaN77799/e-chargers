@@ -17,12 +17,19 @@
         </mat-form-field>
     </div>
 
-
     <div class="row">
         <button class="btn btn-success" type="submit" [disabled]="!reservationForm.valid" (click)="submit()"> Make
-            reservation
+            report
         </button>
     </div>
-</form>
 
-{{chargersReport}}
+    <ul>
+        <li *ngFor="let reportItem of reportItems">
+            {{reportItem.charger.name}}
+            <ul>
+                <li>Money earned: {{reportItem.money_earned}}€</li>
+                <li>Used energy: {{reportItem.used_energy}}kWh</li>
+            </ul>
+        </li>
+    </ul>
+</form>
