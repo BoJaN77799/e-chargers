@@ -3,6 +3,7 @@ import { Coordinates } from 'src/modules/shared/model/coordinates';
 import { ChargerDTO } from 'src/modules/shared/model/chargerDTO';
 import { ChargerService } from '../../service/chargerService';
 import { ChargerInfoComponent } from 'src/modules/shared/components/charger-info/charger-info.component';
+import { MapPageComponent } from 'src/modules/shared/pages/map-page/map-page.component';
 
 @Component({
   selector: 'app-user-home',
@@ -18,6 +19,9 @@ export class UserHomeComponent implements OnInit {
 
   // search
   searchOpened: boolean = false
+
+  @ViewChild(MapPageComponent) mapComponent!: MapPageComponent;
+
 
   @ViewChild(ChargerInfoComponent) chargerInfoComponent!: ChargerInfoComponent;
 
@@ -59,7 +63,9 @@ export class UserHomeComponent implements OnInit {
 
   changeChargers(chargers: ChargerDTO[]) {
     console.log(chargers)
-    this.chargersToMap = chargers;
+    // this.chargersToMap = chargers;
+    this.mapComponent.chargers = chargers;
+    this.mapComponent.printChargers();
   }
 
 }

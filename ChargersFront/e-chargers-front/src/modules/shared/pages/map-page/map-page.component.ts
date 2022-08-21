@@ -123,5 +123,41 @@ export class MapPageComponent implements OnInit {
     return undefined
   }
 
+  refreshMapFeatures(chargers: ChargerDTO[]) {
+    var featureList = [];
+
+    for (let idx = 0; idx < chargers.length; idx++) {
+      const charger = chargers[idx];
+
+      let feature = new Feature({
+        geometry: new Point(fromLonLat([charger.address.longitude, charger.address.latitude]))
+      })
+      feature.setStyle(new Style({
+        image: new Icon(({
+          anchor: [0.5, 1],
+          src: 'assets/img/marker-green-smalle.png',
+        }))
+      }))
+
+      feature.setProperties({ 'name': charger.name })
+
+      featureList.push(feature)
+    }
+
+    //console.log(this.map.getLayers()['array_'][1]['values_']['source'].getFeatures())
+    this.map.getLayers()['array_'][1] = new VectorLayer({
+      source: new VectorSource({
+        features: [...featureList]
+      })
+    })
+
+    //console.log(this.map.getLayers()['array_'][1]['values_']['source'].getFeatures())
+    this.map.updateSize();
+  }
+
+  printChargers() {
+    this.refreshMapFeatures(this.chargers)
+  }
+
 }
 

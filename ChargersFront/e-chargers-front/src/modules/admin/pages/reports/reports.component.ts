@@ -48,10 +48,12 @@ export class ReportsComponent implements OnInit {
     this.reportsService.getReport(startDateTime.valueOf(), endDateTime.valueOf()).subscribe(
       (response) => {
         this.chargersReport = response.body as Report;
+
         const iterrableMap = new Map(Object.entries(this.chargersReport.chargers));
         for (let [key, value] of iterrableMap) {
           this.reportItems.push(value)
         }
+        console.log(this.reportItems)
       },
       (err) => {
         this.snackBarService.openSnackBar("There is no report for this period.")

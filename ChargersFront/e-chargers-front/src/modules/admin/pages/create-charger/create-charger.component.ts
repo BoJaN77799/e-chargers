@@ -69,12 +69,8 @@ export class CreateChargerComponent implements OnInit {
         console.log(response)
         if (response.body && response.body.lenght != 0) {
           let address = response.body[0]
-          console.log(address)
-          console.log(address.lon)
-          console.log(address.lat)
           charger.address.longitude = Number(address.lon)
           charger.address.latitude = Number(address.lat)
-          console.log(charger)
 
           // let's save this in database
           this.chargerService.create(charger).subscribe(

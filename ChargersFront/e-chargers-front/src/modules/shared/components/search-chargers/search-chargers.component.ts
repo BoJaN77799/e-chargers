@@ -19,13 +19,13 @@ export class SearchChargersComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private snackBarService: SnackBarService, private chargerService: ChargerService) {
     this.searchFormGroup = this.fb.group({
-      name: ['', Validators.required],
+      name: ['Promenada', Validators.required],
       workTimeFrom: ['00'],
       workTimeTo: [24],
       capacity: [10],
       pricePerHourFrom: [1],
       pricePerHourTo: [20],
-      type: ['', Validators.required],
+      type: ['Type 2', Validators.required],
       chargingSpeedFrom: [5],
       chargingSpeedTo: [35],
     });
