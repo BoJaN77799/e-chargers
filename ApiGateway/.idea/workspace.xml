@@ -5,14 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3ee43a6f-8681-4b3d-8c8b-776e3b6d299b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/pkg/handlers/ReportsService/handler.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pkg/handlers/RecensionService/handler.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pkg/models/RecensionService/dtos.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pkg/handlers/ReservationService/handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/handlers/ReservationService/handler.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pkg/handlers/ReportsService/handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/handlers/ReportsService/handler.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pkg/router/router.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/router/router.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pkg/utils/communication.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/utils/communication.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/src/modules/admin/admin.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/src/modules/admin/admin.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/src/modules/admin/admin.routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/src/modules/admin/admin.routes.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/src/modules/app/components/headers/header-admin/header-admin.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/src/modules/app/components/headers/header-admin/header-admin.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/src/modules/reservation/pages/user-reservations/user-reservations.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/src/modules/reservation/pages/user-reservations/user-reservations.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/src/modules/reservation/pages/user-reservations/user-reservations.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/src/modules/reservation/pages/user-reservations/user-reservations.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/src/modules/reservation/reservation.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/src/modules/reservation/reservation.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/src/modules/shared/shared.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../ChargersFront/e-chargers-front/src/modules/shared/shared.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RecensionService/pkg/db/repository/recensions.go" beforeDir="false" afterPath="$PROJECT_DIR$/../RecensionService/pkg/db/repository/recensions.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RecensionService/pkg/models/dtos.go" beforeDir="false" afterPath="$PROJECT_DIR$/../RecensionService/pkg/models/dtos.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -184,6 +188,11 @@
           <url>file://$PROJECT_DIR$/pkg/handlers/ReservationService/handler.go</url>
           <line>83</line>
           <option name="timeStamp" value="14" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/pkg/handlers/ReportsService/handler.go</url>
+          <line>18</line>
+          <option name="timeStamp" value="16" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

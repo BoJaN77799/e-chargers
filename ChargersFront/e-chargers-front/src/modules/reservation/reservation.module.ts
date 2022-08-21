@@ -16,6 +16,9 @@ import { UserReservationsComponent } from './pages/user-reservations/user-reserv
     SharedModule,
     ReactiveFormsModule,
     CommonModule,
+  ],
+  exports: [
+    UserReservationsComponent
   ]
 })
 export class ReservationModule { }

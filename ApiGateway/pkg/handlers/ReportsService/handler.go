@@ -16,7 +16,7 @@ func FindAllReservationsInPeriod(w http.ResponseWriter, r *http.Request) {
 	dateFrom, _ := params["date_from"]
 	dateTo, _ := params["date_to"]
 
-	response, err := http.Get(utils.BaseReportsServicePath.Next().Host + "/" + dateFrom + "/" + dateTo)
+	response, err := http.Get(utils.BaseReportsServicePath.Next().Host + "/chargers/" + dateFrom + "/" + dateTo)
 
 	if err != nil {
 		w.WriteHeader(http.StatusGatewayTimeout)

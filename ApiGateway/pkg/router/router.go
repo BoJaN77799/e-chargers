@@ -2,6 +2,7 @@ package router
 
 import (
 	"ApiGateway/pkg/handlers/ChargerService"
+	"ApiGateway/pkg/handlers/RecensionService"
 	"ApiGateway/pkg/handlers/ReportsService"
 	"ApiGateway/pkg/handlers/ReservationService"
 	"ApiGateway/pkg/handlers/UserService"
@@ -34,7 +35,11 @@ func HandleRequests() {
 	router.HandleFunc("/api/reservations/{username}", ReservationService.FindAllReservationsFromUser).Methods("GET")
 	router.HandleFunc("/api/reservations/{id}", ReservationService.CancelReservation).Methods("DELETE")
 
+	// ReportsService
 	router.HandleFunc("/api/reports/{date_from}/{date_to}", ReportsService.FindAllReservationsInPeriod).Methods("GET")
+
+	//RecensionsService
+	router.HandleFunc("/api/recensions", RecensionService.AddRecension).Methods("POST")
 
 	log.Fatal(http.ListenAndServe(":50000", router))
 }

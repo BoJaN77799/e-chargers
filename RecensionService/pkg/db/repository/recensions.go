@@ -5,6 +5,7 @@ import (
 	"recension_service/pkg/db"
 	"recension_service/pkg/models"
 	"recension_service/pkg/utils"
+	"time"
 )
 
 func CreateRecension(recensionDTO models.RecensionDTO) (models.Recension, error) {
@@ -16,23 +17,28 @@ func CreateRecension(recensionDTO models.RecensionDTO) (models.Recension, error)
 		return recension, err
 	}
 
-	err = VerifyUserUsername(recension.Username)
+	err = VerifyUserUsername(recensionDTO.Username)
 
 	if err != nil {
 		return recension, err
 	}
 
-	err = VerifyCharger(recension.ChargerId)
+	err = VerifyCharger(recensionDTO.ChargerId)
 
 	if err != nil {
 		return recension, err
 	}
 
-	err = CheckIfRecensionExist(&recension)
+	err = CheckIfRecensionExist(&recensionDTO)
 
 	if err != nil {
 		return recension, err
 	}
+	recension.Username = recensionDTO.Username
+	recension.ChargerId = recensionDTO.ChargerId
+	recension.Content = recensionDTO.Content
+	recension.Rate = recensionDTO.Rate
+	recension.Date = uint64(time.Now().UnixMilli())
 
 	if result := db.Db.Create(&recension); result.Error != nil {
 		return recension, result.Error
@@ -41,7 +47,7 @@ func CreateRecension(recensionDTO models.RecensionDTO) (models.Recension, error)
 	return recension, nil
 }
 
-func CheckIfRecensionExist(recension *models.Recension) error {
+func CheckIfRecensionExist(recension *models.RecensionDTO) error {
 	var recensionDB models.Recension
 
 	db.Db.Table("recensions").Where(
@@ -51,7 +57,7 @@ func CheckIfRecensionExist(recension *models.Recension) error {
 	).Find(&recensionDB)
 
 	if recensionDB.ID != 0 {
-		return errors.New("user has 2 recension on this charger")
+		return errors.New("user has 2 recensions on this charger")
 	}
 	return nil
 }

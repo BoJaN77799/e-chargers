@@ -9,12 +9,14 @@ import { MaterialExampleModule } from 'src/material.module';
 import { ChargerInfoComponent } from './components/charger-info/charger-info.component';
 import { SearchChargersComponent } from './components/search-chargers/search-chargers.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CreateReviewComponent } from './components/create-review/create-review.component';
 
 @NgModule({
   declarations: [
     ChargerInfoComponent,
     SearchChargersComponent,
-    MapPageComponent
+    MapPageComponent,
+    CreateReviewComponent
   ],
   imports: [
     CommonModule,

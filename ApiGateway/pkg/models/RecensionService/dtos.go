@@ -1,4 +1,4 @@
-package models
+package RecensionService
 
 type RecensionDTO struct {
 	Username  string `json:"username"`

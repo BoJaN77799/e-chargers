@@ -30,7 +30,7 @@
             </th>
             <td class="btn-td" mat-cell *matCellDef="let element">
                 <button class="cancel" (click)="cancelReservation(element)">Cancel reservation</button> 
-                <button class="review" [disabled]="checkIfDisabled(element)">Add a review</button> 
+                <button class="review" [disabled]="checkIfDisabled(element)" (click)="openReviewDialog(element)">Add a review</button> 
             </td>
         </ng-container>
 

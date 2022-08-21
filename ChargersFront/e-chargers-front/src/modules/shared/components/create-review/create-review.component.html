@@ -1,0 +1,32 @@
+<form class="row p-4 align-items-center justify-content-center" [formGroup]="reviewForm"
+  (keydown.enter)="$event.preventDefault()">
+  <div style="text-align: center;">
+    <h2>Add a review to {{reservation.charger_name}}</h2>
+  </div>
+  <div>
+    <div class="row">
+      <span class="rate">
+        <input type="radio" id="star5" name="rate" value="5" />
+        <label for="star5" title="text">5 stars</label>
+        <input type="radio" id="star4" name="rate" value="4" />
+        <label for="star4" title="text">4 stars</label>
+        <input type="radio" id="star3" name="rate" value="3" />
+        <label for="star3" title="text">3 stars</label>
+        <input type="radio" id="star2" name="rate" value="2" />
+        <label for="star2" title="text">2 stars</label>
+        <input type="radio" id="star1" name="rate" value="1" />
+        <label for="star1" title="text">1 star</label>
+      </span>
+    </div>
+    <div class="row">
+      <mat-form-field class="example-full-width textarea" appearance="fill">
+        <mat-label>Describe your charging experience</mat-label>
+        <textarea matInput formControlName="content"></textarea>
+      </mat-form-field>
+    </div>
+    <div class="row">
+      <button class="btn btn-success" type="submit" (click)="submit()"> Submit review
+      </button>
+    </div>
+  </div>
+</form>

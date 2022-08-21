@@ -1,4 +1,5 @@
 import { AfterContentChecked, AfterViewInit, Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { ChargerDTO } from 'src/modules/shared/model/chargerDTO';
 import { SnackBarService } from 'src/modules/shared/service/snack-bar.service';
@@ -9,6 +10,7 @@ import { VehicleService } from 'src/modules/user/service/vehicleService';
 import { ReservationDTO } from '../../model/reservationDTO';
 import { TableData } from '../../model/tableData';
 import { ReservationService } from '../../service/reservationService';
+import { CreateReviewComponent } from 'src/modules/shared/components/create-review/create-review.component';
 
 import * as moment from 'moment'
 
@@ -31,7 +33,8 @@ export class UserReservationsComponent implements OnInit {
 
   constructor(private reservationService: ReservationService,
     private utilService: UtilService,
-    private snackBarService: SnackBarService) {
+    private snackBarService: SnackBarService,
+    public dialog: MatDialog) {
     this.reservations = [];
     this.vehicles = [];
     this.chargers = [];
@@ -79,10 +82,6 @@ export class UserReservationsComponent implements OnInit {
       )
   }
 
-  formatDate(date: number) {
-    return moment(date).format("YYYY-MM-DD HH:mm")
-  }
-
   checkIfDisabled(reservation: ReservationDTO) {
     let now = moment((new Date()).getTime());
     let endCharging = moment(reservation.date_from + reservation.duration * 60 * 1000)
@@ -93,5 +92,22 @@ export class UserReservationsComponent implements OnInit {
 
     return false;
   }
+
+  formatDate(date: number) {
+    return moment(date).format("YYYY-MM-DD HH:mm")
+  }
+
+  openReviewDialog(reservation: ReservationDTO): void {
+    const dialogRef = this.dialog.open(CreateReviewComponent, {
+      data: reservation,
+      width: '30%',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      // this.reservations.splice(this.reservations.findIndex((element) => element.id === reservation.id), 1)
+      console.log(result);
+    });
+  }
+
 
 }
