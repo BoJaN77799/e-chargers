@@ -48,6 +48,8 @@ export class UserReservationsComponent implements OnInit {
         if (response) {
           this.reservations = response.body as ReservationDTO[]
           this.dataSource = new MatTableDataSource(this.reservations)
+          console.log(this.reservations);
+
         }
       },
       (err) => {

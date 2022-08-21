@@ -34,8 +34,13 @@ button {
 }
 
 .cancel {
-    color: red;
+    color: rgb(255, 0, 0);
     margin-right: 10px;
+}
+
+.cancel:disabled,
+.cancel[disabled]{
+  color: rgb(249, 155, 155);
 }
 
 .review {

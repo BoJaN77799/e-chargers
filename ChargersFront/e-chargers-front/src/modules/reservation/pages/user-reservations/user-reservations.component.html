@@ -29,8 +29,10 @@
             <th mat-header-cell *matHeaderCellDef sortActionDescription="Sort by priority">
             </th>
             <td class="btn-td" mat-cell *matCellDef="let element">
-                <button class="cancel" (click)="cancelReservation(element)">Cancel reservation</button> 
-                <button class="review" [disabled]="checkIfDisabled(element)" (click)="openReviewDialog(element)">Add a review</button> 
+                <button class="cancel" [disabled]="!checkIfDisabled(element)"
+                    (click)="cancelReservation(element)">Cancel reservation</button>
+                <button class="review" [disabled]="checkIfDisabled(element)" (click)="openReviewDialog(element)">Add a
+                    review</button>
             </td>
         </ng-container>
 

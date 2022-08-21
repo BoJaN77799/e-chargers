@@ -18,6 +18,8 @@ export class CreateReviewComponent implements OnInit {
 
   reviewForm: FormGroup
 
+  rating: number = 0
+
   constructor(public dialog: MatDialog,
     public dialogRef: MatDialogRef<UserReservationsComponent>,
     @Inject(MAT_DIALOG_DATA) public reservation: ReservationDTO,
@@ -34,12 +36,18 @@ export class CreateReviewComponent implements OnInit {
   }
 
   submit() {
+
+    if (this.rating === 0) {
+      this.snackBarService.openSnackBar("Please rate charger")
+      return
+    }
+
     let review: ReviewDTO = {
       "username": this.utilService.getLoggedUsername(),
       "charger_id": this.reservation.charger_id,
       "content": this.reviewForm.get("content")?.value,
       "date": moment().unix(),
-      "rate": 5,
+      "rate": this.rating,
     }
 
     this.reviewService.create(review).subscribe(
@@ -53,6 +61,10 @@ export class CreateReviewComponent implements OnInit {
         this.snackBarService.openSnackBarFast(err.error)
       }
     )
+  }
+
+  changeRatging(rating: number) {
+    this.rating = rating
   }
 
 }
