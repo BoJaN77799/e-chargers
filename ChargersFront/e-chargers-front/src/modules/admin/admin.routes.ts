@@ -2,6 +2,7 @@ import { Routes } from "@angular/router";
 import { RoleGuard } from "../auth/guards/role/role.guard";
 import { AdminHomeComponent } from "./pages/admin-home/admin-home.component";
 import { CreateChargerComponent } from "./pages/create-charger/create-charger.component";
+import { ReportsUsersComponent } from "./pages/reports-users/reports-users.component";
 import { ReportsComponent } from "./pages/reports/reports.component";
 
 export const AdminRoutes: Routes = [
@@ -23,6 +24,13 @@ export const AdminRoutes: Routes = [
     path: "reports",
     pathMatch: "full",
     component: ReportsComponent,
+    canActivate: [RoleGuard],
+    data: { expectedRoles: "Administrator" },
+  },
+  {
+    path: "reports-users",
+    pathMatch: "full",
+    component: ReportsUsersComponent,
     canActivate: [RoleGuard],
     data: { expectedRoles: "Administrator" },
   },

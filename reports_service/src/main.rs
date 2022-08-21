@@ -13,9 +13,11 @@ use std::collections::HashMap;
 
 pub mod charger_service;
 pub mod types;
+pub mod users_service;
 
 use charger_service::*;
 use types::*;
+use users_service::*;
 
 #[get("/chargers/<date_from>/<date_to>")]
 fn get_reservations(date_from: u64, date_to: u64) -> Result<Json<Report>, Error> {
@@ -37,6 +39,12 @@ fn get_reservations(date_from: u64, date_to: u64) -> Result<Json<Report>, Error>
     Ok(Json(report))
 }
 
+#[get("/users")]
+fn get_users() -> Result<Json<Vec<UserReportDTO>>, Error> {
+    let users: Vec<UserReportDTO> = get_all_users().ok().unwrap();
+    Ok(Json(users))
+}
+
 #[get("/")]
 fn index() -> &'static str {
     "Hello, world."
@@ -44,6 +52,6 @@ fn index() -> &'static str {
 
 fn main() {
     rocket::ignite()
-        .mount("/api/reports", routes![index, get_reservations])
+        .mount("/api/reports", routes![index, get_reservations, get_users])
         .launch();
 }

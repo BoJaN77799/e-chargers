@@ -7,12 +7,14 @@ import { SharedModule } from '../shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CreateChargerComponent } from './pages/create-charger/create-charger.component';
 import { ReportsComponent } from './pages/reports/reports.component';
+import { ReportsUsersComponent } from './pages/reports-users/reports-users.component';
 
 @NgModule({
   declarations: [
     AdminHomeComponent,
     CreateChargerComponent,
-    ReportsComponent
+    ReportsComponent,
+    ReportsUsersComponent
   ],
   imports: [
     CommonModule,

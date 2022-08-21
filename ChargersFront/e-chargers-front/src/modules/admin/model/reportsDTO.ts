@@ -17,3 +17,15 @@ export interface ChargerReportDTO {
     price_per_hour: number,
     charging_speed: number,
 }
+
+export interface UserReportDTO {
+    username: string
+    email: string
+    firstname: string
+    lastname: string
+    user_role: string
+    strikes: number
+    banned: boolean
+    banned_at: number
+    banned_until: number
+}

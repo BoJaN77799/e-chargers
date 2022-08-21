@@ -118,6 +118,14 @@ func GetAllVehicles(userId uint) []models.Vehicle {
 	return vehicles
 }
 
+func GetAllUsers() []models.User {
+	var users []models.User
+
+	db.Db.Table("users").Where("role = 2").Find(&users)
+
+	return users
+}
+
 func DeleteVehicle(name string) error {
 
 	var vehicle models.Vehicle

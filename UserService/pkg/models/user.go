@@ -124,3 +124,17 @@ func (user *User) ToUserProfileDTO() UserProfileDTO {
 		Vehicles:  vehiclesToDto(user.Vehicles),
 	}
 }
+
+func (user *User) ToReportDTO() UserReportDTO {
+	return UserReportDTO{
+		Username:    user.Username,
+		Email:       user.Email,
+		Firstname:   user.Firstname,
+		Lastname:    user.Lastname,
+		Role:        user.Role.String(),
+		Strikes:     user.Strikes,
+		Banned:      user.Banned,
+		BannedAt:    user.BannedAt,
+		BannedUntil: user.BannedUntil,
+	}
+}

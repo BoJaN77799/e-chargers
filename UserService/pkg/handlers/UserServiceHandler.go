@@ -86,6 +86,20 @@ func AddUser(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode("user successfully created")
 }
 
+func FindAllUsers(w http.ResponseWriter, r *http.Request) {
+
+	var usersDTO []models.UserReportDTO
+
+	users := repository.GetAllUsers()
+
+	for _, user := range users {
+		usersDTO = append(usersDTO, user.ToReportDTO())
+	}
+
+	utils.OKResponse(w)
+	json.NewEncoder(w).Encode(usersDTO)
+}
+
 func AddVehicle(w http.ResponseWriter, r *http.Request) {
 
 	defer r.Body.Close()

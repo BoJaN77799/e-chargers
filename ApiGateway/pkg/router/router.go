@@ -23,6 +23,7 @@ func HandleRequests() {
 	router.HandleFunc("/api/users/vehicles/{username}", UserService.GetVehicles).Methods("GET")
 	router.HandleFunc("/api/users/vehicles/{name}", UserService.DeleteVehicle).Methods("DELETE")
 	router.HandleFunc("/api/users/strike/{username}", UserService.StrikeUser).Methods("GET")
+	router.HandleFunc("/api/users", UserService.FindAllUsers).Methods("GET")
 
 	// ChargerService
 	router.HandleFunc("/api/chargers", ChargerService.AddCharger).Methods("POST")
@@ -38,6 +39,7 @@ func HandleRequests() {
 
 	// ReportsService
 	router.HandleFunc("/api/reports/{date_from}/{date_to}", ReportsService.FindAllReservationsInPeriod).Methods("GET")
+	router.HandleFunc("/api/reports/users", ReportsService.FindAllUsersReport).Methods("GET")
 
 	//RecensionsService
 	router.HandleFunc("/api/recensions", RecensionService.AddRecension).Methods("POST")

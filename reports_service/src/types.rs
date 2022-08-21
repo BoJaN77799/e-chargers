@@ -34,3 +34,16 @@ pub struct ReportItem {
     pub money_earned: f32,
     pub used_energy: i32,
 }
+
+#[derive(Deserialize, Serialize, Debug)]
+pub struct UserReportDTO {
+    pub username: String,
+    pub email: String,
+    pub firstname: String,
+    pub lastname: String,
+    pub role: String,
+    pub strikes: i32,
+    pub banned: bool,
+    pub banned_at: u64,
+    pub banned_until: u64,
+}

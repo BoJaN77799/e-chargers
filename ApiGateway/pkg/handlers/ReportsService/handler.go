@@ -25,3 +25,19 @@ func FindAllReservationsInPeriod(w http.ResponseWriter, r *http.Request) {
 
 	utils.DelegateResponse(response, w)
 }
+
+func FindAllUsersReport(w http.ResponseWriter, r *http.Request) {
+	utils.SetupResponse(&w, r)
+	if r.Method == "OPTIONS" {
+		return
+	}
+
+	response, err := http.Get(utils.BaseReportsServicePath.Next().Host + "/users")
+
+	if err != nil {
+		w.WriteHeader(http.StatusGatewayTimeout)
+		return
+	}
+
+	utils.DelegateResponse(response, w)
+}

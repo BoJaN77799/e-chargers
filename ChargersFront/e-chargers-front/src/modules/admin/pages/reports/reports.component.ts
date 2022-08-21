@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { MatTableDataSource } from '@angular/material/table';
 import * as moment from 'moment';
 import { ReservationDateValidator } from 'src/modules/reservation/validators/ReservationDateValidator';
 import { SnackBarService } from 'src/modules/shared/service/snack-bar.service';
@@ -13,11 +14,14 @@ import { ReportsService } from '../../service/reportsService';
 })
 export class ReportsComponent implements OnInit {
 
+  displayedColumns: string[] = ['charger_name', 'money_earned', 'used_energy'];
+
   reservationForm: FormGroup;
 
   chargersReport!: Report;
 
   reportItems: ReportItem[]
+  dataSource: MatTableDataSource<ReportItem>;
 
   constructor(
     private fb: FormBuilder,
@@ -31,6 +35,7 @@ export class ReportsComponent implements OnInit {
       date_to: [endDateTime, [Validators.required]],
     });
     this.reportItems = []
+    this.dataSource = new MatTableDataSource(this.reportItems)
   }
 
   ngOnInit(): void {
@@ -44,16 +49,14 @@ export class ReportsComponent implements OnInit {
       this.snackBarService.openSnackBar("Invalid dates - start is after or equal end")
       return
     }
-
     this.reportsService.getReport(startDateTime.valueOf(), endDateTime.valueOf()).subscribe(
       (response) => {
         this.chargersReport = response.body as Report;
-
         const iterrableMap = new Map(Object.entries(this.chargersReport.chargers));
         for (let [key, value] of iterrableMap) {
           this.reportItems.push(value)
         }
-        console.log(this.reportItems)
+        this.dataSource = new MatTableDataSource(this.reportItems)
       },
       (err) => {
         this.snackBarService.openSnackBar("There is no report for this period.")
@@ -62,4 +65,11 @@ export class ReportsComponent implements OnInit {
 
   }
 
+  getStartDate() {
+    return moment(Number(this.chargersReport.date_from)).format("MMM Do YYYY");
+  }
+
+  getEndDate() {
+    return moment(Number(this.chargersReport.date_to)).format("MMM Do YYYY");
+  }
 }

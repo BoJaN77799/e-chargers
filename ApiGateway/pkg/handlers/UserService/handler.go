@@ -140,6 +140,22 @@ func StrikeUser(w http.ResponseWriter, r *http.Request) {
 	utils.DelegateResponse(response, w)
 }
 
+func FindAllUsers(w http.ResponseWriter, r *http.Request) {
+	utils.SetupResponse(&w, r)
+	if r.Method == "OPTIONS" {
+		return
+	}
+
+	response, err := http.Get(utils.BaseUserServicePath.Next().Host)
+
+	if err != nil {
+		w.WriteHeader(http.StatusGatewayTimeout)
+		return
+	}
+
+	utils.DelegateResponse(response, w)
+}
+
 func DeleteVehicle(w http.ResponseWriter, r *http.Request) {
 
 	utils.SetupResponse(&w, r)

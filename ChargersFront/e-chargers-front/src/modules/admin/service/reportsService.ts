@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Report } from '../model/reportsDTO';
+import { Report, UserReportDTO } from '../model/reportsDTO';
 
 @Injectable({
     providedIn: 'root'
@@ -22,5 +22,16 @@ export class ReportsService {
         };
 
         return this.http.get<HttpResponse<Report>>("echargers/api/reports/" + date_from + "/" + date_to, queryParams);
+    }
+
+    getUserReport(): Observable<HttpResponse<UserReportDTO[]>> {
+        let queryParams = {};
+
+        queryParams = {
+            headers: this.headers,
+            observe: "response",
+        };
+
+        return this.http.get<HttpResponse<UserReportDTO[]>>("echargers/api/users", queryParams);
     }
 }
