@@ -1,0 +1,49 @@
+.title {
+    width: 100%;
+    color: green;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+    margin: 30px 0;
+}
+
+table {
+    position: absolute;
+    transform: translate(-50%, 0);
+    width: 80%;
+    left: 50%;
+    text-align: center;
+}
+
+th {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 13px;
+    text-align: center !important;
+}
+
+.btn-td {
+    width: 25%;
+    padding: 0;
+}
+
+
+button {
+    border: 0;
+    background: transparent;
+}
+
+.cancel {
+    color: rgb(255, 0, 0);
+    margin-right: 10px;
+}
+
+.cancel:disabled,
+.cancel[disabled]{
+  color: rgb(249, 155, 155);
+}
+
+.review {
+    font-style: italic;
+    margin-left: 10px;
+}

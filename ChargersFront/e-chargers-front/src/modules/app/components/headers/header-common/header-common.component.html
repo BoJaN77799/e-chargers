@@ -1,0 +1,22 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="nav-link" style="color: rgb(0, 0, 0); margin-left: 7%; cursor:pointer;" (click)="pushToHome()">Welcome
+            to e-chargers</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="visibility: hidden;">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/myapp/user/homepage">Homepage</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav me-right mb-2 mb-lg-0" style="margin-right: 8%">
+                <li class="nav-item">
+                    <a id="logout" class="nav-link" (click)="login()" style="cursor: pointer;">Login</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

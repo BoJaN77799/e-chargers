@@ -1,0 +1,47 @@
+h2 {
+    margin-bottom: 20px;
+}
+
+.btn {
+    position: relative;
+}
+
+button {
+    width: 80%;
+    position: absolute;
+    top: 50%;
+    left: 40%;
+    transform: translate(-50%, -30%);
+}
+
+.field {
+    width: 95%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    text-align: center;
+}
+
+table {
+    position: relative;
+    -webkit-transform: translate(-50%, 0);
+    transform: translate(-50%, 0);
+    width: 70%;
+    left: 48%;
+    text-align: center;
+
+}
+
+th {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 13px;
+    text-align: center !important;
+}
+
+.main {
+    width: 50%;
+}
+
+span {
+    font-weight: bold;
+}

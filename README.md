@@ -11,7 +11,7 @@
 
  - Registrovani korisik
     - _Sve funkcionalnosti neregistrovanog korisnika_
-    - Registracija (email potvrda preko linka)
+    - Registracija
     - Prijava
     - Pregled/Izmena svojih vozila (električni automobil/bicikl/trotinet)
     - Pregled/Izmena svog profila
@@ -38,10 +38,10 @@
     - Korisnički servis - Go
     - Email servis - Go
     - Rezervacijski servis - Go
-    - Servis za izveštaje - Go
+    - Servis za izveštaje - Rust
     - Recenzijski servis - Go
     - Traveling-plan servis - Rust
-    - Klijentska web aplikacija - React
+    - Klijentska web aplikacija - Angular (Zamišljeno da bude u Reactu, međutim nisam imao dovoljno vremena)
     
     _Baza_
     - Podaci će biti čuvani u SQL bazi (verovatno PostgreSQL)

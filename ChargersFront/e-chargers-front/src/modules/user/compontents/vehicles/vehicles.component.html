@@ -1,0 +1,63 @@
+<div class="data">
+
+    <h2>My vehicles</h2>
+    <div class="row forma">
+        <form class="row p-4 content inline-div align-items-center justify-content-center" [formGroup]="addVehicleForm"
+            (keydown.enter)=" $event.preventDefault()">
+
+            <div class="col-6" style="font-size: 13px">
+                <mat-form-field class="example-form-field" appearance="outline" style="width: 100%; height:10%">
+                    <mat-label>Vehicle name</mat-label>
+                    <input id="nameInput" matInput type="text" formControlName="name">
+                    <button id="clearName" *ngIf="addVehicleForm.controls['name'].value" matSuffix mat-icon-button
+                        aria-label="Clear" (click)="addVehicleForm.controls['name'].setValue('')">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                </mat-form-field>
+            </div>
+            <div class="col-6">
+                <mat-form-field appearance="outline" style="font-size:13px; width: 100%;">
+                    <mat-label>Select your vehicle type</mat-label>
+                    <mat-select id='food-type' formControlName="vehicle_type">
+                        <mat-option *ngFor="let vehicle of ['SCOOTER', 'BIKE', 'CAR' ]" [value]="vehicle">
+                            {{vehicle}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="row">
+                <button class="btn btn-success" style="background-color: green;" type="submit"
+                    [disabled]="!addVehicleForm.valid" (click)="submit()"> Add
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <div class="row table">
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef sortActionDescription="Sort by name" class="main"> Name
+                </th>
+                <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="type">
+                <th mat-header-cell *matHeaderCellDef sortActionDescription="Sort by type" class="main"> Type </th>
+                <td mat-cell *matCellDef="let element"> {{element.vehicle_type}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="button">
+                <th mat-header-cell *matHeaderCellDef>
+                </th>
+                <td class="btn-td" mat-cell *matCellDef="let element">
+                    <button class="cancel" (click)="remove(element.name)">Remove</button>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;" style="cursor: initial;">
+            </tr>
+        </table>
+    </div>
+
+</div>

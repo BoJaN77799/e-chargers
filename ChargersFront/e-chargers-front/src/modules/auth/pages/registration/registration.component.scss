@@ -1,0 +1,120 @@
+::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: rgba(0, 0, 0, 0.5);
+  opacity: 0.5;
+  font-style: italic;
+}
+
+input:focus {
+  outline: 0;
+  border: 0px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+  border-radius: 0;
+  box-shadow: none;
+}
+
+
+.loginForm {
+  transform: translate(0%, 12%);
+  width: 30%;
+  position: relative;
+  margin: auto;
+  border-radius: 0;
+  border: 1.5px solid rgb(0, 0, 0, 0.7);
+  color: rgba($color: rgb(125, 202, 38), $alpha: 0.7);
+  padding: 0px 20px;
+  background-color: white;
+}
+
+@media (max-width: 350px) {
+  .myForm {
+    min-width: 90%;
+  }
+}
+
+#username-div,
+#pass-div,
+#repeatPassword-div,
+#email-div,
+#firstname-div,
+#lastname-div {
+  text-align: center;
+}
+
+#username,
+#password,
+#repeatPassword,
+#email,
+#firstname,
+#lastname {
+  position: relative;
+  margin: auto;
+  width: 70%;
+  margin-top: 10px;
+  margin-bottom: 15px;
+  border: 0px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+  border-radius: 0;
+  text-align: center;
+}
+
+#register-button {
+  margin: auto;
+  margin-top: 30px;
+  margin-bottom: 20px;
+  width: 30%;
+  position: relative;
+  border-radius: 0;
+  font-size: large;
+  border: 1px solid rgb(125, 202, 38);
+  background-color: white;
+  color: rgba($color: rgb(125, 202, 38), $alpha: 1);
+  // background-color: rgba($color: rgb(125, 202, 38), $alpha: 0.8);;
+}
+
+#register-button:hover~div {
+  color: white;
+  cursor: pointer;
+  background-color: rgba($color: rgb(125, 202, 38), $alpha: 0.8);
+}
+
+
+.login-label {
+  font-size: 50px;
+  text-transform: uppercase;
+  font-weight: 350;
+  letter-spacing: 1px;
+  text-align: center;
+  font-weight: 400;
+}
+
+#register-button:hover {
+  color: white !important;
+  background-color: rgba($color: rgb(125, 202, 38), $alpha: 1) !important;
+}
+
+img {
+  position: fixed;
+  height: 15%;
+  width: auto;
+  opacity: 70%;
+}
+
+#img-top {
+  top: 80.9%;
+  left: 60%;
+}
+
+
+#img-btm {
+  top: 15.1%;
+  left: 26.5%;
+  transform: scale(-1, -1);
+}
+
+#register-button:disabled,
+#register-button[disabled] {
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+}

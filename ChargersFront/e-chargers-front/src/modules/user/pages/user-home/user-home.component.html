@@ -1,0 +1,17 @@
+<div class="col-3 inline-div">
+    <div class="center">
+        <button class="btn btn-success search-button" (click)="toggleSearch()">{{searchOpened ? "Close search":
+            "Search"}}</button>
+    </div>
+    <div class="scroll-div content">
+        <app-charger-info [hidden]="searchOpened" [charger]="selectedCharger"></app-charger-info>
+        <app-search-chargers [hidden]="!searchOpened" (searchedChargersEvent)="changeChargers($event)">
+        </app-search-chargers>
+    </div>
+</div>
+<div class="col-9  inline-div map">
+    <button class="map-top" (click)="findMe()">Find me</button><button class="map-top"
+        (click)="findClosestCharger()">Find
+        closest charger</button><button class="map-top" (click)="resetChargers()">Reset</button>
+    <app-map-page [chargers]="chargersToMap" (selectedChargerEvent)="setSelectedCharger($event) "></app-map-page>
+</div>

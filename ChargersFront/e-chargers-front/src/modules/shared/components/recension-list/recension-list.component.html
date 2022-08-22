@@ -1,0 +1,6 @@
+<div class="list">
+    <p [hidden]="recensions.length != 0">There is no reviews on charger</p>
+    <div *ngIf=" recensions.length !=0">
+        <app-recension *ngFor="let recension of recensions" [recension]="recension"></app-recension>
+    </div>
+</div>

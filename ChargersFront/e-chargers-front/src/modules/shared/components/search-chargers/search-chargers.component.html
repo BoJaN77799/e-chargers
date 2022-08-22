@@ -1,0 +1,80 @@
+<form class="row p-4 content inline-div align-items-center justify-content-center" [formGroup]="searchFormGroup"
+    (keydown.enter)="$event.preventDefault()">
+
+    <div class="row" style="font-size: 13px">
+        <mat-form-field class="example-form-field" appearance="outline" style="width: 100%; height:10%">
+            <mat-label>Charger name</mat-label>
+            <input id="nameInput" matInput type="text" formControlName="name">
+            <button id="clearName" *ngIf="searchFormGroup.controls['name'].value" matSuffix mat-icon-button
+                aria-label="Clear" (click)="searchFormGroup.controls['name'].setValue('')">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field>
+    </div>
+
+    <div class=" row">
+        <p>Work time</p>
+        <div class="col-6" style="font-size: 13px">
+            <mat-form-field class="example-form-field" appearance="outline" style="width: 100%">
+                <mat-label>From</mat-label>
+                <input matInput type="number" formControlName="workTimeFrom" min="0" max="23" step="1">
+            </mat-form-field>
+        </div>
+        <div class="col-6" style="font-size: 13px">
+            <mat-form-field class="example-form-field" appearance="outline" style="width: 100%">
+                <mat-label>To</mat-label>
+                <input matInput type="number" formControlName="workTimeTo" min="1" max="24" step="1">
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="row">
+        <p>Number of plugs and type</p>
+        <div class="col-6" style="font-size: 13px">
+            <mat-form-field class="example-form-field" appearance="outline" style="width: 100%">
+                <mat-label>Capacity</mat-label>
+                <input matInput type="number" formControlName="capacity" min="1" max="10">
+            </mat-form-field>
+        </div>
+        <div class="col-6" style="font-size: 13px">
+            <mat-form-field class="example-form-field" appearance="outline" style="width: 100%">
+                <mat-label>Plug type</mat-label>
+                <input matInput type="text" formControlName="type">
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="row">
+        <p>Price</p>
+        <div class="col-6" style="font-size: 13px">
+            <mat-form-field class="example-form-field" appearance="outline" style="width: 100%">
+                <mat-label>From</mat-label>
+                <input matInput type="number" formControlName="pricePerHourFrom" min="1" max="19" step="1">
+            </mat-form-field>
+        </div>
+        <div class="col-6" style="font-size: 13px">
+            <mat-form-field class="example-form-field" appearance="outline" style="width: 100%">
+                <mat-label>To</mat-label>
+                <input matInput type="number" formControlName="pricePerHourTo" min="2" max="20" step="1">
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="row">
+        <p>Charging speed</p>
+        <div class="col-6" style="font-size: 13px">
+            <mat-form-field class="example-form-field" appearance="outline" style="width: 100%">
+                <mat-label>From</mat-label>
+                <input matInput type="number" formControlName="chargingSpeedFrom" min="5" max="34" step="1">
+            </mat-form-field>
+        </div>
+        <div class="col-6" style="font-size: 13px">
+            <mat-form-field class="example-form-field" appearance="outline" style="width: 100%">
+                <mat-label>To</mat-label>
+                <input matInput type="number" formControlName="chargingSpeedTo" min="6" max="35" step="1">
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="row">
+        <button class="btn btn-success search-button" type="submit" [disabled]="!searchFormGroup.valid"
+            (click)="submit()"> Search
+        </button>
+    </div>
+</form>

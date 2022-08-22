@@ -1,0 +1,60 @@
+<form class="row p-4 align-items-center justify-content-center" [formGroup]="reservationForm"
+    (keydown.enter)="$event.preventDefault()">
+    <div style="text-align: center;">
+        <h2>Consumption and income report</h2>
+    </div>
+    <span class="row col-3">
+        <mat-form-field class="example-form-field field" appearance="outline" style="font-size: 15px">
+            <mat-label>Enter start datetime</mat-label>
+            <input matInput formControlName="date_from" type="datetime-local">
+        </mat-form-field>
+    </span>
+
+    <span class="row col-3">
+        <mat-form-field class="example-form-field field" appearance="outline" style="font-size: 15px">
+            <mat-label>Enter end datetime</mat-label>
+            <input matInput formControlName="date_to" type="datetime-local">
+        </mat-form-field>
+    </span>
+
+    <span class="row col-2 btn">
+        <button class="btn btn-success" type="submit" [disabled]="!reservationForm.valid" (click)="submit()"> Get
+            report
+        </button>
+    </span>
+    <span class="row col-1"></span>
+
+
+</form>
+
+<div *ngIf="reportItems.length != 0">
+    <h5 style="text-align: center; margin-bottom: 10px;">Report from <span>{{getStartDate()}}</span> to
+        <span>{{getEndDate()}}</span></h5>
+    <div>
+        <table id='order-items' mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
+
+            <ng-container matColumnDef="charger_name">
+                <th mat-header-cell *matHeaderCellDef sortActionDescription="Sort by itemType" class="main"> Charger
+                    name
+                </th>
+                <td mat-cell *matCellDef="let report"> {{report.charger.name}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="money_earned">
+                <th mat-header-cell *matHeaderCellDef sortActionDescription="Sort by earned money"> Earned money (€)
+                </th>
+                <td mat-cell *matCellDef="let report"> {{report.money_earned}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="used_energy">
+                <th mat-header-cell *matHeaderCellDef sortActionDescription="Sort by used energy"> Used energy (kWh)
+                </th>
+                <td mat-cell *matCellDef="let report"> {{report.used_energy}} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;" style="cursor: initial;">
+            </tr>
+        </table>
+    </div>
+</div>

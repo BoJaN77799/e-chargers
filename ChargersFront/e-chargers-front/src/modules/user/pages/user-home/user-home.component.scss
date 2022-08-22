@@ -1,0 +1,53 @@
+.search-button {
+    margin-top: 2%;
+    width: 65%;
+    border: 2px solid green;
+    background-color: white;
+    color: green;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+.search-button:hover {
+    border: 3px solid green;
+    background-color: green;
+    color: white;
+
+}
+
+.inline-div {
+    display: inline-block;
+    position: relative;
+    overflow-y: hidden;
+    height: 100%;
+}
+
+.map {
+    padding: 0;
+    margin: 0;
+    padding-top: 16px;
+    padding-left: 15px;
+    position: absolute;
+    max-width: 72%;
+    max-height: 90%;
+    overflow: hidden;
+}
+
+.content {
+    margin-top: 55px;
+    overflow: hidden;
+    height: 90%;
+}
+
+.map-top {
+    background-color: transparent;
+    margin: 0px 15px;
+    color: green;
+    border: none;
+    margin-bottom: 12px;
+}
+
+.map-top:hover {
+    color: black
+}

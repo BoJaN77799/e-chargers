@@ -1,0 +1,66 @@
+<div>
+    <div [hidden]="charger != undefined">
+        <p class="not-selected"> Please select charger from map</p>
+    </div>
+
+    <div [hidden]="charger === undefined">
+        <img class="cover-img" src="assets/img/cover-photo-charger.jpg">
+
+        <div>
+            <p class="charger-name">{{charger?.name}}</p>
+            <button class="reviews-btn" (click)="toggleReviews()">{{!reviewsVisible ? "Read reviews" : "Charger info"}}
+            </button>
+        </div>
+
+        <div *ngIf="reviewsVisible">
+            <app-recension-list [recensions]="recensions"></app-recension-list>
+        </div>
+
+        <div *ngIf="!reviewsVisible">
+            <div>
+                <p></p>
+                <p class="label">Working hours</p>
+                <p class="working-hours content">{{charger?.work_time}}</p>
+            </div>
+
+            <div>
+                <p class="label">Address</p>
+                <p class="smirk-content"> {{charger?.address?.street}} </p>
+                <p class="smirk-content"> {{charger?.address?.postal_code}} {{charger?.address?.city}},
+                    {{charger?.address?.country}} </p>
+            </div>
+
+            <div>
+                <p></p>
+                <p class="label">Description</p>
+                <p> {{charger?.description}}</p>
+            </div>
+
+            <div>
+                <p></p>
+                <p class="label">Available chargers</p>
+                <p> {{charger?.plugs}}</p>
+            </div>
+
+            <div>
+                <p></p>
+                <p class="label">Charging speed</p>
+                <p>{{charger?.charging_speed}}</p>
+            </div>
+
+            <div class="box">
+
+                <div class="inline-div">
+                    <p class="label">Price</p>
+                    <p>{{charger?.price_per_hour}}</p>
+                </div>
+
+                <div class="inline-div">
+                    <button class="btn btn-success target-btn" [hidden]="!isRole('RegisteredUser')"
+                        (click)="openReservationDialog()">Make a
+                        reservation</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
