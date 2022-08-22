@@ -31,6 +31,7 @@ func HandleRequests() {
 	router.HandleFunc("/api/chargers", ChargerService.GetAllChargers).Methods("GET")
 	router.HandleFunc("/api/chargers/search", ChargerService.SearchChargers).Methods("POST")
 	router.HandleFunc("/api/chargers/{chargerId}", ChargerService.GetChargerById).Methods("GET")
+	router.HandleFunc("/api/chargers/{lon}/{lat}", ChargerService.FindClosestCharger).Methods("GET")
 
 	// ReservationService
 	router.HandleFunc("/api/reservations", ReservationService.AddReservation).Methods("POST")

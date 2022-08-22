@@ -3,6 +3,7 @@ import * as moment from 'moment';
 import { AuthService } from 'src/modules/auth/services/auth.service';
 import { ReviewDTO } from '../../model/reviewDTO';
 import { SnackBarService } from '../../service/snack-bar.service';
+import { UtilService } from '../../service/utils-service';
 
 @Component({
   selector: 'app-recension',
@@ -14,7 +15,7 @@ export class RecensionComponent implements OnInit {
   @Input()
   recension: ReviewDTO | undefined;
 
-  constructor(private authSerice: AuthService, private snackBarService: SnackBarService) { }
+  constructor(private authSerice: AuthService, private snackBarService: SnackBarService, private utilService: UtilService) { }
 
   ngOnInit(): void {
   }
@@ -36,6 +37,10 @@ export class RecensionComponent implements OnInit {
         }
       )
     }
+  }
+
+  isRole(role: string) {
+    return this.utilService.isRole(role);
   }
 
 }

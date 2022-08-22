@@ -55,14 +55,14 @@ export class SearchChargersComponent implements OnInit {
       "chargingSpeedTo": this.searchFormGroup.get('chargingSpeedTo')?.value,
     }
 
-    console.log(searchDTO);
-
-    this.snackBarService.openSnackBar("Sve dobro")
-
     this.chargerService.search(searchDTO).subscribe(
       (response) => {
-        console.log(response.body as ChargerDTO[])
-        this.searchedChargersEvent.emit(response.body as ChargerDTO[])
+        let chargers = response.body as ChargerDTO[]
+        if (!chargers) {
+          this.snackBarService.openSnackBar("no search results")
+        } else {
+          this.searchedChargersEvent.emit(chargers)
+        }
       },
       (err) => {
         this.snackBarService.openSnackBar(err.error)

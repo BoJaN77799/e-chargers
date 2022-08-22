@@ -40,7 +40,7 @@ var (
 			ChargingSpeedPerMinute: 22,
 		},
 		{
-			Name:                   "Promenada Shopping Mall",
+			Name:                   "Promenada",
 			Address:                addresses[1],
 			WorkTimeFrom:           10,
 			WorkTimeTo:             22,

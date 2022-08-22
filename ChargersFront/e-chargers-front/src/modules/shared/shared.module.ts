@@ -11,8 +11,8 @@ import { SearchChargersComponent } from './components/search-chargers/search-cha
 import { ReactiveFormsModule } from '@angular/forms';
 import { CreateReviewComponent } from './components/create-review/create-review.component';
 import { RecensionListComponent } from './components/recension-list/recension-list.component';
-import { RecensionComponent } from './components/recension/recension.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { RecensionComponent } from './components/recension/recension.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +33,7 @@ import { ProfileComponent } from './components/profile/profile.component';
     MapPageComponent,
     MaterialExampleModule,
     SearchChargersComponent,
-    ChargerInfoComponent
+    ChargerInfoComponent,
   ],
   providers: [
     SnackBarService,

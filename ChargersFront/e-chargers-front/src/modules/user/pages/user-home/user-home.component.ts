@@ -43,6 +43,16 @@ export class UserHomeComponent implements OnInit {
         this.chargers.forEach(chargerForMap => {
           this.chargersToMap.push(chargerForMap)
         });
+
+        console.log(this.mapComponent.userLocation)
+        // set user location
+        navigator.geolocation.getCurrentPosition((position) => {
+          console.log(position.coords)
+          // this.mapComponent.userLocation.push(position.coords.longitude)
+          // this.mapComponent.userLocation.push(position.coords.latitude)
+          this.mapComponent.userLocation.push(19.838230)
+          this.mapComponent.userLocation.push(45.236300)
+        })
       },
       (err) => {
         console.log(err.error)
@@ -62,10 +72,42 @@ export class UserHomeComponent implements OnInit {
   }
 
   changeChargers(chargers: ChargerDTO[]) {
-    console.log(chargers)
-    // this.chargersToMap = chargers;
     this.mapComponent.chargers = chargers;
-    this.mapComponent.printChargers();
+    this.mapComponent.showUserLocation = false;
+    this.mapComponent.showClosestChargerLocation = false;
+    this.mapComponent.refreshMapAfterSearch();
+  }
+
+  findMe() {
+    this.mapComponent.showUserLocation = true;
+    this.mapComponent.showClosestChargerLocation = false;
+    this.mapComponent.findUserAndRefreshMap();
+  }
+
+  findClosestCharger() {
+    this.findMe();
+    this.chargerService.findClosestCharger(this.mapComponent.userLocation).subscribe(
+      (response) => {
+        let charger = response.body as ChargerDTO;
+        this.chargersToMap.splice(this.chargersToMap.findIndex((element) => element.id === charger.id), 1);
+        this.mapComponent.showUserLocation = true;
+        this.mapComponent.showClosestChargerLocation = true;
+        this.mapComponent.closestCharger = charger;
+        this.mapComponent.refreshMapFeatures(this.chargersToMap);
+        this.mapComponent.centerMapWithGivenCoordinates();
+        // console.log(charger)
+      },
+      (err) => {
+        console.log(err.error)
+      }
+    )
+  }
+
+  resetChargers() {
+    this.mapComponent.chargers = this.chargers;
+    this.mapComponent.showUserLocation = false;
+    this.mapComponent.showClosestChargerLocation = false;
+    this.mapComponent.refreshMapAfterSearch();
   }
 
 }

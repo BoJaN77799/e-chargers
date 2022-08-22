@@ -58,5 +58,16 @@ export class ChargerService {
         return this.http.post<HttpResponse<string>>("echargers/api/chargers", charger, queryParams);
     }
 
+    findClosestCharger(location: number[]) {
+        let queryParams = {};
+
+        queryParams = {
+            headers: this.headers,
+            observe: "response"
+        };
+
+        return this.http.get<HttpResponse<ChargerDTO>>("echargers/api/chargers/" + location[0] + "/" + location[1], queryParams);
+    }
+
 
 }

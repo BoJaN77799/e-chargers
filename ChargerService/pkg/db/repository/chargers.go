@@ -4,6 +4,7 @@ import (
 	"charger_service/pkg/db"
 	"charger_service/pkg/models"
 	"charger_service/pkg/utils"
+	"math"
 )
 
 func CreateCharger(charger models.Charger) (models.Charger, error) {
@@ -60,4 +61,26 @@ func GetChargerById(chargerId uint) models.Charger {
 	db.Db.Preload("Address").Where("id = ?", chargerId).Find(&charger)
 
 	return charger
+}
+
+func GetClosestChargerToCoordinates(lon float32, lat float32) models.Charger {
+	var chargers []models.Charger
+
+	db.Db.Preload("Address").Find(&chargers)
+
+	var closestCharger models.Charger
+	var minDistance float64
+	minDistance = 500.0
+	for _, charger := range chargers {
+		var distance float64
+		distance = math.Sqrt(
+			math.Pow(float64(charger.Address.Longitude-lon), 2) +
+				math.Pow(float64(charger.Address.Latitude-lat), 2))
+
+		if distance < minDistance {
+			minDistance = distance
+			closestCharger = charger
+		}
+	}
+	return closestCharger
 }

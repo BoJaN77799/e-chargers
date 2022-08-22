@@ -96,3 +96,24 @@ func GetChargerById(w http.ResponseWriter, r *http.Request) {
 
 	utils.DelegateResponse(response, w)
 }
+
+func FindClosestCharger(w http.ResponseWriter, r *http.Request) {
+
+	utils.SetupResponse(&w, r)
+	if r.Method == "OPTIONS" {
+		return
+	}
+
+	params := mux.Vars(r)
+	lon, _ := params["lon"]
+	lat, _ := params["lat"]
+
+	response, err := http.Get(utils.BaseChargerServicePath.Next().Host + "/" + lon + "/" + lat)
+
+	if err != nil {
+		w.WriteHeader(http.StatusGatewayTimeout)
+		return
+	}
+
+	utils.DelegateResponse(response, w)
+}

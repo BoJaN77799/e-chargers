@@ -1,9 +1,23 @@
-<div>
-    <p>Review from: {{recension?.username}}</p>
-    <button (click)="strikeUser(recension?.username)">Strike</button>
-    <ul>
-        <li>Reviewed at: {{formatDate(recension?.date)}}</li>
-        <li>Review content: {{recension?.content}}</li>
-        <li>Review content: {{recension?.rate}}/5</li>
-    </ul>
+<div class="box">
+    <p class="user">{{recension?.username}}</p>
+    <p class="datetime">{{formatDate(recension?.date)}}</p>
+    <div class="row">
+        <span class="rate">
+            <input type="radio" id="star1" name="rate" value="1" />
+            <label [ngStyle]="{'color': recension!.rate >= 1 ? 'green': ''}" for="star1" title="text">1 star</label>
+            <input type="radio" id="star2" name="rate" value="2" />
+            <label [ngStyle]="{'color': recension!.rate >= 2 ? 'green': ''}" for="star2" title="text">2 stars</label>
+            <input type="radio" id="star3" name="rate" value="3" />
+            <label [ngStyle]="{'color': recension!.rate >= 3 ? 'green': ''}" for="star3" title="text">3 stars</label>
+            <input type="radio" id="star4" name="rate" value="4" />
+            <label [ngStyle]="{'color': recension!.rate >= 4 ? 'green': ''}" for="star4" title="text">4 stars</label>
+            <input type="radio" id="star5" name="rate" value="5" />
+            <label [ngStyle]="{'color': recension!.rate >= 5 ? 'green': ''}" for="star5" title="text">5 stars</label>
+        </span>
+      </div>
+    <div class="comment">
+        <div class="img-span"><img src="assets/img/quotes.png"></div>
+        <div class="comment-span"> {{recension?.content}}</div></div>
+    <button class="strike" [hidden]="isRole('RegisteredUser')" 
+    (click)="strikeUser(recension?.username)">Strike</button>
 </div>

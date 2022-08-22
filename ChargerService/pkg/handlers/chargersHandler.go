@@ -142,3 +142,32 @@ func GetChargerByID(w http.ResponseWriter, r *http.Request) {
 	utils.OKResponse(w)
 	json.NewEncoder(w).Encode(charger.ToDTO())
 }
+
+func FindClosestCharger(w http.ResponseWriter, r *http.Request) {
+
+	params := mux.Vars(r)
+	lon, _ := params["lon"]
+
+	lonFloat, err := strconv.ParseFloat(lon, 32)
+	if err != nil {
+		utils.BadRequestResponse(w, "longitude isn't proper float32")
+		return
+	}
+	lat, _ := params["lat"]
+
+	latFloat, err := strconv.ParseFloat(lat, 32)
+	if err != nil {
+		utils.BadRequestResponse(w, "latitude isn't proper float32")
+		return
+	}
+
+	charger := repository.GetClosestChargerToCoordinates(float32(lonFloat), float32(latFloat))
+
+	if charger.ID == 0 {
+		utils.BadRequestResponse(w, "charger not found")
+		return
+	}
+
+	utils.OKResponse(w)
+	json.NewEncoder(w).Encode(charger.ToDTO())
+}
