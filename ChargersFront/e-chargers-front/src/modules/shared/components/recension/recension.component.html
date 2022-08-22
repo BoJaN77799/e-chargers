@@ -14,10 +14,10 @@
             <input type="radio" id="star5" name="rate" value="5" />
             <label [ngStyle]="{'color': recension!.rate >= 5 ? 'green': ''}" for="star5" title="text">5 stars</label>
         </span>
-      </div>
+    </div>
     <div class="comment">
         <div class="img-span"><img src="assets/img/quotes.png"></div>
-        <div class="comment-span"> {{recension?.content}}</div></div>
-    <button class="strike" [hidden]="isRole('RegisteredUser')" 
-    (click)="strikeUser(recension?.username)">Strike</button>
+        <div class="comment-span"> {{recension?.content}}</div>
+    </div>
+    <button class="strike" [hidden]="!isRole('Administrator')" (click)="strikeUser(recension?.username)">Strike</button>
 </div>

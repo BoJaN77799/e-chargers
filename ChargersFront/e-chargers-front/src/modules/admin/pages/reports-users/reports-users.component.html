@@ -1,5 +1,8 @@
 <div class="row">
-    <table id='order-items' mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
+    <div style="text-align: center;">
+        <h2>All users</h2>
+    </div>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 user-table">
 
         <ng-container matColumnDef="username">
             <th mat-header-cell *matHeaderCellDef sortActionDescription="Sort by itemType"> Username

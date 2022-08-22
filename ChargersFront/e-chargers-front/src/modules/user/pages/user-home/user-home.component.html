@@ -10,7 +10,8 @@
     </div>
 </div>
 <div class="col-9  inline-div map">
-    <button (click)="findMe()">Find me</button><button (click)="findClosestCharger()">Find
-        closest charger</button><button (click)="resetChargers()">Reset</button>
+    <button class="map-top" (click)="findMe()">Find me</button><button class="map-top"
+        (click)="findClosestCharger()">Find
+        closest charger</button><button class="map-top" (click)="resetChargers()">Reset</button>
     <app-map-page [chargers]="chargersToMap" (selectedChargerEvent)="setSelectedCharger($event) "></app-map-page>
 </div>

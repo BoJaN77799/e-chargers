@@ -25,7 +25,7 @@
       </mat-form-field>
     </div>
     <div class="row">
-      <button class="btn btn-success" type="submit" (click)="submit()"> Submit review
+      <button class="btn btn-success" type="submit" [disabled]="!reviewForm.valid" (click)="submit()"> Submit review
       </button>
     </div>
   </div>

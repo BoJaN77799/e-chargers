@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/modules/auth/services/auth.service';
-import { SnackBarService } from 'src/modules/shared/service/snack-bar.service';
-import { UtilService } from 'src/modules/shared/service/utils-service';
 
 @Component({
   selector: 'app-header-admin',
@@ -10,18 +9,14 @@ import { UtilService } from 'src/modules/shared/service/utils-service';
 })
 export class HeaderAdminComponent implements OnInit {
 
-  constructor(private authService: AuthService) {
+  constructor(private router: Router, private authService: AuthService) {
   }
 
   ngOnInit(): void {
   }
 
   logout(): void {
-    this.authService.logout().subscribe((result) => {
-      console.log(result);
-    });
-
     sessionStorage.removeItem("user");
+    this.router.navigate(['myapp/user/homepage'])
   }
-
 }

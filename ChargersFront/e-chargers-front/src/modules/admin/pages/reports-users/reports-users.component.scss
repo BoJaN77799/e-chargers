@@ -1,3 +1,7 @@
+h2 {
+    margin-top: 20px;
+}
+
 .title {
     width: 100%;
     color: green;
@@ -13,6 +17,7 @@ table {
     width: 80%;
     left: 50%;
     text-align: center;
+    margin-top: 7%;
 }
 
 th {
@@ -20,25 +25,4 @@ th {
     font-weight: bold;
     font-size: 13px;
     text-align: center !important;
-}
-
-.btn-td {
-    width: 25%;
-    padding: 0;
-}
-
-
-button {
-    border: 0;
-    background: transparent;
-}
-
-.cancel {
-    color: red;
-    margin-right: 10px;
-}
-
-.review {
-    font-style: italic;
-    margin-left: 10px;
 }

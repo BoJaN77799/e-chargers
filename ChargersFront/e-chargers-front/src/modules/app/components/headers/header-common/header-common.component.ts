@@ -22,7 +22,7 @@ export class HeaderCommonComponent implements AfterViewInit {
   }
 
   pushToHome() {
-    this.router.navigate(["myapp/user/home"])
+    this.router.navigate(["myapp/user/homepage"])
   }
 
 }

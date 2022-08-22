@@ -16,7 +16,6 @@
             <app-recension-list [recensions]="recensions"></app-recension-list>
         </div>
 
-
         <div *ngIf="!reviewsVisible">
             <div>
                 <p></p>
@@ -57,12 +56,11 @@
                 </div>
 
                 <div class="inline-div">
-                    <button class="btn btn-success target-btn" (click)="openReservationDialog()">Make a
+                    <button class="btn btn-success target-btn" [hidden]="!isRole('RegisteredUser')"
+                        (click)="openReservationDialog()">Make a
                         reservation</button>
                 </div>
             </div>
         </div>
-
-
     </div>
 </div>

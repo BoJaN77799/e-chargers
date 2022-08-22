@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { ChargerInfoComponent } from 'src/modules/shared/components/charger-info/charger-info.component';
 import { ChargerDTO } from 'src/modules/shared/model/chargerDTO';
 import { MapPageComponent } from 'src/modules/shared/pages/map-page/map-page.component';
 import { SnackBarService } from 'src/modules/shared/service/snack-bar.service';
@@ -14,11 +15,12 @@ export class AdminHomeComponent implements OnInit {
   chargers: ChargerDTO[]
   chargersToMap: ChargerDTO[]
 
-
   selectedCharger: ChargerDTO | undefined
 
   @ViewChild(MapPageComponent)
   child!: MapPageComponent;
+
+  @ViewChild(ChargerInfoComponent) chargerInfoComponent!: ChargerInfoComponent;
 
   // search
   searchOpened: boolean = false
@@ -47,6 +49,8 @@ export class AdminHomeComponent implements OnInit {
   setSelectedCharger(charger: ChargerDTO) {
     this.selectedCharger = charger;
     this.searchOpened = false;
+    this.chargerInfoComponent.recensions = [];
+    this.chargerInfoComponent.reviewsVisible = false;
   }
 
   toggleSearch() {

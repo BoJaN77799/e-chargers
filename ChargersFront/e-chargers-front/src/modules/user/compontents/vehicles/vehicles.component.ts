@@ -17,8 +17,6 @@ export class VehiclesComponent implements OnInit {
   dataSource: MatTableDataSource<VehicleDTO>;
   vehicles: VehicleDTO[] = []
 
-  addInputs = false
-
   addVehicleForm: FormGroup
 
 
@@ -46,10 +44,6 @@ export class VehiclesComponent implements OnInit {
     )
   }
 
-  toggleAdd() {
-    this.addInputs = !this.addInputs
-  }
-
   submit() {
 
     let vehicle: VehicleDTO = {
@@ -64,7 +58,6 @@ export class VehiclesComponent implements OnInit {
         if (response) {
           this.vehicles.push(vehicle);
           this.dataSource = new MatTableDataSource(this.vehicles);
-          this.addInputs = false
         }
       },
       (err) => {

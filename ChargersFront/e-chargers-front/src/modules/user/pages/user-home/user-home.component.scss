@@ -26,7 +26,7 @@
 .map {
     padding: 0;
     margin: 0;
-    padding-top: 20px;
+    padding-top: 16px;
     padding-left: 15px;
     position: absolute;
     max-width: 72%;
@@ -38,4 +38,16 @@
     margin-top: 55px;
     overflow: hidden;
     height: 90%;
+}
+
+.map-top {
+    background-color: transparent;
+    margin: 0px 15px;
+    color: green;
+    border: none;
+    margin-bottom: 12px;
+}
+
+.map-top:hover {
+    color: black
 }
