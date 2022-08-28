@@ -29,11 +29,11 @@ func CreateRecension(recensionDTO models.RecensionDTO) (models.Recension, error)
 		return recension, err
 	}
 
-	err = CheckIfRecensionExist(&recensionDTO)
-
-	if err != nil {
-		return recension, err
-	}
+	//err = CheckIfRecensionExist(&recensionDTO)
+	//
+	//if err != nil {
+	//	return recension, err
+	//}
 	recension.Username = recensionDTO.Username
 	recension.ChargerId = recensionDTO.ChargerId
 	recension.Content = recensionDTO.Content
