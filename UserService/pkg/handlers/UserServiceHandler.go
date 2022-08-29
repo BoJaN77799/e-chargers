@@ -238,3 +238,59 @@ func StrikeUser(w http.ResponseWriter, r *http.Request) {
 	utils.OKResponse(w)
 	json.NewEncoder(w).Encode(message)
 }
+
+func AuthAdmin(w http.ResponseWriter, r *http.Request) {
+	bearer := r.Header["Authorization"]
+	if bearer == nil {
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+
+	tokenStr := strings.Split(bearer[0], " ")[1]
+	token, err := utils.ParseTokenStr(tokenStr)
+	claims := token.Claims.(jwt.MapClaims)
+
+	if err != nil || !token.Valid || claims["role"] != models.Administrator.String() {
+		w.WriteHeader(http.StatusUnauthorized)
+	}
+
+	// Check if banned or deleted
+	var username = fmt.Sprintf("%v", claims["username"])
+	user, err := repository.FindUserByUsername(username)
+	if err != nil {
+		w.WriteHeader(http.StatusUnauthorized)
+	}
+
+	// check user's role
+	if user.Role.String() != claims["role"] {
+		w.WriteHeader(http.StatusUnauthorized)
+	}
+}
+
+func AuthUser(w http.ResponseWriter, r *http.Request) {
+	bearer := r.Header["Authorization"]
+	if bearer == nil {
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+
+	tokenStr := strings.Split(bearer[0], " ")[1]
+	token, err := utils.ParseTokenStr(tokenStr)
+	claims := token.Claims.(jwt.MapClaims)
+
+	if err != nil || !token.Valid || claims["role"] != models.RegisteredUser.String() {
+		w.WriteHeader(http.StatusUnauthorized)
+	}
+
+	// Check if banned or deleted
+	var username = fmt.Sprintf("%v", claims["username"])
+	user, err := repository.FindUserByUsername(username)
+	if err != nil {
+		w.WriteHeader(http.StatusUnauthorized)
+	}
+
+	// check user's role
+	if user.Role.String() != claims["role"] {
+		w.WriteHeader(http.StatusUnauthorized)
+	}
+}

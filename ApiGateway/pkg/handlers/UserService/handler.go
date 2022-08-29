@@ -10,21 +10,6 @@ import (
 	"net/http"
 )
 
-func HelloWorld(w http.ResponseWriter, r *http.Request) {
-	utils.SetupResponse(&w, r)
-	if r.Method == "OPTIONS" {
-		return
-	}
-	response, err := http.Get(utils.BaseUserServicePath.Next().Host + "/hello")
-
-	if err != nil {
-		w.WriteHeader(http.StatusGatewayTimeout)
-		return
-	}
-
-	utils.DelegateResponse(response, w)
-}
-
 func Login(w http.ResponseWriter, r *http.Request) {
 
 	utils.SetupResponse(&w, r)
@@ -77,6 +62,14 @@ func AddUser(w http.ResponseWriter, r *http.Request) {
 
 func AddVehicle(w http.ResponseWriter, r *http.Request) {
 
+	// auth
+	if err := utils.Authorize(r, "user"); err != nil {
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusUnauthorized)
+		json.NewEncoder(w).Encode(err.Error())
+		return
+	}
+
 	utils.SetupResponse(&w, r)
 	if r.Method == "OPTIONS" {
 		return
@@ -102,6 +95,14 @@ func AddVehicle(w http.ResponseWriter, r *http.Request) {
 
 func GetVehicles(w http.ResponseWriter, r *http.Request) {
 
+	// auth
+	if err := utils.Authorize(r, "user"); err != nil {
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusUnauthorized)
+		json.NewEncoder(w).Encode(err.Error())
+		return
+	}
+
 	utils.SetupResponse(&w, r)
 	if r.Method == "OPTIONS" {
 		return
@@ -121,6 +122,14 @@ func GetVehicles(w http.ResponseWriter, r *http.Request) {
 }
 
 func GetUserInfo(w http.ResponseWriter, r *http.Request) {
+
+	// auth
+	if err := utils.Authorize(r, "user"); err != nil {
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusUnauthorized)
+		json.NewEncoder(w).Encode(err.Error())
+		return
+	}
 
 	utils.SetupResponse(&w, r)
 	if r.Method == "OPTIONS" {
@@ -142,6 +151,14 @@ func GetUserInfo(w http.ResponseWriter, r *http.Request) {
 
 func StrikeUser(w http.ResponseWriter, r *http.Request) {
 
+	// auth
+	if err := utils.Authorize(r, "admin"); err != nil {
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusUnauthorized)
+		json.NewEncoder(w).Encode(err.Error())
+		return
+	}
+
 	utils.SetupResponse(&w, r)
 	if r.Method == "OPTIONS" {
 		return
@@ -161,6 +178,15 @@ func StrikeUser(w http.ResponseWriter, r *http.Request) {
 }
 
 func FindAllUsers(w http.ResponseWriter, r *http.Request) {
+
+	//// auth
+	//if err := utils.Authorize(r, "user"); err != nil {
+	//	w.Header().Set("Content-Type", "application/json")
+	//	w.WriteHeader(http.StatusUnauthorized)
+	//	json.NewEncoder(w).Encode(err.Error())
+	//	return
+	//}
+
 	utils.SetupResponse(&w, r)
 	if r.Method == "OPTIONS" {
 		return
@@ -177,6 +203,14 @@ func FindAllUsers(w http.ResponseWriter, r *http.Request) {
 }
 
 func DeleteVehicle(w http.ResponseWriter, r *http.Request) {
+
+	// auth
+	if err := utils.Authorize(r, "user"); err != nil {
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusUnauthorized)
+		json.NewEncoder(w).Encode(err.Error())
+		return
+	}
 
 	utils.SetupResponse(&w, r)
 	if r.Method == "OPTIONS" {
