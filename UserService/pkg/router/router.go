@@ -28,5 +28,9 @@ func HandleRequests() {
 	router.HandleFunc("/api/users/{username}", handlers.GetUsersInfo).Methods("GET")
 	router.HandleFunc("/api/users/strike/{username}", handlers.StrikeUser).Methods("GET")
 
+	// authorization
+	router.HandleFunc("/api/users/auth/admin", handlers.AuthAdmin).Methods("GET")
+	router.HandleFunc("/api/users/auth/user", handlers.AuthUser).Methods("GET")
+
 	log.Fatal(http.ListenAndServe(":50001", router))
 }

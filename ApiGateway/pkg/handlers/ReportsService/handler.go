@@ -7,6 +7,15 @@ import (
 )
 
 func FindAllReservationsInPeriod(w http.ResponseWriter, r *http.Request) {
+
+	//// auth
+	//if err := utils.Authorize(r, "admin"); err != nil {
+	//	w.Header().Set("Content-Type", "application/json")
+	//	w.WriteHeader(http.StatusUnauthorized)
+	//	json.NewEncoder(w).Encode(err.Error())
+	//	return
+	//}
+
 	utils.SetupResponse(&w, r)
 	if r.Method == "OPTIONS" {
 		return
@@ -27,6 +36,15 @@ func FindAllReservationsInPeriod(w http.ResponseWriter, r *http.Request) {
 }
 
 func FindAllUsersReport(w http.ResponseWriter, r *http.Request) {
+
+	//// auth
+	//if err := utils.Authorize(r, "admin"); err != nil {
+	//	w.Header().Set("Content-Type", "application/json")
+	//	w.WriteHeader(http.StatusUnauthorized)
+	//	json.NewEncoder(w).Encode(err.Error())
+	//	return
+	//}
+
 	utils.SetupResponse(&w, r)
 	if r.Method == "OPTIONS" {
 		return
