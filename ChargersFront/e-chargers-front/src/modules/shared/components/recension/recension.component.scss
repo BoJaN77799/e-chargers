@@ -3,7 +3,7 @@
     margin: 10px;
     padding: 20px;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
-  }
+}
 
 .user {
     font-weight: bold;
@@ -27,8 +27,8 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-width: 20%;
-display: inline-block;
+    width: 20%;
+    display: inline-block;
 }
 
 .comment-span {
@@ -93,11 +93,16 @@ img {
     content: '★ ';
 }
 
-.strike {
+.strike-div {
     position: absolute;
     right: 0;
     top: 0;
-    transform: translate(-25%, 50%);
+    padding: 10px;
+    text-align: center;
+}
+
+.strike {
+    font-size: 12px;
     text-transform: uppercase;
     color: red;
     font-weight: bold;
@@ -105,10 +110,31 @@ img {
     background-color: transparent;
     border: 1px solid red;
     border-radius: 3px;
-
 }
 
 .strike:hover {
     color: white;
     background-color: red;
+}
+
+
+.strike-ai-red {
+    font-size: 12px;
+    color: red;
+    font-style: italic;
+    padding-top: 5px;
+}
+
+.strike-ai-orange {
+    font-size: 12px;
+    color: orange;
+    font-style: italic;
+    padding-top: 5px;
+}
+
+.strike-ai-green {
+    font-size: 12px;
+    color: green;
+    font-style: italic;
+    padding-top: 5px;
 }

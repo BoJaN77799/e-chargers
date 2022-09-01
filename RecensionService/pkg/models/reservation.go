@@ -6,11 +6,12 @@ import (
 
 type Recension struct {
 	gorm.Model
-	Username  string `json:"username" gorm:"not-null"`
-	ChargerId uint   `json:"charger_id" gorm:"not-null"`
-	Date      uint64 `json:"date"  gorm:"not-null"`
-	Content   string `json:"content" gorm:"not-null"`
-	Rate      uint   `json:"rate" gorm:"not-null"`
+	Username  string  `json:"username" gorm:"not-null"`
+	ChargerId uint    `json:"charger_id" gorm:"not-null"`
+	Date      uint64  `json:"date"  gorm:"not-null"`
+	Content   string  `json:"content" gorm:"not-null"`
+	Rate      uint    `json:"rate" gorm:"not-null"`
+	Toxic     float32 `json:"toxic" gorm:"not-null"`
 }
 
 func (recension *Recension) ToDTO() RecensionDTO {
@@ -20,6 +21,7 @@ func (recension *Recension) ToDTO() RecensionDTO {
 		Date:      recension.Date,
 		Content:   recension.Content,
 		Rate:      recension.Rate,
+		Toxic:     recension.Toxic,
 	}
 }
 

@@ -17,7 +17,7 @@ export class Interceptor implements HttpInterceptor {
     if (item) {
       request = request.clone({
         setHeaders: {
-          Authorization: `Bearer ${JSON.parse(item).accessToken}`
+          Authorization: `Bearer ${JSON.parse(item).token}`
         },
         withCredentials: true
       });

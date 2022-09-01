@@ -23,8 +23,9 @@ var (
 			Username:  "boksi",
 			ChargerId: 2,
 			Date:      1664116200000,
-			Content:   "Charger is poor and speed is low",
+			Content:   "Charger is awesome, but speed is low",
 			Rate:      2,
+			Toxic:     0.05,
 		},
 		{
 			Username:  "velja",
@@ -32,6 +33,7 @@ var (
 			Date:      1664116200000 + 40*60*1000,
 			Content:   "This is the coolest charger I have ever seen.",
 			Rate:      5,
+			Toxic:     0.08,
 		},
 		{
 			Username:  "boksi",
@@ -39,13 +41,15 @@ var (
 			Date:      1664116200000 + 200*60*1000,
 			Content:   "Fine charger. Speed can be better",
 			Rate:      4,
+			Toxic:     0.26,
 		},
 		{
 			Username:  "boksi",
 			ChargerId: 3,
 			Date:      1664116200000 + 60*60*1000,
-			Content:   "You sons of a glitch, repair this charger idiots",
+			Content:   "Stupid bastards, fix this charger",
 			Rate:      1,
+			Toxic:     0.98,
 		},
 	}
 )
