@@ -48,6 +48,7 @@ export class CreateReviewComponent implements OnInit {
       "content": this.reviewForm.get("content")?.value,
       "date": moment().unix(),
       "rate": this.rating,
+      "toxic": 0,
     }
 
     this.reviewService.create(review).subscribe(

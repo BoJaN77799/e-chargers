@@ -29,16 +29,18 @@ func CreateRecension(recensionDTO models.RecensionDTO) (models.Recension, error)
 		return recension, err
 	}
 
-	//err = CheckIfRecensionExist(&recensionDTO)
-	//
-	//if err != nil {
-	//	return recension, err
-	//}
+	result, err := CheckRecensionToxicity(&recensionDTO)
+
+	if err != nil {
+		return recension, err
+	}
+
 	recension.Username = recensionDTO.Username
 	recension.ChargerId = recensionDTO.ChargerId
 	recension.Content = recensionDTO.Content
 	recension.Rate = recensionDTO.Rate
 	recension.Date = uint64(time.Now().UnixMilli())
+	recension.Toxic = result[1]
 
 	if result := db.Db.Create(&recension); result.Error != nil {
 		return recension, result.Error
@@ -47,19 +49,9 @@ func CreateRecension(recensionDTO models.RecensionDTO) (models.Recension, error)
 	return recension, nil
 }
 
-func CheckIfRecensionExist(recension *models.RecensionDTO) error {
-	var recensionDB models.Recension
-
-	db.Db.Table("recensions").Where(
-		"username = ? AND charger_id = ? ",
-		recension.Username,
-		recension.ChargerId,
-	).Find(&recensionDB)
-
-	if recensionDB.ID != 0 {
-		return errors.New("user has 2 recensions on this charger")
-	}
-	return nil
+func CheckRecensionToxicity(recension *models.RecensionDTO) ([]float32, error) {
+	result, err := GetRecensionToxicity(recension.Content)
+	return result, err
 }
 
 func GetAllRecensions() []models.Recension {

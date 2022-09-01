@@ -1,6 +1,7 @@
 package repository
 
 import (
+	"bytes"
 	"encoding/json"
 	"errors"
 	"io/ioutil"
@@ -50,4 +51,30 @@ func VerifyCharger(chargerId uint) error {
 	}
 
 	return nil
+}
+
+func GetRecensionToxicity(recensionText string) ([]float32, error) {
+
+	var result []float32
+
+	req, _ := http.NewRequest(http.MethodPost, "http://localhost:50006/prediction", bytes.NewReader([]byte(recensionText)))
+	req.Header.Set("Accept", "application/json")
+	req.Header.Set("Content-Type", "application/json")
+	client := &http.Client{}
+	response, err := client.Do(req)
+
+	if response.StatusCode != http.StatusOK || err != nil {
+		return result, errors.New("strikes AI not work")
+	}
+
+	defer response.Body.Close()
+	body, err := ioutil.ReadAll(response.Body)
+
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	json.Unmarshal(body, &result)
+
+	return result, nil
 }

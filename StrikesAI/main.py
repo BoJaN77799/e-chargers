@@ -39,12 +39,12 @@ def generate_handler():
             if self.path == "/prediction":
                 # getting post request body
                 req_content_len = int(self.headers.get('Content-Length'))
+                print(req_content_len)
                 post_body = self.rfile.read(req_content_len)
-                my_json = post_body.decode('utf8').replace("'", '"')
-                data = json.loads(my_json) # this is request body
-                
+                print(post_body)
+                recension_text = post_body.decode('utf8').replace("'", '"')
+
                 # call predict
-                recension_text = data['text']
                 result = self.predict_proba(recension_text)
                 result_list = result.tolist()[0]
                 

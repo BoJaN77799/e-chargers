@@ -3,5 +3,6 @@ export interface ReviewDTO {
     charger_id: number
     date: number
     content: string
-    rate: number
+    rate: number,
+    toxic: number
 }
