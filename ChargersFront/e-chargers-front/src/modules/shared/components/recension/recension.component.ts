@@ -26,9 +26,10 @@ export class RecensionComponent implements OnInit {
 
   strikeUser(username: string | undefined) {
     if (username) {
-      this.authSerice.strikeUser(username).subscribe(
+      this.authSerice.strikeUser(username, this.recension?.id!).subscribe(
         (response) => {
           if (response) {
+            console.log(response)
             this.snackBarService.openSnackBar(response.body as string);
           }
         },

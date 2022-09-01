@@ -24,7 +24,7 @@ func HandleRequests() {
 	// USER - AUTH
 	router.HandleFunc("/api/users/vehicles/{name}", UserService.DeleteVehicle).Methods("DELETE")
 	// ADMIN - AUTH
-	router.HandleFunc("/api/users/strike/{username}", UserService.StrikeUser).Methods("GET")
+	router.HandleFunc("/api/users/strike/{username}/{recension_id}", UserService.StrikeUser).Methods("GET")
 	// ADMIN - AUTH
 	router.HandleFunc("/api/users", UserService.FindAllUsers).Methods("GET")
 	// USER - AUTH

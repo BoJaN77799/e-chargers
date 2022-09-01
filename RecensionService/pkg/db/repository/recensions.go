@@ -102,7 +102,22 @@ func GetAllRecensionsInPeriod(dateFromUInt64 uint64, dateToUInt64 uint64) []mode
 func GetAllRecensionsOfCharger(chargerId uint) []models.Recension {
 	var recensions []models.Recension
 
-	db.Db.Table("recensions").Where("charger_id = ?", chargerId).Find(&recensions)
+	db.Db.Table("recensions").Where("charger_id = ? AND banned = false", chargerId).Find(&recensions)
 
 	return recensions
+}
+
+func BanRecension(recensionId uint) error {
+	var recension models.Recension
+
+	db.Db.Table("recensions").Where("ID = ?", recensionId).Find(&recension)
+
+	if recension.ID == 0 {
+		return errors.New("user didn't give recension on this charger")
+	}
+
+	recension.Banned = true
+	db.Db.Save(recension)
+
+	return nil
 }

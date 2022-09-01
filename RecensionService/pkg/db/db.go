@@ -26,6 +26,7 @@ var (
 			Content:   "Charger is awesome, but speed is low",
 			Rate:      2,
 			Toxic:     0.05,
+			Banned:    false,
 		},
 		{
 			Username:  "velja",
@@ -34,6 +35,7 @@ var (
 			Content:   "This is the coolest charger I have ever seen.",
 			Rate:      5,
 			Toxic:     0.08,
+			Banned:    false,
 		},
 		{
 			Username:  "boksi",
@@ -42,6 +44,7 @@ var (
 			Content:   "Fine charger. Speed can be better",
 			Rate:      4,
 			Toxic:     0.26,
+			Banned:    false,
 		},
 		{
 			Username:  "boksi",
@@ -50,6 +53,7 @@ var (
 			Content:   "Stupid bastards, fix this charger",
 			Rate:      1,
 			Toxic:     0.98,
+			Banned:    false,
 		},
 	}
 )

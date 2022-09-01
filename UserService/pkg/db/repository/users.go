@@ -141,16 +141,16 @@ func DeleteVehicle(name string) error {
 	return nil
 }
 
-func StrikeUser(username string) (models.User, error) {
+func StrikeUser(username string) (string, error) {
 	var user models.User
 
 	db.Db.Table("users").Where("username = ?", username).First(&user)
 
 	if user.ID == 0 {
-		return user, errors.New("invalid username")
+		return "", errors.New("invalid username")
 	}
 	if user.Strikes == 3 {
-		return user, errors.New("this user is already banned by 3 committed strikes")
+		return "", errors.New("this user is already banned by 3 committed strikes")
 	}
 
 	if user.Strikes+1 == 3 {
@@ -159,14 +159,14 @@ func StrikeUser(username string) (models.User, error) {
 		user.BannedAt = uint64(time.Now().UnixMilli())
 		user.BannedUntil = uint64(time.Now().AddDate(0, 1, 0).UnixMilli())
 		db.Db.Save(user)
-		return user, errors.New("user is banned during 3 strikes")
+		return "user is banned during 3 strikes", nil
 	} else {
 		user.Strikes += 1
 		db.Db.Save(user)
 		if user.Strikes == 1 {
-			return user, errors.New(fmt.Sprintf("user %s has now 1 strike", user.Username))
+			return fmt.Sprintf("user %s has now 1 strike", user.Username), nil
 		} else {
-			return user, errors.New(fmt.Sprintf("user %s has now %d strikes", user.Username, user.Strikes))
+			return fmt.Sprintf("user %s has now %d strikes", user.Username, user.Strikes), nil
 		}
 	}
 }

@@ -12,16 +12,19 @@ type Recension struct {
 	Content   string  `json:"content" gorm:"not-null"`
 	Rate      uint    `json:"rate" gorm:"not-null"`
 	Toxic     float32 `json:"toxic" gorm:"not-null"`
+	Banned    bool    `json:"banned" gorm:"not-null"`
 }
 
 func (recension *Recension) ToDTO() RecensionDTO {
 	return RecensionDTO{
+		Id:        recension.ID,
 		Username:  recension.Username,
 		ChargerId: recension.ChargerId,
 		Date:      recension.Date,
 		Content:   recension.Content,
 		Rate:      recension.Rate,
 		Toxic:     recension.Toxic,
+		Banned:    recension.Banned,
 	}
 }
 
