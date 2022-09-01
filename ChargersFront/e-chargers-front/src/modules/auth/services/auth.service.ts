@@ -41,11 +41,16 @@ export class AuthService {
     });
   }
 
-  strikeUser(username: string): Observable<HttpResponse<string>> {
-    return this.http.get<HttpResponse<string>>("echargers/api/users/strike/" + username, {
+  strikeUser(username: string, recension_id: number): Observable<HttpResponse<string>> {
+    let queryParams = {};
+
+    queryParams = {
       headers: this.headers,
-      responseType: "json",
-    });
+      observe: "response",
+      responseType: "text"
+    };
+
+    return this.http.get<HttpResponse<string>>("echargers/api/users/strike/" + username + "/" + recension_id, queryParams);
   }
 
   getUserInfo(username: string): Observable<HttpResponse<UserProfileDTO>> {

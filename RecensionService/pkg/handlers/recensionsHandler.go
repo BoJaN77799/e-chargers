@@ -107,3 +107,24 @@ func FindAllRecensionsOfCharger(w http.ResponseWriter, r *http.Request) {
 	utils.OKResponse(w)
 	json.NewEncoder(w).Encode(recensionsDTO)
 }
+
+func BanRecension(w http.ResponseWriter, r *http.Request) {
+
+	params := mux.Vars(r)
+	recensionId, _ := params["recension_id"]
+
+	recensionIdUint, err := strconv.ParseUint(recensionId, 10, 32)
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+	err = repository.BanRecension(uint(recensionIdUint))
+
+	if err != nil {
+		utils.BadRequestResponse(w, err.Error())
+		return
+	}
+
+	utils.OKResponse(w)
+	json.NewEncoder(w).Encode("recension successfully canceled")
+}

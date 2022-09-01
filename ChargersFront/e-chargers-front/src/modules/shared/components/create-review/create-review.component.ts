@@ -43,6 +43,7 @@ export class CreateReviewComponent implements OnInit {
     }
 
     let review: ReviewDTO = {
+      "id": 0,
       "username": this.utilService.getLoggedUsername(),
       "charger_id": this.reservation.charger_id,
       "content": this.reviewForm.get("content")?.value,

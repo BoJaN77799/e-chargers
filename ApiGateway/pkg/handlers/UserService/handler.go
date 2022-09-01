@@ -166,8 +166,9 @@ func StrikeUser(w http.ResponseWriter, r *http.Request) {
 
 	params := mux.Vars(r)
 	username, _ := params["username"]
+	recensionId, _ := params["recension_id"]
 
-	response, err := http.Get(utils.BaseUserServicePath.Next().Host + "/strike/" + username)
+	response, err := http.Get(utils.BaseUserServicePath.Next().Host + "/strike/" + username + "/" + recensionId)
 
 	if err != nil {
 		w.WriteHeader(http.StatusGatewayTimeout)

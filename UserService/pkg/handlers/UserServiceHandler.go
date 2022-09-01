@@ -227,6 +227,7 @@ func StrikeUser(w http.ResponseWriter, r *http.Request) {
 
 	params := mux.Vars(r)
 	username, _ := params["username"]
+	recensionId, _ := params["recension_id"]
 
 	message, err := repository.StrikeUser(username)
 
@@ -235,6 +236,13 @@ func StrikeUser(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	vehicleIdUint, err := strconv.ParseUint(recensionId, 10, 32)
+	err = repository.BanRecension(uint(vehicleIdUint))
+
+	if err != nil {
+		utils.BadRequestResponse(w, err.Error())
+		return
+	}
 	utils.OKResponse(w)
 	json.NewEncoder(w).Encode(message)
 }

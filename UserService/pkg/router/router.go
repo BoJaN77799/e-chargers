@@ -26,7 +26,7 @@ func HandleRequests() {
 	router.HandleFunc("/api/users/exist/{username}", handlers.CheckIfUserExist).Methods("GET")
 
 	router.HandleFunc("/api/users/{username}", handlers.GetUsersInfo).Methods("GET")
-	router.HandleFunc("/api/users/strike/{username}", handlers.StrikeUser).Methods("GET")
+	router.HandleFunc("/api/users/strike/{username}/{recension_id}", handlers.StrikeUser).Methods("GET")
 
 	// authorization
 	router.HandleFunc("/api/users/auth/admin", handlers.AuthAdmin).Methods("GET")

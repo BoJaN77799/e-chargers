@@ -19,9 +19,8 @@
         <div class="img-span"><img src="assets/img/quotes.png"></div>
         <div class="comment-span"> {{recension?.content}}</div>
     </div>
-    <div class="strike-div">
-        <button class="strike" [hidden]="!isRole('Administrator')"
-            (click)="strikeUser(recension?.username)">Strike</button>
+    <div class="strike-div" [hidden]="!isRole('Administrator')">
+        <button class="strike" (click)="strikeUser(recension?.username)">Strike</button>
         <p
             [ngClass]="{
             'strike-ai-red': recension?.toxic! > 0.75, 'strike-ai-orange': recension?.toxic! > 0.40 && recension?.toxic! <= 0.75,'strike-ai-green': recension?.toxic! <= 0.40}">
