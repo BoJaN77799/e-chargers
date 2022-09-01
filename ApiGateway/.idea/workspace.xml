@@ -4,19 +4,7 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3ee43a6f-8681-4b3d-8c8b-776e3b6d299b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/pkg/utils/auth.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../UserService/pkg/utils/auth.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pkg/handlers/ChargerService/handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/handlers/ChargerService/handler.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pkg/handlers/RecensionService/handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/handlers/RecensionService/handler.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pkg/handlers/ReportsService/handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/handlers/ReportsService/handler.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pkg/handlers/ReservationService/handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/handlers/ReservationService/handler.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pkg/handlers/UserService/handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/handlers/UserService/handler.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pkg/router/router.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/router/router.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../UserService/pkg/handlers/UserServiceHandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/../UserService/pkg/handlers/UserServiceHandler.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../UserService/pkg/router/router.go" beforeDir="false" afterPath="$PROJECT_DIR$/../UserService/pkg/router/router.go" afterDir="false" />
-    </list>
+    <list default="true" id="3ee43a6f-8681-4b3d-8c8b-776e3b6d299b" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
