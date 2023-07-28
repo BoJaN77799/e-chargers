@@ -35,6 +35,46 @@ func Login(w http.ResponseWriter, r *http.Request) {
 	utils.DelegateResponse(response, w)
 }
 
+func Login2(w http.ResponseWriter, r *http.Request) {
+	utils.SetupResponse(&w, r)
+	if r.Method == http.MethodOptions {
+		return
+	}
+
+	var loginDTO UserService.LoginDTO
+	err := json.NewDecoder(r.Body).Decode(&loginDTO)
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+
+	baseUserServicePath := utils.BaseUserServicePath.Next().Host
+	requestBody, err := json.Marshal(loginDTO)
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		return
+	}
+
+	req, err := http.NewRequest(http.MethodPost, baseUserServicePath+"/login", bytes.NewBuffer(requestBody))
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		return
+	}
+
+	req.Header.Set("Accept", "application/json")
+	req.Header.Set("Content-Type", "application/json")
+
+	client := &http.Client{}
+	response, err := client.Do(req)
+	if err != nil {
+		w.WriteHeader(http.StatusGatewayTimeout)
+		return
+	}
+	defer response.Body.Close()
+
+	utils.DelegateResponse(response, w)
+}
+
 func AddUser(w http.ResponseWriter, r *http.Request) {
 
 	utils.SetupResponse(&w, r)
