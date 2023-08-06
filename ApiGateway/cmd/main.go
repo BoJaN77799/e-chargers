@@ -3,5 +3,5 @@ package main
 import "ApiGateway/pkg/router"
 
 func main() {
-	router.HandleRequests()
+	router.HandleRequests(50000)
 }

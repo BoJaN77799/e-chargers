@@ -100,7 +100,7 @@ func Init() {
 func CreateConfiguration() Configuration {
 	var conf Configuration
 	conf.User = "postgres"
-	conf.Password = "admin"
+	conf.Password = "postgres"
 	conf.Host = "localhost"
 	conf.Port = 5432
 	conf.DBName = "chargersDB"

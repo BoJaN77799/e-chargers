@@ -6,12 +6,14 @@ import (
 	"ApiGateway/pkg/handlers/ReportsService"
 	"ApiGateway/pkg/handlers/ReservationService"
 	"ApiGateway/pkg/handlers/UserService"
+	"fmt"
 	"github.com/gorilla/mux"
 	"log"
 	"net/http"
+	"strconv"
 )
 
-func HandleRequests() {
+func HandleRequests(port int) {
 
 	router := mux.NewRouter()
 
@@ -64,5 +66,6 @@ func HandleRequests() {
 	// FREE
 	router.HandleFunc("/api/recensions/charger/{charger_id}", RecensionService.FindAllRecensionsOfCharger).Methods("GET")
 
-	log.Fatal(http.ListenAndServe(":50000", router))
+	fmt.Println("ApiGateway is running on port: " + strconv.Itoa(port))
+	log.Fatal(http.ListenAndServe(":"+strconv.Itoa(port), router))
 }

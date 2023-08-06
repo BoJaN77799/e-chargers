@@ -1,14 +1,16 @@
 package router
 
 import (
+	"fmt"
 	"github.com/gorilla/mux"
 	"log"
 	"net/http"
+	"strconv"
 	"user_service/pkg/db"
 	"user_service/pkg/handlers"
 )
 
-func HandleRequests() {
+func HandleRequests(port int) {
 
 	db.Init() // initialized data base
 
@@ -32,5 +34,6 @@ func HandleRequests() {
 	router.HandleFunc("/api/users/auth/admin", handlers.AuthAdmin).Methods("GET")
 	router.HandleFunc("/api/users/auth/user", handlers.AuthUser).Methods("GET")
 
-	log.Fatal(http.ListenAndServe(":50001", router))
+	fmt.Println("UserService is running on port: " + strconv.Itoa(port))
+	log.Fatal(http.ListenAndServe(":"+strconv.Itoa(port), router))
 }

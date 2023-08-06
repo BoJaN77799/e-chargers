@@ -1,15 +1,17 @@
 package router
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 	"reservation_service/pkg/db"
 	"reservation_service/pkg/handlers"
+	"strconv"
 
 	"github.com/gorilla/mux"
 )
 
-func HandleRequests() {
+func HandleRequests(port int) {
 
 	db.Init() // initialized data base
 
@@ -22,5 +24,6 @@ func HandleRequests() {
 
 	router.HandleFunc("/api/reservations/{date_from}/{date_to}", handlers.FindAllReservationsInPeriod).Methods("GET")
 
-	log.Fatal(http.ListenAndServe(":50003", router))
+	fmt.Println("ReservationService is running on port: " + strconv.Itoa(port))
+	log.Fatal(http.ListenAndServe(":"+strconv.Itoa(port), router))
 }
