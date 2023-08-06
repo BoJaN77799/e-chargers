@@ -3,13 +3,15 @@ package router
 import (
 	"charger_service/pkg/db"
 	"charger_service/pkg/handlers"
+	"fmt"
 	"log"
 	"net/http"
+	"strconv"
 
 	"github.com/gorilla/mux"
 )
 
-func HandleRequests() {
+func HandleRequests(port int) {
 
 	db.Init() // initialized data base
 
@@ -24,5 +26,6 @@ func HandleRequests() {
 	router.HandleFunc("/api/chargers/{chargerId}", handlers.GetChargerByID).Methods("GET")
 	router.HandleFunc("/api/chargers/{lon}/{lat}", handlers.FindClosestCharger).Methods("GET")
 
-	log.Fatal(http.ListenAndServe(":50002", router))
+	fmt.Println("ChargerService is running on port: " + strconv.Itoa(port))
+	log.Fatal(http.ListenAndServe(":"+strconv.Itoa(port), router))
 }

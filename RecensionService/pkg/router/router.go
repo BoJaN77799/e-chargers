@@ -1,15 +1,17 @@
 package router
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 	"recension_service/pkg/db"
 	"recension_service/pkg/handlers"
+	"strconv"
 
 	"github.com/gorilla/mux"
 )
 
-func HandleRequests() {
+func HandleRequests(port int) {
 
 	db.Init() // initialized data base
 
@@ -22,5 +24,6 @@ func HandleRequests() {
 	router.HandleFunc("/api/recensions/{recension_id}", handlers.BanRecension).Methods("DELETE")
 	router.HandleFunc("/api/recensions/charger/{charger_id}", handlers.FindAllRecensionsOfCharger).Methods("GET")
 
-	log.Fatal(http.ListenAndServe(":50005", router))
+	fmt.Println("RecensionService is running on port: " + strconv.Itoa(port))
+	log.Fatal(http.ListenAndServe(":"+strconv.Itoa(port), router))
 }
