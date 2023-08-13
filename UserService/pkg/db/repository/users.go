@@ -53,9 +53,8 @@ func FindUserByUsername(username string) (models.User, error) {
 	var user models.User
 
 	db.Db.Table("users").Where("username = ?", username).First(&user)
-
 	if user.ID == 0 {
-		return user, errors.New("invalid username")
+		return user, fmt.Errorf("there is no user by search condition username='%s'", username)
 	}
 
 	return user, nil

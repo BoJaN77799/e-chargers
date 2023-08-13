@@ -9,7 +9,7 @@ import (
 )
 
 var BaseUserServicePath, _ = roundRobinScheduler.New(
-	&url.URL{Host: "http://localhost:50001/api/users"},
+	&url.URL{Host: "http://localhost:50001/api/usr"},
 )
 
 var BaseChargerServicePath, _ = roundRobinScheduler.New(

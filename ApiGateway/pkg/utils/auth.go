@@ -7,6 +7,9 @@ import (
 	"time"
 )
 
+// SECRET This should be stored as an environment variable
+var SECRET = []byte("my_ultra_secret_key")
+
 func Authorize(req *http.Request, role string) error {
 	bearer := req.Header["Authorization"]
 	if bearer == nil {
@@ -31,30 +34,4 @@ func Authorize(req *http.Request, role string) error {
 	}
 
 	return nil
-}
-
-func Authenticate(req *http.Request) (int, error) {
-	//bearer := req.Header["Authorization"]
-	//if bearer == nil {
-	//	return http.StatusBadRequest, errors.New("no token bearer")
-	//}
-	//tokenStr := strings.Split(bearer[0], " ")[1]
-	//
-	//timeout := time.Duration(5 * time.Second)
-	//client := http.Client{Timeout: timeout}
-	//
-	//endpoint := UserServiceRoot + _AuthenticateApi
-	//request, _ := http.NewRequest(http.MethodGet, endpoint, bytes.NewBufferString(""))
-	//request.Header.Set("Authorization", "Bearer "+tokenStr)
-	//
-	//response, err := client.Do(request)
-	//if err != nil {
-	//	return http.StatusGatewayTimeout, errors.New("error sending request")
-	//}
-	//
-	//if response.StatusCode != 200 {
-	//	return http.StatusUnauthorized, errors.New("not authenticated")
-	//}
-
-	return http.StatusOK, nil
 }
