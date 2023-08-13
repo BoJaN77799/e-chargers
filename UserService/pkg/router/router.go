@@ -10,29 +10,33 @@ import (
 	"user_service/pkg/handlers"
 )
 
+const UrlBase = "/api/usr"
+
 func HandleRequests(port int) {
 
-	db.Init() // initialized data base
+	db.Init()
 
-	router := mux.NewRouter() // init router
-	router.HandleFunc("/api/users/hello", handlers.HelloWorld).Methods("GET")
+	router := mux.NewRouter()
+	router.HandleFunc(UrlBase+"/users/hello", handlers.HelloWorld).Methods("GET")
 
-	router.HandleFunc("/api/users/login", handlers.Login).Methods("POST")
-	router.HandleFunc("/api/users", handlers.AddUser).Methods("POST")
-	router.HandleFunc("/api/users", handlers.FindAllUsers).Methods("GET")
-	router.HandleFunc("/api/users/vehicles", handlers.AddVehicle).Methods("POST")
-	router.HandleFunc("/api/users/vehicles/{username}", handlers.GetVehicles).Methods("GET")
-	router.HandleFunc("/api/users/vehicles/{name}", handlers.DeleteVehicle).Methods("DELETE")
+	// Auth endpoint
+	router.HandleFunc(UrlBase+"/auth", handlers.Auth).Methods("GET")
+	router.HandleFunc(UrlBase+"/auth/login", handlers.Login).Methods("POST")
 
-	router.HandleFunc("/api/users/exist/{username}/{vehicleId}", handlers.CheckIfUserExistWithVehicle).Methods("GET")
-	router.HandleFunc("/api/users/exist/{username}", handlers.CheckIfUserExist).Methods("GET")
+	// User endpoints
+	router.HandleFunc(UrlBase+"/users", handlers.AddUser).Methods("POST")
+	router.HandleFunc(UrlBase+"/users", handlers.FindAllUsers).Methods("GET")
 
-	router.HandleFunc("/api/users/{username}", handlers.GetUsersInfo).Methods("GET")
-	router.HandleFunc("/api/users/strike/{username}/{recension_id}", handlers.StrikeUser).Methods("GET")
+	router.HandleFunc(UrlBase+"/users/exist/{username}/{vehicleId}", handlers.CheckIfUserExistWithVehicle).Methods("GET")
+	router.HandleFunc(UrlBase+"/users/exist/{username}", handlers.CheckIfUserExist).Methods("GET")
 
-	// authorization
-	router.HandleFunc("/api/users/auth/admin", handlers.AuthAdmin).Methods("GET")
-	router.HandleFunc("/api/users/auth/user", handlers.AuthUser).Methods("GET")
+	router.HandleFunc(UrlBase+"/users/{username}", handlers.GetUsersInfo).Methods("GET")
+	router.HandleFunc(UrlBase+"/users/strike/{username}/{recension_id}", handlers.StrikeUser).Methods("GET")
+
+	// Vehicles endpoints
+	router.HandleFunc(UrlBase+"/users/vehicles", handlers.AddVehicle).Methods("POST")
+	router.HandleFunc(UrlBase+"/users/vehicles", handlers.GetVehicles).Methods("GET")
+	router.HandleFunc(UrlBase+"/users/vehicles/{name}", handlers.DeleteVehicle).Methods("DELETE")
 
 	fmt.Println("UserService is running on port: " + strconv.Itoa(port))
 	log.Fatal(http.ListenAndServe(":"+strconv.Itoa(port), router))

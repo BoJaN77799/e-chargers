@@ -1,7 +1,7 @@
 package utils
 
 import (
-	"encoding/json"
+	json "encoding/json"
 	"net/http"
 )
 
@@ -24,4 +24,11 @@ func OKResponse(w http.ResponseWriter) {
 func UnauthorizedResponse(w http.ResponseWriter) {
 	w.Header().Add("Content-Type", "application/json")
 	w.WriteHeader(http.StatusUnauthorized)
+	json.NewEncoder(w).Encode("Unauthorized")
+}
+
+func BadToken(w http.ResponseWriter, err string) {
+	w.Header().Add("Content-Type", "application/json")
+	w.WriteHeader(http.StatusUnauthorized)
+	json.NewEncoder(w).Encode(err)
 }
