@@ -18,7 +18,6 @@ const (
 func HandleRequests(port int) {
 	//router := mux.NewRouter()
 	//
-	//router.HandleFunc("/api/users/login", UserService.Login).Methods("POST") // login
 	//router.HandleFunc("/api/users", UserService.AddUser).Methods("POST")     // register
 	//// USER - AUTH
 	//router.HandleFunc("/api/users/vehicles", UserService.AddVehicle).Methods("POST")
@@ -67,7 +66,8 @@ func HandleRequests(port int) {
 
 	router := mux.NewRouter()
 
-	router.HandleFunc("/api/auth/login", UserService.Login).Methods("POST") // login
+	router.HandleFunc("/api/auth/login", UserService.Login).Methods("POST")           // login
+	router.HandleFunc("/api/auth/register", UserService.Registration).Methods("POST") // register
 
 	router.Use(authenticationMiddleware)
 

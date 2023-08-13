@@ -22,9 +22,9 @@ func HandleRequests(port int) {
 	// Auth endpoint
 	router.HandleFunc(UrlBase+"/auth", handlers.Auth).Methods("GET")
 	router.HandleFunc(UrlBase+"/auth/login", handlers.Login).Methods("POST")
+	router.HandleFunc(UrlBase+"/auth/register", handlers.Registration).Methods("POST")
 
 	// User endpoints
-	router.HandleFunc(UrlBase+"/users", handlers.AddUser).Methods("POST")
 	router.HandleFunc(UrlBase+"/users", handlers.FindAllUsers).Methods("GET")
 
 	router.HandleFunc(UrlBase+"/users/exist/{username}/{vehicleId}", handlers.CheckIfUserExistWithVehicle).Methods("GET")

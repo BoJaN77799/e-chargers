@@ -11,56 +11,6 @@ import (
 	"net/http"
 )
 
-func Login(w http.ResponseWriter, r *http.Request) {
-
-	utils.SetupResponse(&w, r)
-	if r.Method == "OPTIONS" {
-		return
-	}
-
-	var loginDTO UserService.LoginDTO
-	data, _ := ioutil.ReadAll(r.Body)
-	json.NewDecoder(bytes.NewReader(data)).Decode(&loginDTO)
-
-	req, _ := http.NewRequest(http.MethodPost, utils.BaseUserServicePath.Next().Host+"/auth/login", bytes.NewReader(data))
-	req.Header.Set("Accept", "application/json")
-	req.Header.Set("Content-Type", "application/json")
-	client := &http.Client{}
-	response, err := client.Do(req)
-
-	if err != nil {
-		w.WriteHeader(http.StatusGatewayTimeout)
-		return
-	}
-
-	utils.DelegateResponse(response, w)
-}
-
-func AddUser(w http.ResponseWriter, r *http.Request) {
-
-	utils.SetupResponse(&w, r)
-	if r.Method == "OPTIONS" {
-		return
-	}
-
-	var userDTO UserService.UserDTO
-	data, _ := ioutil.ReadAll(r.Body)
-	json.NewDecoder(bytes.NewReader(data)).Decode(&userDTO)
-
-	req, _ := http.NewRequest(http.MethodPost, utils.BaseUserServicePath.Next().Host, bytes.NewReader(data))
-	req.Header.Set("Accept", "application/json")
-	req.Header.Set("Content-Type", "application/json")
-	client := &http.Client{}
-	response, err := client.Do(req)
-
-	if err != nil {
-		w.WriteHeader(http.StatusGatewayTimeout)
-		return
-	}
-
-	utils.DelegateResponse(response, w)
-}
-
 func AddVehicle(w http.ResponseWriter, r *http.Request) {
 
 	// auth

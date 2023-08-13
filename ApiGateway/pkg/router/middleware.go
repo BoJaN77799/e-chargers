@@ -9,6 +9,7 @@ import (
 
 var publicRoutes = []string{
 	"/api/auth/login",
+	"/api/auth/register",
 }
 
 func isRoutePublic(route string) bool {

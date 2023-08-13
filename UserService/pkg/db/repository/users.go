@@ -16,12 +16,8 @@ func CreateUser(user models.User) (models.User, error) {
 		return user, err
 	}
 
-	// registered user
 	user.Role = models.RegisteredUser
-
-	// hashing password
 	user.Password, _ = utils.HashPassword(user.Password)
-
 	if result := db.Db.Create(&user); result.Error != nil {
 		return user, result.Error
 	}
