@@ -18,11 +18,14 @@ import (
 
 func HelloWorld(w http.ResponseWriter, r *http.Request) {
 	utils.OKResponse(w)
-	json.NewEncoder(w).Encode("Hello World from UserService")
-}
 
-// This should be stored as an environment variable
-var jwtKey = []byte("my_ultra_secret_key")
+	message := "Hello World from UserService : " + r.URL.String()
+	err := json.NewEncoder(w).Encode(message)
+	if err != nil {
+		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+		return
+	}
+}
 
 func Login(w http.ResponseWriter, r *http.Request) {
 
@@ -46,7 +49,7 @@ func Login(w http.ResponseWriter, r *http.Request) {
 	claims := models.Claims{Email: user.Email, Username: user.Username, Role: user.Role.String(), Id: user.ID, StandardClaims: jwt.StandardClaims{ExpiresAt: expirationTime.Unix()}}
 
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, &claims)
-	tokenString, _ := token.SignedString(jwtKey)
+	tokenString, _ := token.SignedString(utils.SECRET)
 
 	http.SetCookie(w, &http.Cookie{
 		Name:    "token",
@@ -127,21 +130,20 @@ func AddVehicle(w http.ResponseWriter, r *http.Request) {
 func GetVehicles(w http.ResponseWriter, r *http.Request) {
 	var vehiclesDTO []models.VehicleDTO
 
-	params := mux.Vars(r)
-	username, _ := params["username"]
-
-	var err error
-	var user models.User
-	user, err = repository.FindUserByUsername(username)
-
+	username, err := utils.GetUsernameFromToken(r)
 	if err != nil {
-		utils.BadRequestResponse(w, "user with given username doesn't exist")
+		utils.BadToken(w, err.Error())
 		json.NewEncoder(w).Encode(vehiclesDTO)
 		return
 	}
 
-	vehicles := repository.GetAllVehicles(user.ID)
+	user, err := repository.FindUserByUsername(username)
+	if err != nil {
+		utils.BadRequestResponse(w, err.Error())
+		return
+	}
 
+	vehicles := repository.GetAllVehicles(user.ID)
 	for _, vehicle := range vehicles {
 		vehiclesDTO = append(vehiclesDTO, vehicle.ToDTO())
 	}
@@ -245,60 +247,4 @@ func StrikeUser(w http.ResponseWriter, r *http.Request) {
 	}
 	utils.OKResponse(w)
 	json.NewEncoder(w).Encode(message)
-}
-
-func AuthAdmin(w http.ResponseWriter, r *http.Request) {
-	bearer := r.Header["Authorization"]
-	if bearer == nil {
-		w.WriteHeader(http.StatusBadRequest)
-		return
-	}
-
-	tokenStr := strings.Split(bearer[0], " ")[1]
-	token, err := utils.ParseTokenStr(tokenStr)
-	claims := token.Claims.(jwt.MapClaims)
-
-	if err != nil || !token.Valid || claims["role"] != models.Administrator.String() {
-		w.WriteHeader(http.StatusUnauthorized)
-	}
-
-	// Check if banned or deleted
-	var username = fmt.Sprintf("%v", claims["username"])
-	user, err := repository.FindUserByUsername(username)
-	if err != nil {
-		w.WriteHeader(http.StatusUnauthorized)
-	}
-
-	// check user's role
-	if user.Role.String() != claims["role"] {
-		w.WriteHeader(http.StatusUnauthorized)
-	}
-}
-
-func AuthUser(w http.ResponseWriter, r *http.Request) {
-	bearer := r.Header["Authorization"]
-	if bearer == nil {
-		w.WriteHeader(http.StatusBadRequest)
-		return
-	}
-
-	tokenStr := strings.Split(bearer[0], " ")[1]
-	token, err := utils.ParseTokenStr(tokenStr)
-	claims := token.Claims.(jwt.MapClaims)
-
-	if err != nil || !token.Valid || claims["role"] != models.RegisteredUser.String() {
-		w.WriteHeader(http.StatusUnauthorized)
-	}
-
-	// Check if banned or deleted
-	var username = fmt.Sprintf("%v", claims["username"])
-	user, err := repository.FindUserByUsername(username)
-	if err != nil {
-		w.WriteHeader(http.StatusUnauthorized)
-	}
-
-	// check user's role
-	if user.Role.String() != claims["role"] {
-		w.WriteHeader(http.StatusUnauthorized)
-	}
 }

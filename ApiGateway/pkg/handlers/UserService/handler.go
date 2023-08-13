@@ -1,6 +1,7 @@
 package UserService
 
 import (
+	"ApiGateway/pkg/handlers"
 	"ApiGateway/pkg/models/UserService"
 	"ApiGateway/pkg/utils"
 	"bytes"
@@ -21,7 +22,7 @@ func Login(w http.ResponseWriter, r *http.Request) {
 	data, _ := ioutil.ReadAll(r.Body)
 	json.NewDecoder(bytes.NewReader(data)).Decode(&loginDTO)
 
-	req, _ := http.NewRequest(http.MethodPost, utils.BaseUserServicePath.Next().Host+"/login", bytes.NewReader(data))
+	req, _ := http.NewRequest(http.MethodPost, utils.BaseUserServicePath.Next().Host+"/auth/login", bytes.NewReader(data))
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("Content-Type", "application/json")
 	client := &http.Client{}
@@ -94,24 +95,13 @@ func AddVehicle(w http.ResponseWriter, r *http.Request) {
 }
 
 func GetVehicles(w http.ResponseWriter, r *http.Request) {
-
-	// auth
-	if err := utils.Authorize(r, "user"); err != nil {
-		w.Header().Set("Content-Type", "application/json")
-		w.WriteHeader(http.StatusUnauthorized)
-		json.NewEncoder(w).Encode(err.Error())
-		return
-	}
-
 	utils.SetupResponse(&w, r)
 	if r.Method == "OPTIONS" {
 		return
 	}
 
-	params := mux.Vars(r)
-	username, _ := params["username"]
-
-	response, err := http.Get(utils.BaseUserServicePath.Next().Host + "/vehicles/" + username)
+	URL := utils.BaseUserServicePath.Next().Host + "/users/vehicles"
+	response, err := handlers.DoRequestWithToken(r, http.MethodGet, URL, nil)
 
 	if err != nil {
 		w.WriteHeader(http.StatusGatewayTimeout)

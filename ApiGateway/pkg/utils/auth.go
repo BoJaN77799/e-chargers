@@ -7,6 +7,9 @@ import (
 	"time"
 )
 
+// SECRET This should be stored as an environment variable
+var SECRET = []byte("my_ultra_secret_key")
+
 func Authorize(req *http.Request, role string) error {
 	bearer := req.Header["Authorization"]
 	if bearer == nil {
