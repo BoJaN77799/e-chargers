@@ -34,9 +34,9 @@ func HandleRequests(port int) {
 	router.HandleFunc(UrlBase+"/users/strike/{username}/{recension_id}", handlers.StrikeUser).Methods("GET")
 
 	// Vehicles endpoints
-	router.HandleFunc(UrlBase+"/users/vehicles", handlers.AddVehicle).Methods("POST")
-	router.HandleFunc(UrlBase+"/users/vehicles", handlers.GetVehicles).Methods("GET")
-	router.HandleFunc(UrlBase+"/users/vehicles/{name}", handlers.DeleteVehicle).Methods("DELETE")
+	router.HandleFunc(UrlBase+"/vehicles", handlers.AddVehicle).Methods("POST")
+	router.HandleFunc(UrlBase+"/vehicles", handlers.GetVehicles).Methods("GET")
+	router.HandleFunc(UrlBase+"/vehicles/{name}", handlers.DeleteVehicle).Methods("DELETE")
 
 	fmt.Println("UserService is running on port: " + strconv.Itoa(port))
 	log.Fatal(http.ListenAndServe(":"+strconv.Itoa(port), router))

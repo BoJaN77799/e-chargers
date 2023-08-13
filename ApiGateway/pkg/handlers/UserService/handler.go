@@ -100,9 +100,8 @@ func GetVehicles(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	URL := utils.BaseUserServicePath.Next().Host + "/users/vehicles"
+	URL := utils.BaseUserServicePath.Next().Host + "/vehicles"
 	response, err := handlers.DoRequestWithToken(r, http.MethodGet, URL, nil)
-
 	if err != nil {
 		w.WriteHeader(http.StatusGatewayTimeout)
 		return
