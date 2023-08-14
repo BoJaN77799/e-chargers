@@ -2,11 +2,11 @@ package db
 
 import (
 	"fmt"
-	"log"
-	"user_service/pkg/models"
-
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
+	uuid "github.com/satori/go.uuid"
+	"log"
+	"user_service/pkg/entities"
 )
 
 type Configuration struct {
@@ -18,20 +18,68 @@ type Configuration struct {
 }
 
 var (
-	users = []models.User{
-		{Email: "admin@example.com", Username: "admin", Password: "$2a$12$QxDPTEbONfGxoUvxIx5oW.ge3anxohFaFU3Nq1AMMbyYei0jOY.9i", Firstname: "Adminko", Lastname: "Adminic", Role: models.Administrator, Strikes: 0, Banned: false},
-		{Email: "boksimus@example.com", Username: "boksi", Password: "$2a$12$QxDPTEbONfGxoUvxIx5oW.ge3anxohFaFU3Nq1AMMbyYei0jOY.9i", Firstname: "Boksi", Lastname: "Mus", Role: models.RegisteredUser, Strikes: 0, Banned: false},
-		{Email: "velja_zajecar@example.com", Username: "velja", Password: "$2a$12$QxDPTEbONfGxoUvxIx5oW.ge3anxohFaFU3Nq1AMMbyYei0jOY.9i", Firstname: "Velja", Lastname: "Tomic", Role: models.RegisteredUser, Strikes: 0, Banned: false},
-		{Email: "mire_kralj@example.com", Username: "mire", Password: "$2a$12$QxDPTEbONfGxoUvxIx5oW.ge3anxohFaFU3Nq1AMMbyYei0jOY.9i", Firstname: "Mire", Lastname: "Kralj", Role: models.RegisteredUser, Strikes: 3, Banned: true, BannedAt: 1661000100000, BannedUntil: 1663678500000},
+	adminUUID, _ = uuid.FromString("bada76ea-7bfc-4d4a-9e96-32755c9eb3f7")
+	boksiUUID, _ = uuid.FromString("602ec829-89de-49b4-b96f-873ff8c819af")
+	baneUUID, _  = uuid.FromString("14e0d726-1b6f-4cdc-a520-b0ae7e812b2a")
+)
+
+var (
+	users = []entities.User{
+		{
+			Id:          adminUUID,
+			Username:    "admin",
+			Email:       "admin@example.com",
+			Role:        entities.Administrator,
+			Firstname:   "Adminko",
+			Lastname:    "Adminic",
+			Password:    "$2a$12$QxDPTEbONfGxoUvxIx5oW.ge3anxohFaFU3Nq1AMMbyYei0jOY.9i",
+			Strikes:     0,
+			Banned:      false,
+			BannedAt:    0,
+			BannedUntil: 0,
+		},
+		{
+			Id:          boksiUUID,
+			Username:    "boksi",
+			Email:       "boksimus@example.com",
+			Role:        entities.RegisteredUser,
+			Firstname:   "Boksi",
+			Lastname:    "Mus",
+			Password:    "$2a$12$QxDPTEbONfGxoUvxIx5oW.ge3anxohFaFU3Nq1AMMbyYei0jOY.9i",
+			Strikes:     0,
+			Banned:      false,
+			BannedAt:    0,
+			BannedUntil: 0,
+		},
+		{
+			Id:          baneUUID,
+			Username:    "bane",
+			Email:       "bane_kralj@example.com",
+			Role:        entities.RegisteredUser,
+			Firstname:   "Bane",
+			Lastname:    "Kralj",
+			Password:    "$2a$12$QxDPTEbONfGxoUvxIx5oW.ge3anxohFaFU3Nq1AMMbyYei0jOY.9i",
+			Strikes:     3,
+			Banned:      true,
+			BannedAt:    1661000100000,
+			BannedUntil: 1663678500000,
+		},
 	}
 )
 
 var (
-	vehicles = []models.Vehicle{
-		{Name: "Skutercic", VehicleType: models.SCOOTER, UserID: 2},
-		{Name: "Tesla Model 2", VehicleType: models.CAR, UserID: 2},
-		{Name: "Tesla Model 3", VehicleType: models.CAR, UserID: 3},
-		{Name: "Tesla Model 4", VehicleType: models.CAR, UserID: 4},
+	vehicle1UUID, _ = uuid.FromString("20d1789f-218b-4b6a-9731-7a599aa7b53c")
+	vehicle2UUID, _ = uuid.FromString("c1d6eaed-33ef-4b0c-bd2e-3dfc14f88d29")
+	vehicle3UUID, _ = uuid.FromString("5d16ce02-9a6a-4602-aa6a-25e16016112e")
+	vehicle4UUID, _ = uuid.FromString("e1bb84c6-570c-4cf7-9df5-bb5bb0d13e78")
+)
+
+var (
+	vehicles = []entities.Vehicle{
+		{Id: vehicle1UUID, Name: "Skutercic", VehicleType: entities.SCOOTER, UserID: boksiUUID},
+		{Id: vehicle2UUID, Name: "Tesla Model 2", VehicleType: entities.CAR, UserID: boksiUUID},
+		{Id: vehicle3UUID, Name: "Tesla Model 3", VehicleType: entities.CAR, UserID: boksiUUID},
+		{Id: vehicle4UUID, Name: "Tesla Model 4", VehicleType: entities.CAR, UserID: baneUUID},
 	}
 )
 
@@ -49,9 +97,8 @@ func Init() {
 		conf.Password,
 		conf.Port,
 	)
-	dialect := "postgres"
 
-	Db, err = gorm.Open(dialect, connection)
+	Db, err = gorm.Open("postgres", connection)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -81,7 +128,7 @@ func DropTables() {
 }
 
 func AutoMigrateTables() {
-	Db.AutoMigrate(&models.User{}, &models.Vehicle{})
+	Db.AutoMigrate(&entities.User{}, &entities.Vehicle{})
 }
 
 func InitializeData() {

@@ -1,4 +1,6 @@
-package models
+package entities
+
+import uuid "github.com/satori/go.uuid"
 
 type LoginDTO struct {
 	Username string `json:"username"`
@@ -10,16 +12,16 @@ type UserTokenState struct {
 	ExpiredAt string `json:"expiredAt"`
 }
 
-type VehicleDTO struct {
-	Id          uint   `json:"id"`
-	Name        string `json:"name"`
-	VehicleType string `json:"vehicle_type"`
-	Username    string `json:"username"`
+type VehicleDto struct {
+	Id          uuid.UUID `json:"id"`
+	Name        string    `json:"name"`
+	VehicleType string    `json:"vehicle_type"`
+	Username    string    `json:"username"`
 }
 
 type UserReservationDTO struct {
 	Username string `json:"username" gorm:"unique;not-null"`
-	Vehicles []VehicleDTO
+	Vehicles []VehicleDto
 }
 
 type UserProfileDTO struct {
@@ -27,7 +29,7 @@ type UserProfileDTO struct {
 	Email       string `json:"email"`
 	Firstname   string `json:"firstname"`
 	Lastname    string `json:"lastname"`
-	Vehicles    []VehicleDTO
+	Vehicles    []VehicleDto
 	Strikes     uint   `json:"strikes"`
 	Banned      bool   `json:"banned"`
 	BannedAt    uint64 `json:"banned_at"`

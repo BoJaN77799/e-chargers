@@ -3,6 +3,7 @@ package utils
 import (
 	"fmt"
 	"github.com/dgrijalva/jwt-go"
+	uuid "github.com/satori/go.uuid"
 	"net/http"
 	"strings"
 )
@@ -33,4 +34,14 @@ func parseTokenAndGet(r *http.Request, key string) (string, error) {
 
 func GetUsernameFromToken(r *http.Request) (string, error) {
 	return parseTokenAndGet(r, "username")
+}
+
+func GetUserIDFromToken(r *http.Request) (uuid.UUID, error) {
+	id, err := parseTokenAndGet(r, "id")
+	if err != nil {
+		return uuid.UUID{}, err
+	}
+
+	userId, _ := uuid.FromString(id)
+	return userId, nil
 }

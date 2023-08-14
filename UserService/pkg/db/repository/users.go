@@ -3,20 +3,22 @@ package repository
 import (
 	"errors"
 	"fmt"
+	uuid "github.com/satori/go.uuid"
 	"time"
 	"user_service/pkg/db"
-	"user_service/pkg/models"
+	"user_service/pkg/entities"
 	"user_service/pkg/utils"
 )
 
-func CreateUser(user models.User) (models.User, error) {
+func CreateUser(user entities.User) (entities.User, error) {
 
 	err := utils.CheckUsersInfo(user)
 	if err != nil {
 		return user, err
 	}
 
-	user.Role = models.RegisteredUser
+	user.Id = uuid.NewV4()
+	user.Role = entities.RegisteredUser
 	user.Password, _ = utils.HashPassword(user.Password)
 	if result := db.Db.Create(&user); result.Error != nil {
 		return user, result.Error
@@ -25,13 +27,12 @@ func CreateUser(user models.User) (models.User, error) {
 	return user, nil
 }
 
-func FindUserByUsernameAndPassword(username string, password string) (models.User, error) {
-	var user models.User
+func FindUserByUsernameAndPassword(username string, password string) (entities.User, error) {
+	var user entities.User
 
-	db.Db.Table("users").Where("username = ?", username).First(&user)
-
-	if user.ID == 0 {
-		return user, errors.New("invalid username")
+	err := db.Db.Table("users").Where("username = ?", username).First(&user).Error
+	if err != nil {
+		return user, err
 	}
 
 	if !utils.CheckPasswordHash(password, user.Password) {
@@ -39,36 +40,34 @@ func FindUserByUsernameAndPassword(username string, password string) (models.Use
 	}
 
 	if user.Banned {
-		return user, errors.New("user with give credentials is banned")
+		return user, errors.New("user with given credentials is banned")
 	}
 
 	return user, nil
 }
 
-func FindUserByUsername(username string) (models.User, error) {
-	var user models.User
+func FindUserByUsername(username string) (entities.User, error) {
+	var user entities.User
 
-	db.Db.Table("users").Where("username = ?", username).First(&user)
-	if user.ID == 0 {
+	err := db.Db.Table("users").Where("username = ?", username).First(&user).Error
+	if err != nil {
 		return user, fmt.Errorf("there is no user by search condition username='%s'", username)
 	}
 
 	return user, nil
 }
 
-func CheckUserOwnership(username string, vehicleId uint) (models.User, error) {
-	var user models.User
+func CheckUserOwnership(username string, vehicleId uuid.UUID) (entities.User, error) {
+	var user entities.User
 
-	db.Db.Table("users").Where("username = ?", username).First(&user)
-
-	if user.ID == 0 {
+	err := db.Db.Table("users").Where("username = ?", username).First(&user).Error
+	if err != nil {
 		return user, errors.New("invalid username")
 	}
 
-	var vehicle models.Vehicle
-	db.Db.Table("vehicles").Where("user_id = ? AND id = ?", user.ID, vehicleId).Find(&vehicle)
-
-	if vehicle.ID == 0 {
+	var vehicle entities.Vehicle
+	err = db.Db.Table("vehicles").Where("user_id = ? AND id = ?", user.Id, vehicleId).Find(&vehicle).Error
+	if err != nil {
 		return user, errors.New("user with given username isn't owner of given vehicle")
 	}
 
@@ -77,71 +76,57 @@ func CheckUserOwnership(username string, vehicleId uint) (models.User, error) {
 	return user, nil
 }
 
-func CreateVehicle(vehicleDTO models.VehicleDTO) (models.Vehicle, error) {
-
-	var err error
-
-	var user models.User
-	user, err = FindUserByUsername(vehicleDTO.Username)
-
-	var vehicle models.Vehicle
-	vehicle.Name = vehicleDTO.Name
-	vehicle.VehicleType = models.ParseString(vehicleDTO.VehicleType)
-	vehicle.UserID = user.ID
-
-	if err != nil {
-		return vehicle, errors.New("user with given username doesn't exist")
+func CreateVehicle(vehicleDTO entities.VehicleDto, userId uuid.UUID) (*entities.Vehicle, error) {
+	vehicle := entities.Vehicle{
+		Id:          uuid.NewV4(),
+		Name:        vehicleDTO.Name,
+		VehicleType: entities.StrToVehicleType(vehicleDTO.VehicleType),
+		UserID:      userId,
 	}
 
-	err = utils.CheckVehicleInfo(vehicle)
-	if err != nil {
-		return vehicle, err
+	if err := utils.CheckVehicleInfo(vehicle); err != nil {
+		return nil, err
 	}
 
 	if result := db.Db.Create(&vehicle); result.Error != nil {
-		return vehicle, result.Error
+		return nil, result.Error
 	}
 
-	return vehicle, nil
+	return &vehicle, nil
 }
 
-func GetAllVehicles(userId uint) []models.Vehicle {
-	var vehicles []models.Vehicle
+func GetAllVehicles(userId uuid.UUID) []entities.Vehicle {
+	var vehicles []entities.Vehicle
 
 	db.Db.Table("vehicles").Where("user_id = ?", userId).Find(&vehicles)
 
 	return vehicles
 }
 
-func GetAllUsers() []models.User {
-	var users []models.User
-
+func GetAllUsers() []entities.User {
+	var users []entities.User
 	db.Db.Table("users").Where("role = 2").Find(&users)
-
 	return users
 }
 
 func DeleteVehicle(name string) error {
 
-	var vehicle models.Vehicle
+	var vehicle entities.Vehicle
 
-	db.Db.Table("vehicles").Where("name = ?", name).Find(&vehicle)
-
-	if vehicle.ID <= 0 {
+	err := db.Db.Table("vehicles").Where("name = ?", name).Find(&vehicle).Error
+	if err != nil {
 		return errors.New("vehicle with given name doesn't exist")
 	}
 
-	db.Db.Delete(&vehicle)
-
-	return nil
+	return db.Db.Delete(&vehicle).Error
 }
 
 func StrikeUser(username string) (string, error) {
-	var user models.User
+	var user entities.User
 
-	db.Db.Table("users").Where("username = ?", username).First(&user)
+	err := db.Db.Table("users").Where("username = ?", username).First(&user).Error
 
-	if user.ID == 0 {
+	if err != nil {
 		return "", errors.New("invalid username")
 	}
 	if user.Strikes == 3 {

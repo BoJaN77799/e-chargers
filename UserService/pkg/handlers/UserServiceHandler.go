@@ -4,13 +4,13 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/gorilla/mux"
+	uuid "github.com/satori/go.uuid"
 	"io/ioutil"
-	"log"
 	"net/http"
 	"strconv"
 	"strings"
 	"user_service/pkg/db/repository"
-	"user_service/pkg/models"
+	"user_service/pkg/entities"
 	"user_service/pkg/utils"
 )
 
@@ -27,7 +27,7 @@ func HelloWorld(w http.ResponseWriter, r *http.Request) {
 
 func FindAllUsers(w http.ResponseWriter, r *http.Request) {
 
-	var usersDTO []models.UserReportDTO
+	var usersDTO []entities.UserReportDTO
 
 	users := repository.GetAllUsers()
 
@@ -43,17 +43,22 @@ func AddVehicle(w http.ResponseWriter, r *http.Request) {
 
 	defer r.Body.Close()
 	body, err := ioutil.ReadAll(r.Body)
-
 	if err != nil {
-		log.Fatalln(err)
+		utils.BadRequestResponse(w, "vehicle body is missing")
+		return
 	}
 
-	var vehicleDTO models.VehicleDTO
+	var vehicleDTO entities.VehicleDto
 	json.Unmarshal(body, &vehicleDTO)
 
-	_, err = repository.CreateVehicle(vehicleDTO)
+	userId, err := utils.GetUserIDFromToken(r)
 	if err != nil {
-		fmt.Println(err.Error())
+		utils.BadRequestResponse(w, err.Error())
+		return
+	}
+
+	_, err = repository.CreateVehicle(vehicleDTO, userId)
+	if err != nil {
 		if strings.Contains(err.Error(), "name") {
 			utils.BadRequestResponse(w, "vehicle with given name already exists")
 		}
@@ -64,7 +69,7 @@ func AddVehicle(w http.ResponseWriter, r *http.Request) {
 }
 
 func GetVehicles(w http.ResponseWriter, r *http.Request) {
-	var vehiclesDTO []models.VehicleDTO
+	var vehiclesDTO []entities.VehicleDto
 
 	username, err := utils.GetUsernameFromToken(r)
 	if err != nil {
@@ -79,7 +84,7 @@ func GetVehicles(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	vehicles := repository.GetAllVehicles(user.ID)
+	vehicles := repository.GetAllVehicles(user.Id)
 	for _, vehicle := range vehicles {
 		vehiclesDTO = append(vehiclesDTO, vehicle.ToDTO())
 	}
@@ -111,14 +116,13 @@ func CheckIfUserExistWithVehicle(w http.ResponseWriter, r *http.Request) {
 	username, _ := params["username"]
 	vehicleId, _ := params["vehicleId"]
 
-	vehicleIdUint, err := strconv.ParseUint(vehicleId, 10, 32)
-
+	id, err := uuid.FromString(vehicleId)
 	if err != nil {
-		utils.BadRequestResponse(w, "vehicleId isn't proper uint")
-		return
+		utils.BadRequestResponse(w, "vehicleId isn't proper uuid")
 	}
-	var user models.User
-	user, err = repository.CheckUserOwnership(username, uint(vehicleIdUint))
+
+	var user entities.User
+	user, err = repository.CheckUserOwnership(username, id)
 
 	if err != nil {
 		utils.BadRequestResponse(w, err.Error())

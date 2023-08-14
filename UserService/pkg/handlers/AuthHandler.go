@@ -10,7 +10,7 @@ import (
 	"strings"
 	"time"
 	"user_service/pkg/db/repository"
-	"user_service/pkg/models"
+	"user_service/pkg/entities"
 	"user_service/pkg/utils"
 )
 
@@ -29,7 +29,7 @@ func Auth(w http.ResponseWriter, r *http.Request) {
 
 func Login(w http.ResponseWriter, r *http.Request) {
 
-	var loginDTO models.LoginDTO
+	var loginDTO entities.LoginDTO
 	json.NewDecoder(r.Body).Decode(&loginDTO)
 
 	user, err := repository.FindUserByUsernameAndPassword(loginDTO.Username, loginDTO.Password)
@@ -46,7 +46,7 @@ func Login(w http.ResponseWriter, r *http.Request) {
 	}
 
 	expirationTime := time.Now().Add(time.Hour * 24)
-	claims := models.Claims{Email: user.Email, Username: user.Username, Role: user.Role.String(), Id: user.ID, StandardClaims: jwt.StandardClaims{ExpiresAt: expirationTime.Unix()}}
+	claims := entities.Claims{Email: user.Email, Username: user.Username, Role: user.Role.String(), Id: user.Id, StandardClaims: jwt.StandardClaims{ExpiresAt: expirationTime.Unix()}}
 
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, &claims)
 	tokenString, _ := token.SignedString(utils.SECRET)
@@ -58,7 +58,7 @@ func Login(w http.ResponseWriter, r *http.Request) {
 	})
 
 	utils.OKResponse(w)
-	json.NewEncoder(w).Encode(models.UserTokenState{Token: tokenString, ExpiredAt: expirationTime.String()})
+	json.NewEncoder(w).Encode(entities.UserTokenState{Token: tokenString, ExpiredAt: expirationTime.String()})
 }
 
 func Registration(w http.ResponseWriter, r *http.Request) {
@@ -70,20 +70,15 @@ func Registration(w http.ResponseWriter, r *http.Request) {
 		log.Fatalln(err)
 	}
 
-	var user models.User
+	var user entities.User
 	json.Unmarshal(body, &user)
 
 	_, err = repository.CreateUser(user)
 	if err != nil {
-		if strings.Contains(err.Error(), "username") {
-			utils.BadRequestResponse(w, "user with given username already exists")
-		}
-		if strings.Contains(err.Error(), "email") {
-			utils.BadRequestResponse(w, "user with given email already exists")
-		}
+		utils.BadRequestResponse(w, "user registration process failed")
 		return
 	}
 
 	utils.CreatedResponse(w)
-	json.NewEncoder(w).Encode("user successfully created")
+	json.NewEncoder(w).Encode("user registration process successfully finished")
 }

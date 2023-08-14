@@ -7,3 +7,5 @@ require (
 	github.com/gorilla/mux v1.8.0
 	github.com/hlts2/round-robin v0.0.0-20211119053418-5ea74e1f7bfc
 )
+
+require github.com/satori/go.uuid v1.2.0 // indirect

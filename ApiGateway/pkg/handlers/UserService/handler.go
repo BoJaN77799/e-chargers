@@ -2,40 +2,20 @@ package UserService
 
 import (
 	"ApiGateway/pkg/handlers"
-	"ApiGateway/pkg/models/UserService"
 	"ApiGateway/pkg/utils"
-	"bytes"
 	"encoding/json"
 	"github.com/gorilla/mux"
-	"io/ioutil"
 	"net/http"
 )
 
 func AddVehicle(w http.ResponseWriter, r *http.Request) {
-
-	// auth
-	if err := utils.Authorize(r, "user"); err != nil {
-		w.Header().Set("Content-Type", "application/json")
-		w.WriteHeader(http.StatusUnauthorized)
-		json.NewEncoder(w).Encode(err.Error())
-		return
-	}
-
 	utils.SetupResponse(&w, r)
 	if r.Method == "OPTIONS" {
 		return
 	}
 
-	var vehicleDTO UserService.VehicleDTO
-	data, _ := ioutil.ReadAll(r.Body)
-	json.NewDecoder(bytes.NewReader(data)).Decode(&vehicleDTO)
-
-	req, _ := http.NewRequest(http.MethodPost, utils.BaseUserServicePath.Next().Host+"/vehicles", bytes.NewReader(data))
-	req.Header.Set("Accept", "application/json")
-	req.Header.Set("Content-Type", "application/json")
-	client := &http.Client{}
-	response, err := client.Do(req)
-
+	URL := utils.BaseUserServicePath.Next().Host + "/vehicles"
+	response, err := handlers.DoRequestWithToken(r, http.MethodPost, URL, r.Body)
 	if err != nil {
 		w.WriteHeader(http.StatusGatewayTimeout)
 		return

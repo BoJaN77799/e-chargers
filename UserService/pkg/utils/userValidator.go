@@ -3,13 +3,13 @@ package utils
 import (
 	"errors"
 	"regexp"
-	"user_service/pkg/models"
+	"user_service/pkg/entities"
 )
 
 const EmailRegex = "^[a-zA-Z\\d_+&*-]+(?:\\.[a-zA-Z\\d_+&*-]+)*@(?:[a-zA-Z\\d-]+\\.)+[a-zA-Z]{2,7}$"
 const PassRegex = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[$@$!%*#?&])[A-Za-z\\d$@$!%*#?&]{8,}$"
 
-func CheckUsersInfo(user models.User) error {
+func CheckUsersInfo(user entities.User) error {
 
 	if !checkRegexPattern(EmailRegex, user.Email) {
 		return errors.New("email not matching pattern user@example.com")
@@ -39,7 +39,7 @@ func checkRegexPattern(regex string, value string) bool {
 	return result
 }
 
-func CheckVehicleInfo(vehicle models.Vehicle) error {
+func CheckVehicleInfo(vehicle entities.Vehicle) error {
 
 	if len(vehicle.Name) == 0 {
 		return errors.New("name is empty")
