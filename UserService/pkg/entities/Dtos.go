@@ -37,13 +37,14 @@ type UserProfileDTO struct {
 }
 
 type UserReportDTO struct {
-	Username    string `json:"username" `
-	Email       string `json:"email"  `
-	Firstname   string `json:"firstname"`
-	Lastname    string `json:"lastname"`
-	Role        string `json:"user_role"`
-	Strikes     uint   `json:"strikes"`
-	Banned      bool   `json:"banned"`
-	BannedAt    uint64 `json:"banned_at"`
-	BannedUntil uint64 `json:"banned_until"`
+	Id          uuid.UUID `json:"id" `
+	Username    string    `json:"username" `
+	Email       string    `json:"email"  `
+	Role        string    `json:"user_role"`
+	Firstname   string    `json:"firstname"`
+	Lastname    string    `json:"lastname"`
+	Strikes     uint      `json:"strikes"`
+	Banned      bool      `json:"banned"`
+	BannedAt    uint64    `json:"banned_at"`
+	BannedUntil uint64    `json:"banned_until"`
 }

@@ -1,6 +1,7 @@
 package UserService
 
 import (
+	"ApiGateway/pkg/handlers"
 	"ApiGateway/pkg/utils"
 	"encoding/json"
 	"github.com/gorilla/mux"
@@ -65,22 +66,13 @@ func StrikeUser(w http.ResponseWriter, r *http.Request) {
 }
 
 func FindAllUsers(w http.ResponseWriter, r *http.Request) {
-
-	//// auth
-	//if err := utils.Authorize(r, "user"); err != nil {
-	//	w.Header().Set("Content-Type", "application/json")
-	//	w.WriteHeader(http.StatusUnauthorized)
-	//	json.NewEncoder(w).Encode(err.Error())
-	//	return
-	//}
-
 	utils.SetupResponse(&w, r)
 	if r.Method == "OPTIONS" {
 		return
 	}
 
-	response, err := http.Get(utils.BaseUserServicePath.Next().Host)
-
+	URL := utils.BaseUserServicePath.Next().Host + "/users"
+	response, err := handlers.DoRequestWithToken(r, http.MethodGet, URL, nil)
 	if err != nil {
 		w.WriteHeader(http.StatusGatewayTimeout)
 		return

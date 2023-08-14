@@ -19,6 +19,7 @@ func (user *User) ToUserProfileDTO() UserProfileDTO {
 
 func (user *User) ToReportDTO() UserReportDTO {
 	return UserReportDTO{
+		Id:          user.Id,
 		Username:    user.Username,
 		Email:       user.Email,
 		Firstname:   user.Firstname,

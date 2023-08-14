@@ -24,11 +24,8 @@ func HelloWorld(w http.ResponseWriter, r *http.Request) {
 }
 
 func FindAllUsers(w http.ResponseWriter, r *http.Request) {
-
 	var usersDTO []entities.UserReportDTO
-
-	users := repository.GetAllUsers()
-
+	users := repository.GetAllRegisteredUsers()
 	for _, user := range users {
 		usersDTO = append(usersDTO, user.ToReportDTO())
 	}

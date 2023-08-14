@@ -66,7 +66,11 @@ func HandleRequests(port int) {
 
 	router.Use(authenticationMiddleware)
 
-	// Protected route
+	//// Protected routes
+	// Administrator
+	router.HandleFunc("/api/users", authorizationMiddleware(UserService.FindAllUsers, []string{Administrator})).Methods("GET")
+
+	// Registered User
 	router.HandleFunc("/api/users/vehicles", authorizationMiddleware(UserService.GetVehicles, []string{RegisteredUser})).Methods("GET")
 	router.HandleFunc("/api/users/vehicles", authorizationMiddleware(UserService.AddVehicle, []string{RegisteredUser})).Methods("POST")
 	router.HandleFunc("/api/users/vehicles/{id}", authorizationMiddleware(UserService.DeleteVehicle, []string{RegisteredUser})).Methods("DELETE")

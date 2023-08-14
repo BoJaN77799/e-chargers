@@ -30,7 +30,7 @@ type User struct {
 	Id          uuid.UUID `json:"id" gorm:"primary_key;type:uuid"`
 	Username    string    `json:"username" gorm:"unique;not-null"`
 	Email       string    `json:"email"  gorm:"unique;not-null"`
-	Role        UserRole  `json:"userRole" gorm:"not null"`
+	Role        UserRole  `json:"user_role" gorm:"not null"`
 	Firstname   string    `json:"firstname" gorm:"not null"`
 	Lastname    string    `json:"lastname" gorm:"not null"`
 	Password    string    `json:"password" gorm:"not null"`

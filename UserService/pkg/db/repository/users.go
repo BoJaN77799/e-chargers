@@ -103,9 +103,9 @@ func GetAllVehicles(userId uuid.UUID) []entities.Vehicle {
 	return vehicles
 }
 
-func GetAllUsers() []entities.User {
+func GetAllRegisteredUsers() []entities.User {
 	var users []entities.User
-	db.Db.Table("users").Where("role = 2").Find(&users)
+	db.Db.Table("users").Where("role = ?", entities.RegisteredUser).Find(&users)
 	return users
 }
 
