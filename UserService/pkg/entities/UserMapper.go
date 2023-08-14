@@ -2,13 +2,12 @@ package entities
 
 func (user *User) ToDTO() UserReservationDTO {
 	return UserReservationDTO{
-		Username: user.Username,
 		Vehicles: vehiclesToDto(user.Vehicles),
 	}
 }
 func (user *User) ToUserProfileDTO() UserProfileDTO {
 	return UserProfileDTO{
-		Username:  user.Username,
+		Id:        user.Id,
 		Email:     user.Email,
 		Firstname: user.Firstname,
 		Lastname:  user.Lastname,
@@ -20,7 +19,6 @@ func (user *User) ToUserProfileDTO() UserProfileDTO {
 func (user *User) ToReportDTO() UserReportDTO {
 	return UserReportDTO{
 		Id:          user.Id,
-		Username:    user.Username,
 		Email:       user.Email,
 		Firstname:   user.Firstname,
 		Lastname:    user.Lastname,
@@ -46,8 +44,6 @@ func vehiclesToDto(vehicles []Vehicle) []VehicleDto {
 	}
 	return vehiclesDTO
 }
-
-// FromDto
 
 func (vehicle *VehicleDto) FromDto() Vehicle {
 	return Vehicle{

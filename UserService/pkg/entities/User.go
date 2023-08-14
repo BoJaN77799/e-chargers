@@ -28,7 +28,6 @@ func (e UserRole) String() string {
 
 type User struct {
 	Id          uuid.UUID `json:"id" gorm:"primary_key;type:uuid"`
-	Username    string    `json:"username" gorm:"unique;not-null"`
 	Email       string    `json:"email"  gorm:"unique;not-null"`
 	Role        UserRole  `json:"user_role" gorm:"not null"`
 	Firstname   string    `json:"firstname" gorm:"not null"`
@@ -43,10 +42,9 @@ type User struct {
 }
 
 type Claims struct {
-	Email    string    `json:"email"`
-	Role     string    `json:"role"`
-	Username string    `json:"username"`
-	Id       uuid.UUID `json:"id"`
+	Email string    `json:"email"`
+	Role  string    `json:"role"`
+	Id    uuid.UUID `json:"id"`
 	jwt.StandardClaims
 }
 

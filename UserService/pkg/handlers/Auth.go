@@ -15,12 +15,12 @@ import (
 )
 
 func Auth(w http.ResponseWriter, r *http.Request) {
-	username, err := utils.GetUsernameFromToken(r)
+	id, err := utils.GetUserIDFromToken(r)
 	if err != nil {
 		utils.UnauthorizedResponse(w)
 		return
 	}
-	_, err = repository.FindUserByUsername(username)
+	_, err = repository.FindUserById(id)
 	if err != nil {
 		utils.UnauthorizedResponse(w)
 		return
@@ -28,11 +28,10 @@ func Auth(w http.ResponseWriter, r *http.Request) {
 }
 
 func Login(w http.ResponseWriter, r *http.Request) {
-
 	var loginDTO entities.LoginDTO
 	json.NewDecoder(r.Body).Decode(&loginDTO)
 
-	user, err := repository.FindUserByUsernameAndPassword(loginDTO.Username, loginDTO.Password)
+	user, err := repository.FindUserByEmailAndPassword(loginDTO.Email, loginDTO.Password)
 
 	if err != nil {
 		if strings.Contains(err.Error(), "banned") {
@@ -46,7 +45,7 @@ func Login(w http.ResponseWriter, r *http.Request) {
 	}
 
 	expirationTime := time.Now().Add(time.Hour * 24)
-	claims := entities.Claims{Email: user.Email, Username: user.Username, Role: user.Role.String(), Id: user.Id, StandardClaims: jwt.StandardClaims{ExpiresAt: expirationTime.Unix()}}
+	claims := entities.Claims{Email: user.Email, Role: user.Role.String(), Id: user.Id, StandardClaims: jwt.StandardClaims{ExpiresAt: expirationTime.Unix()}}
 
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, &claims)
 	tokenString, _ := token.SignedString(utils.SECRET)

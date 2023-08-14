@@ -7,16 +7,24 @@ import (
 	"net/http"
 )
 
-func GetIdFromPathParams(r *http.Request) (uuid.UUID, error) {
+func getFromPathParams(r *http.Request, param string) (uuid.UUID, error) {
 	params := mux.Vars(r)
-	paramId, exists := params["id"]
+	paramId, exists := params[param]
 	if !exists {
-		return uuid.UUID{}, fmt.Errorf("id is missing from path params")
+		return uuid.UUID{}, fmt.Errorf("%s is missing from path params", param)
 	}
 
 	id, err := uuid.FromString(paramId)
 	if err != nil {
-		return uuid.UUID{}, fmt.Errorf("invalid id (uuid) in path params")
+		return uuid.UUID{}, fmt.Errorf("invalid %s (uuid) in path params", param)
 	}
 	return id, nil
+}
+
+func GetIdFromPathParams(r *http.Request) (uuid.UUID, error) {
+	return getFromPathParams(r, "id")
+}
+
+func GetVehicleIdFromPathParams(r *http.Request) (uuid.UUID, error) {
+	return getFromPathParams(r, "vehicleId")
 }

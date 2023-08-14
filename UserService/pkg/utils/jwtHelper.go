@@ -32,10 +32,6 @@ func parseTokenAndGet(r *http.Request, key string) (string, error) {
 	return claims[key].(string), nil
 }
 
-func GetUsernameFromToken(r *http.Request) (string, error) {
-	return parseTokenAndGet(r, "username")
-}
-
 func GetUserIDFromToken(r *http.Request) (uuid.UUID, error) {
 	id, err := parseTokenAndGet(r, "id")
 	if err != nil {

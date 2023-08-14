@@ -9,24 +9,24 @@ import (
 )
 
 func GetUserInfo(w http.ResponseWriter, r *http.Request) {
-
-	// auth
-	if err := utils.Authorize(r, "user"); err != nil {
-		w.Header().Set("Content-Type", "application/json")
-		w.WriteHeader(http.StatusUnauthorized)
-		json.NewEncoder(w).Encode(err.Error())
-		return
-	}
-
 	utils.SetupResponse(&w, r)
 	if r.Method == "OPTIONS" {
 		return
 	}
 
 	params := mux.Vars(r)
-	username, _ := params["username"]
+	id, exists := params["id"]
+	if !exists {
+		http.Error(w, "Bad Request", http.StatusBadRequest)
+		return
+	}
 
-	response, err := http.Get(utils.BaseUserServicePath.Next().Host + "/" + username)
+	URL := utils.BaseUserServicePath.Next().Host + "/users/" + id
+	response, err := handlers.DoRequestWithToken(r, http.MethodGet, URL, nil)
+	if err != nil {
+		w.WriteHeader(http.StatusGatewayTimeout)
+		return
+	}
 
 	if err != nil {
 		w.WriteHeader(http.StatusGatewayTimeout)

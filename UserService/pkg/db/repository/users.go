@@ -10,6 +10,8 @@ import (
 	"user_service/pkg/utils"
 )
 
+const MaxStrikes = 3
+
 func CreateUser(user entities.User) (entities.User, error) {
 
 	err := utils.CheckUsersInfo(user)
@@ -27,16 +29,14 @@ func CreateUser(user entities.User) (entities.User, error) {
 	return user, nil
 }
 
-func FindUserByUsernameAndPassword(username string, password string) (entities.User, error) {
-	var user entities.User
-
-	err := db.Db.Table("users").Where("username = ?", username).First(&user).Error
+func FindUserByEmailAndPassword(email string, password string) (entities.User, error) {
+	user, err := FindUserByEmail(email)
 	if err != nil {
 		return user, err
 	}
 
 	if !utils.CheckPasswordHash(password, user.Password) {
-		return user, errors.New(fmt.Sprintf("wrong password for username '%s'", user.Username))
+		return user, errors.New(fmt.Sprintf("wrong password for email '%s'", user.Email))
 	}
 
 	if user.Banned {
@@ -46,61 +46,42 @@ func FindUserByUsernameAndPassword(username string, password string) (entities.U
 	return user, nil
 }
 
-func FindUserByUsername(username string) (entities.User, error) {
+func FindUserByEmail(email string) (entities.User, error) {
 	var user entities.User
 
-	err := db.Db.Table("users").Where("username = ?", username).First(&user).Error
+	err := db.Db.Table("users").Where("email = ?", email).First(&user).Error
 	if err != nil {
-		return user, fmt.Errorf("there is no user by search condition username='%s'", username)
+		return user, fmt.Errorf("there is no user by search condition email='%s'", email)
 	}
 
 	return user, nil
 }
 
-func CheckUserOwnership(username string, vehicleId uuid.UUID) (entities.User, error) {
+func FindUserById(id uuid.UUID) (entities.User, error) {
 	var user entities.User
 
-	err := db.Db.Table("users").Where("username = ?", username).First(&user).Error
+	err := db.Db.Table("users").Where("id = ?", id).First(&user).Error
 	if err != nil {
-		return user, errors.New("invalid username")
+		return user, fmt.Errorf("there is no user by search condition id='%s'", id)
 	}
 
-	var vehicle entities.Vehicle
-	err = db.Db.Table("vehicles").Where("user_id = ? AND id = ?", user.Id, vehicleId).Find(&vehicle).Error
+	return user, nil
+}
+
+func CheckUserOwnership(id uuid.UUID, vehicleId uuid.UUID) (entities.User, error) {
+	user, err := FindUserById(id)
 	if err != nil {
-		return user, errors.New("user with given username isn't owner of given vehicle")
+		return user, err
+	}
+
+	vehicle, err := GetVehicleByIdAndUserId(id, vehicleId)
+	if err != nil {
+		return user, err
 	}
 
 	user.Vehicles = append(user.Vehicles, vehicle)
 
 	return user, nil
-}
-
-func CreateVehicle(vehicleDTO entities.VehicleDto, userId uuid.UUID) (*entities.Vehicle, error) {
-	vehicle := entities.Vehicle{
-		Id:          uuid.NewV4(),
-		Name:        vehicleDTO.Name,
-		VehicleType: entities.StrToVehicleType(vehicleDTO.VehicleType),
-		UserID:      userId,
-	}
-
-	if err := utils.CheckVehicleInfo(vehicle); err != nil {
-		return nil, err
-	}
-
-	if result := db.Db.Create(&vehicle); result.Error != nil {
-		return nil, result.Error
-	}
-
-	return &vehicle, nil
-}
-
-func GetAllVehicles(userId uuid.UUID) []entities.Vehicle {
-	var vehicles []entities.Vehicle
-
-	db.Db.Table("vehicles").Where("user_id = ?", userId).Find(&vehicles)
-
-	return vehicles
 }
 
 func GetAllRegisteredUsers() []entities.User {
@@ -109,44 +90,43 @@ func GetAllRegisteredUsers() []entities.User {
 	return users
 }
 
-func DeleteVehicle(id uuid.UUID) error {
-
-	var vehicle entities.Vehicle
-
-	err := db.Db.Table("vehicles").Where("id = ?", id).Find(&vehicle).Error
+func StrikeUser(id uuid.UUID) (string, error) {
+	user, err := FindUserById(id)
 	if err != nil {
-		return errors.New("vehicle doesn't exist")
+		return "", err
 	}
 
-	return db.Db.Delete(&vehicle).Error
+	if user.Strikes == MaxStrikes {
+		return "", fmt.Errorf("this user is already banned by %d committed strikes", MaxStrikes)
+	}
+
+	if user.Strikes+1 == MaxStrikes {
+		return banUser(user)
+	} else {
+		incrementStrikes(user)
+		return getStrikeMessage(user), nil
+	}
 }
 
-func StrikeUser(username string) (string, error) {
-	var user entities.User
+func banUser(user entities.User) (string, error) {
+	user.Strikes++
+	user.Banned = true
+	user.BannedAt = uint64(time.Now().UnixMilli())
+	user.BannedUntil = uint64(time.Now().AddDate(0, 1, 0).UnixMilli())
+	db.Db.Save(&user)
+	return fmt.Sprintf("user is banned during %d strikes", MaxStrikes), nil
+}
 
-	err := db.Db.Table("users").Where("username = ?", username).First(&user).Error
+func incrementStrikes(user entities.User) {
+	user.Strikes++
+	db.Db.Save(&user)
+}
 
-	if err != nil {
-		return "", errors.New("invalid username")
-	}
-	if user.Strikes == 3 {
-		return "", errors.New("this user is already banned by 3 committed strikes")
-	}
-
-	if user.Strikes+1 == 3 {
-		user.Strikes += 1
-		user.Banned = true
-		user.BannedAt = uint64(time.Now().UnixMilli())
-		user.BannedUntil = uint64(time.Now().AddDate(0, 1, 0).UnixMilli())
-		db.Db.Save(user)
-		return "user is banned during 3 strikes", nil
-	} else {
-		user.Strikes += 1
-		db.Db.Save(user)
-		if user.Strikes == 1 {
-			return fmt.Sprintf("user %s has now 1 strike", user.Username), nil
-		} else {
-			return fmt.Sprintf("user %s has now %d strikes", user.Username, user.Strikes), nil
-		}
+func getStrikeMessage(user entities.User) string {
+	switch user.Strikes {
+	case 1:
+		return fmt.Sprintf("user id='%s' has now 1 strike", user.Id)
+	default:
+		return fmt.Sprintf("user id='%s' has now %d strikes", user.Id, user.Strikes)
 	}
 }

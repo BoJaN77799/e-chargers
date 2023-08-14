@@ -17,7 +17,6 @@ func HandleRequests(port int) {
 	db.Init()
 
 	router := mux.NewRouter()
-	router.HandleFunc(UrlBase+"/users/hello", handlers.HelloWorld).Methods("GET")
 
 	// Auth endpoint
 	router.HandleFunc(UrlBase+"/auth", handlers.Auth).Methods("GET")
@@ -27,11 +26,11 @@ func HandleRequests(port int) {
 	// User endpoints
 	router.HandleFunc(UrlBase+"/users", handlers.FindAllUsers).Methods("GET")
 
-	router.HandleFunc(UrlBase+"/users/exist/{username}/{vehicleId}", handlers.CheckIfUserExistWithVehicle).Methods("GET")
-	router.HandleFunc(UrlBase+"/users/exist/{username}", handlers.CheckIfUserExist).Methods("GET")
+	router.HandleFunc(UrlBase+"/users/exist/{id}/{vehicleId}", handlers.CheckIfUserExistWithVehicle).Methods("GET")
+	router.HandleFunc(UrlBase+"/users/exist/{id}", handlers.CheckIfUserExist).Methods("GET")
 
-	router.HandleFunc(UrlBase+"/users/{username}", handlers.GetUsersInfo).Methods("GET")
-	router.HandleFunc(UrlBase+"/users/strike/{username}/{recension_id}", handlers.StrikeUser).Methods("GET")
+	router.HandleFunc(UrlBase+"/users/{id}", handlers.GetUsersInfo).Methods("GET")
+	router.HandleFunc(UrlBase+"/users/strike/{id}/{recension_id}", handlers.StrikeUser).Methods("GET")
 
 	// Vehicles endpoints
 	router.HandleFunc(UrlBase+"/vehicles", handlers.AddVehicle).Methods("POST")

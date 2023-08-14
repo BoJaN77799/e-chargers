@@ -16,12 +16,8 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	var loginDTO UserService.LoginDTO
-	data, _ := ioutil.ReadAll(r.Body)
-	json.NewDecoder(bytes.NewReader(data)).Decode(&loginDTO)
-
 	URL := utils.BaseUserServicePath.Next().Host + "/auth/login"
-	req, _ := http.NewRequest(http.MethodPost, URL, bytes.NewReader(data))
+	req, _ := http.NewRequest(http.MethodPost, URL, r.Body)
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("Content-Type", "application/json")
 	client := &http.Client{}

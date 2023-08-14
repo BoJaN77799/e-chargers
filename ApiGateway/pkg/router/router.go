@@ -22,8 +22,6 @@ func HandleRequests(port int) {
 	//router.HandleFunc("/api/users/strike/{username}/{recension_id}", UserService.StrikeUser).Methods("GET")
 	//// ADMIN - AUTH
 	//router.HandleFunc("/api/users", UserService.FindAllUsers).Methods("GET")
-	//// USER - AUTH
-	//router.HandleFunc("/api/users/{username}", UserService.GetUserInfo).Methods("GET")
 	//
 	//// ChargerService
 	//// ADMIN - AUTH
@@ -71,9 +69,10 @@ func HandleRequests(port int) {
 	router.HandleFunc("/api/users", authorizationMiddleware(UserService.FindAllUsers, []string{Administrator})).Methods("GET")
 
 	// Registered User
-	router.HandleFunc("/api/users/vehicles", authorizationMiddleware(UserService.GetVehicles, []string{RegisteredUser})).Methods("GET")
-	router.HandleFunc("/api/users/vehicles", authorizationMiddleware(UserService.AddVehicle, []string{RegisteredUser})).Methods("POST")
-	router.HandleFunc("/api/users/vehicles/{id}", authorizationMiddleware(UserService.DeleteVehicle, []string{RegisteredUser})).Methods("DELETE")
+	router.HandleFunc("/api/users/{id}", authorizationMiddleware(UserService.GetUserInfo, []string{RegisteredUser})).Methods("GET")
+	router.HandleFunc("/api/vehicles", authorizationMiddleware(UserService.GetVehicles, []string{RegisteredUser})).Methods("GET")
+	router.HandleFunc("/api/vehicles", authorizationMiddleware(UserService.AddVehicle, []string{RegisteredUser})).Methods("POST")
+	router.HandleFunc("/api/vehicles/{id}", authorizationMiddleware(UserService.DeleteVehicle, []string{RegisteredUser})).Methods("DELETE")
 
 	fmt.Println("ApiGateway is running on port: " + strconv.Itoa(port))
 	log.Fatal(http.ListenAndServe(":"+strconv.Itoa(port), router))

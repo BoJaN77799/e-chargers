@@ -6,7 +6,7 @@ import (
 	"strconv"
 )
 
-func BanRecension(recensionId uint) error {
+func BanRecension(recensionId uint64) error {
 
 	endpoint := "http://localhost:50005/api/recensions/" + strconv.Itoa(int(recensionId))
 	req, _ := http.NewRequest(http.MethodDelete, endpoint, nil)

@@ -15,16 +15,8 @@ func CheckUsersInfo(user entities.User) error {
 		return errors.New("email not matching pattern user@example.com")
 	}
 
-	if len(user.Username) == 0 {
-		return errors.New("username is empty")
-	}
-
 	if len(user.Password) == 0 {
 		return errors.New("password is empty")
-	}
-
-	if len(user.Username) < 3 && len(user.Username) > 20 {
-		return errors.New("username is minimum 3 chars, maximum 20 chars")
 	}
 
 	//if !checkRegexPattern(PassRegex, user.Password) {

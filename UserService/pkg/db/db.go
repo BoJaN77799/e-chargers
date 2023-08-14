@@ -27,7 +27,6 @@ var (
 	users = []entities.User{
 		{
 			Id:          adminUUID,
-			Username:    "admin",
 			Email:       "admin@example.com",
 			Role:        entities.Administrator,
 			Firstname:   "Adminko",
@@ -40,7 +39,6 @@ var (
 		},
 		{
 			Id:          boksiUUID,
-			Username:    "boksi",
 			Email:       "boksimus@example.com",
 			Role:        entities.RegisteredUser,
 			Firstname:   "Boksi",
@@ -53,7 +51,6 @@ var (
 		},
 		{
 			Id:          baneUUID,
-			Username:    "bane",
 			Email:       "bane_kralj@example.com",
 			Role:        entities.RegisteredUser,
 			Firstname:   "Bane",

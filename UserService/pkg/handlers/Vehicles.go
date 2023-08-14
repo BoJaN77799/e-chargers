@@ -42,14 +42,14 @@ func AddVehicle(w http.ResponseWriter, r *http.Request) {
 func GetVehicles(w http.ResponseWriter, r *http.Request) {
 	var vehiclesDTO []entities.VehicleDto
 
-	username, err := utils.GetUsernameFromToken(r)
+	id, err := utils.GetUserIDFromToken(r)
 	if err != nil {
 		utils.BadToken(w, err.Error())
 		json.NewEncoder(w).Encode(vehiclesDTO)
 		return
 	}
 
-	user, err := repository.FindUserByUsername(username)
+	user, err := repository.FindUserById(id)
 	if err != nil {
 		utils.BadRequestResponse(w, err.Error())
 		return
