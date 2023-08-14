@@ -109,13 +109,13 @@ func GetAllUsers() []entities.User {
 	return users
 }
 
-func DeleteVehicle(name string) error {
+func DeleteVehicle(id uuid.UUID) error {
 
 	var vehicle entities.Vehicle
 
-	err := db.Db.Table("vehicles").Where("name = ?", name).Find(&vehicle).Error
+	err := db.Db.Table("vehicles").Where("id = ?", id).Find(&vehicle).Error
 	if err != nil {
-		return errors.New("vehicle with given name doesn't exist")
+		return errors.New("vehicle doesn't exist")
 	}
 
 	return db.Db.Delete(&vehicle).Error

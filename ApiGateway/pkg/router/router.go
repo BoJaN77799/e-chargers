@@ -18,8 +18,6 @@ const (
 func HandleRequests(port int) {
 	//router := mux.NewRouter()
 
-	//// USER - AUTH
-	//router.HandleFunc("/api/users/vehicles/{name}", UserService.DeleteVehicle).Methods("DELETE")
 	//// ADMIN - AUTH
 	//router.HandleFunc("/api/users/strike/{username}/{recension_id}", UserService.StrikeUser).Methods("GET")
 	//// ADMIN - AUTH
@@ -71,6 +69,7 @@ func HandleRequests(port int) {
 	// Protected route
 	router.HandleFunc("/api/users/vehicles", authorizationMiddleware(UserService.GetVehicles, []string{RegisteredUser})).Methods("GET")
 	router.HandleFunc("/api/users/vehicles", authorizationMiddleware(UserService.AddVehicle, []string{RegisteredUser})).Methods("POST")
+	router.HandleFunc("/api/users/vehicles/{id}", authorizationMiddleware(UserService.DeleteVehicle, []string{RegisteredUser})).Methods("DELETE")
 
 	fmt.Println("ApiGateway is running on port: " + strconv.Itoa(port))
 	log.Fatal(http.ListenAndServe(":"+strconv.Itoa(port), router))
