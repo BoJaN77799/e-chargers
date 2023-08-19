@@ -2,26 +2,22 @@ package handlers
 
 import (
 	"encoding/json"
-	"github.com/gorilla/mux"
 	"io/ioutil"
 	"log"
 	"net/http"
 	"recension_service/pkg/db/repository"
-	"recension_service/pkg/models"
+	"recension_service/pkg/entities"
 	"recension_service/pkg/utils"
-	"strconv"
 )
 
 func AddRecension(w http.ResponseWriter, r *http.Request) {
-
 	defer r.Body.Close()
 	body, err := ioutil.ReadAll(r.Body)
-
 	if err != nil {
 		log.Fatalln(err)
 	}
 
-	var recensionDTO models.RecensionDTO
+	var recensionDTO entities.RecensionDTO
 	json.Unmarshal(body, &recensionDTO)
 
 	_, err = repository.CreateRecension(recensionDTO)
@@ -34,11 +30,8 @@ func AddRecension(w http.ResponseWriter, r *http.Request) {
 }
 
 func FindAllRecensions(w http.ResponseWriter, r *http.Request) {
-
-	var recensionsDTO []models.RecensionDTO
-
+	var recensionsDTO []entities.RecensionDTO
 	recensions := repository.GetAllRecensions()
-
 	for _, recension := range recensions {
 		recensionsDTO = append(recensionsDTO, recension.ToDTO())
 	}
@@ -48,14 +41,15 @@ func FindAllRecensions(w http.ResponseWriter, r *http.Request) {
 }
 
 func FindAllRecensionsFromUser(w http.ResponseWriter, r *http.Request) {
+	var recensionsDTO []entities.RecensionDTO
+	userId, err := utils.GetUserIdFromPathParams(r)
+	if err != nil {
+		utils.BadRequestResponse(w, err.Error())
+		json.NewEncoder(w).Encode(recensionsDTO)
+		return
+	}
 
-	var recensionsDTO []models.RecensionDTO
-
-	params := mux.Vars(r)
-	username, _ := params["username"]
-
-	recensions := repository.GetAllRecensionsFromUser(username)
-
+	recensions := repository.GetAllRecensionsFromUser(userId)
 	for _, recension := range recensions {
 		recensionsDTO = append(recensionsDTO, recension.ToDTO())
 	}
@@ -66,18 +60,13 @@ func FindAllRecensionsFromUser(w http.ResponseWriter, r *http.Request) {
 
 func CancelRecension(w http.ResponseWriter, r *http.Request) {
 
-	defer r.Body.Close()
-	body, err := ioutil.ReadAll(r.Body)
-
+	id, err := utils.GetIdFromPathParams(r)
 	if err != nil {
-		log.Fatalln(err)
+		utils.BadRequestResponse(w, err.Error())
+		return
 	}
 
-	var cancelRecension models.CancelRecension
-	json.Unmarshal(body, &cancelRecension)
-
-	err = repository.CancelRecension(cancelRecension.Username, cancelRecension.ChargerId)
-
+	err = repository.CancelRecension(id)
 	if err != nil {
 		utils.BadRequestResponse(w, err.Error())
 		return
@@ -88,18 +77,15 @@ func CancelRecension(w http.ResponseWriter, r *http.Request) {
 }
 
 func FindAllRecensionsOfCharger(w http.ResponseWriter, r *http.Request) {
-
-	var recensionsDTO []models.RecensionDTO
-	params := mux.Vars(r)
-	charger, _ := params["charger_id"]
-
-	chargerId, err := strconv.ParseUint(charger, 10, 32)
+	var recensionsDTO []entities.RecensionDTO
+	chargerId, err := utils.GetChargerIdFromPathParams(r)
 	if err != nil {
-		w.WriteHeader(http.StatusBadRequest)
+		utils.BadRequestResponse(w, err.Error())
+		json.NewEncoder(w).Encode(recensionsDTO)
 		return
 	}
-	recensions := repository.GetAllRecensionsOfCharger(uint(chargerId))
 
+	recensions := repository.GetAllRecensionsOfCharger(chargerId)
 	for _, recension := range recensions {
 		recensionsDTO = append(recensionsDTO, recension.ToDTO())
 	}
@@ -110,16 +96,13 @@ func FindAllRecensionsOfCharger(w http.ResponseWriter, r *http.Request) {
 
 func BanRecension(w http.ResponseWriter, r *http.Request) {
 
-	params := mux.Vars(r)
-	recensionId, _ := params["recension_id"]
-
-	recensionIdUint, err := strconv.ParseUint(recensionId, 10, 32)
+	id, err := utils.GetUserIdFromPathParams(r)
 	if err != nil {
-		w.WriteHeader(http.StatusBadRequest)
+		utils.BadRequestResponse(w, err.Error())
 		return
 	}
-	err = repository.BanRecension(uint(recensionIdUint))
 
+	err = repository.BanRecension(id)
 	if err != nil {
 		utils.BadRequestResponse(w, err.Error())
 		return

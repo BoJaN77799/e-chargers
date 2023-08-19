@@ -2,8 +2,10 @@ package db
 
 import (
 	"fmt"
+	uuid "github.com/satori/go.uuid"
 	"log"
-	"recension_service/pkg/models"
+	"recension_service/pkg/entities"
+	"time"
 
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
@@ -18,38 +20,46 @@ type Configuration struct {
 }
 
 var (
-	recensions = []models.Recension{
+	boksiUUID, _ = uuid.FromString("602ec829-89de-49b4-b96f-873ff8c819af")
+)
+
+var (
+	recensions = []entities.Recension{
 		{
-			Username:  "boksi",
-			ChargerId: 2,
-			Date:      1664116200000,
+			Id:        uuid.NewV4(),
+			UserId:    boksiUUID,
+			ChargerId: uuid.NewV4(),
+			Date:      time.Now(),
 			Content:   "Charger is awesome, but speed is low",
 			Rate:      2,
 			Toxic:     0.05,
 			Banned:    false,
 		},
 		{
-			Username:  "velja",
-			ChargerId: 1,
-			Date:      1664116200000 + 40*60*1000,
+			Id:        uuid.NewV4(),
+			UserId:    boksiUUID,
+			ChargerId: uuid.NewV4(),
+			Date:      time.Now().Add(10 * time.Minute),
 			Content:   "This is the coolest charger I have ever seen.",
 			Rate:      5,
 			Toxic:     0.08,
 			Banned:    false,
 		},
 		{
-			Username:  "boksi",
-			ChargerId: 1,
-			Date:      1664116200000 + 200*60*1000,
+			Id:        uuid.NewV4(),
+			UserId:    boksiUUID,
+			ChargerId: uuid.NewV4(),
+			Date:      time.Now().Add(40 * time.Minute),
 			Content:   "Fine charger. Speed can be better",
 			Rate:      4,
 			Toxic:     0.26,
 			Banned:    false,
 		},
 		{
-			Username:  "boksi",
-			ChargerId: 3,
-			Date:      1664116200000 + 60*60*1000,
+			Id:        uuid.NewV4(),
+			UserId:    boksiUUID,
+			ChargerId: uuid.NewV4(),
+			Date:      time.Now().Add(time.Hour),
 			Content:   "Stupid bastards, fix this charger",
 			Rate:      1,
 			Toxic:     0.98,
@@ -104,7 +114,7 @@ func DropTables() {
 }
 
 func AutoMigrateTables() {
-	Db.AutoMigrate(&models.Recension{})
+	Db.AutoMigrate(&entities.Recension{})
 }
 
 func InitializeData() {

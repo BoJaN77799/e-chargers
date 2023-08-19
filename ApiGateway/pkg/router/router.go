@@ -18,10 +18,6 @@ const (
 func HandleRequests(port int) {
 	//router := mux.NewRouter()
 
-	//// ADMIN - AUTH
-	//router.HandleFunc("/api/users/strike/{username}/{recension_id}", UserService.StrikeUser).Methods("GET")
-	//// ADMIN - AUTH
-	//router.HandleFunc("/api/users", UserService.FindAllUsers).Methods("GET")
 	//
 	//// ChargerService
 	//// ADMIN - AUTH
@@ -67,6 +63,7 @@ func HandleRequests(port int) {
 	//// Protected routes
 	// Administrator
 	router.HandleFunc("/api/users", authorizationMiddleware(UserService.FindAllUsers, []string{Administrator})).Methods("GET")
+	router.HandleFunc("/api/users/strike/{id}/{recension_id}", authorizationMiddleware(UserService.StrikeUser, []string{Administrator})).Methods("POST")
 
 	// Registered User
 	router.HandleFunc("/api/users/{id}", authorizationMiddleware(UserService.GetUserInfo, []string{RegisteredUser})).Methods("GET")

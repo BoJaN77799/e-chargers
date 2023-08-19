@@ -1,46 +1,42 @@
 package repository
 
 import (
-	"errors"
+	"fmt"
+	uuid "github.com/satori/go.uuid"
 	"recension_service/pkg/db"
-	"recension_service/pkg/models"
+	"recension_service/pkg/entities"
 	"recension_service/pkg/utils"
-	"time"
 )
 
-func CreateRecension(recensionDTO models.RecensionDTO) (models.Recension, error) {
-
-	var recension models.Recension
-
+func CreateRecension(recensionDTO entities.RecensionDTO) (entities.Recension, error) {
 	err := utils.CheckRecensionsInfo(&recensionDTO)
 	if err != nil {
-		return recension, err
+		return entities.Recension{}, err
 	}
 
-	err = VerifyUserUsername(recensionDTO.Username)
-
+	err = VerifyUserUsername(recensionDTO.UserId)
 	if err != nil {
-		return recension, err
+		return entities.Recension{}, err
 	}
 
 	err = VerifyCharger(recensionDTO.ChargerId)
-
 	if err != nil {
-		return recension, err
+		return entities.Recension{}, err
 	}
 
-	result, err := CheckRecensionToxicity(&recensionDTO)
-
+	result, err := GetRecensionToxicity(recensionDTO.Content)
 	if err != nil {
-		return recension, err
+		return entities.Recension{}, err
 	}
 
-	recension.Username = recensionDTO.Username
-	recension.ChargerId = recensionDTO.ChargerId
-	recension.Content = recensionDTO.Content
-	recension.Rate = recensionDTO.Rate
-	recension.Date = uint64(time.Now().UnixMilli())
-	recension.Toxic = result[1]
+	var recension = entities.Recension{
+		Id:        uuid.NewV4(),
+		UserId:    recensionDTO.UserId,
+		ChargerId: recensionDTO.ChargerId,
+		Content:   recensionDTO.Content,
+		Rate:      recensionDTO.Rate,
+		Toxic:     result[1],
+	}
 
 	if result := db.Db.Create(&recension); result.Error != nil {
 		return recension, result.Error
@@ -49,75 +45,51 @@ func CreateRecension(recensionDTO models.RecensionDTO) (models.Recension, error)
 	return recension, nil
 }
 
-func CheckRecensionToxicity(recension *models.RecensionDTO) ([]float32, error) {
-	result, err := GetRecensionToxicity(recension.Content)
-	return result, err
-}
-
-func GetAllRecensions() []models.Recension {
-	var recensions []models.Recension
-
+func GetAllRecensions() []entities.Recension {
+	var recensions []entities.Recension
 	db.Db.Table("recensions").Find(&recensions)
-
 	return recensions
 }
 
-func GetAllRecensionsFromUser(username string) []models.Recension {
-	var recensions []models.Recension
-
-	db.Db.Table("recensions").Where("username = ?", username).Find(&recensions)
-
+func GetAllRecensionsFromUser(userId uuid.UUID) []entities.Recension {
+	var recensions []entities.Recension
+	db.Db.Table("recensions").Where("userId = ?", userId).Find(&recensions)
 	return recensions
 }
 
-func CancelRecension(username string, chargerId uint) error {
-	var recension models.Recension
-
-	db.Db.Table("recensions").Where("username = ? AND charger_id = ?", username, chargerId).Find(&recension)
-
-	if recension.ID == 0 {
-		return errors.New("user didn't give recension on this charger")
+func CancelRecension(id uuid.UUID) error {
+	recension, err := getRecensionByID(id)
+	if err != nil {
+		return err
 	}
 
-	db.Db.Delete(recension)
-
-	return nil
+	return db.Db.Delete(recension).Error
 }
 
-func GetAllRecensionsInPeriod(dateFromUInt64 uint64, dateToUInt64 uint64) []models.Recension {
-
-	var recensions []models.Recension
-
-	db.Db.Table("recensions").Where(
-		"NOT ((date_from >= ? AND date_from >= ?) OR (date_to <= ? AND date_to <= ?))",
-		dateFromUInt64,
-		dateToUInt64,
-		dateFromUInt64,
-		dateToUInt64,
-	).Find(&recensions)
-
-	return recensions
+func getRecensionByID(id uuid.UUID) (entities.Recension, error) {
+	var recension entities.Recension
+	err := db.Db.Table("recensions").Where("id = ?", id).Find(&recension).Error
+	if err != nil {
+		return entities.Recension{}, fmt.Errorf("recension doesn't exist by search condition id='%s'", id)
+	}
+	return recension, nil
 }
 
-func GetAllRecensionsOfCharger(chargerId uint) []models.Recension {
-	var recensions []models.Recension
-
+func GetAllRecensionsOfCharger(chargerId uuid.UUID) []entities.Recension {
+	var recensions []entities.Recension
 	db.Db.Table("recensions").Where("charger_id = ? AND banned = false", chargerId).Find(&recensions)
-
 	return recensions
 }
 
-func BanRecension(recensionId uint) error {
-	var recension models.Recension
-
-	db.Db.Table("recensions").Where("ID = ?", recensionId).Find(&recension)
-
-	if recension.ID == 0 {
-		return errors.New("user didn't give recension on this charger")
+func BanRecension(id uuid.UUID) error {
+	recension := entities.Recension{
+		Id:     id,
+		Banned: true,
 	}
 
-	recension.Banned = true
-	db.Db.Save(recension)
+	if err := db.Db.Update(&recension); err != nil {
+		return fmt.Errorf("failed to make banned recension with id='%s'", id)
+	}
 
 	return nil
 }

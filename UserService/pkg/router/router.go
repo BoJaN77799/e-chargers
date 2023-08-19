@@ -30,7 +30,7 @@ func HandleRequests(port int) {
 	router.HandleFunc(UrlBase+"/users/exist/{id}", handlers.CheckIfUserExist).Methods("GET")
 
 	router.HandleFunc(UrlBase+"/users/{id}", handlers.GetUsersInfo).Methods("GET")
-	router.HandleFunc(UrlBase+"/users/strike/{id}/{recension_id}", handlers.StrikeUser).Methods("GET")
+	router.HandleFunc(UrlBase+"/users/strike/{id}/{recension_id}", handlers.StrikeUser).Methods("POST")
 
 	// Vehicles endpoints
 	router.HandleFunc(UrlBase+"/vehicles", handlers.AddVehicle).Methods("POST")

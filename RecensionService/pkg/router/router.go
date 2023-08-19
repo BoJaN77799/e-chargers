@@ -19,9 +19,9 @@ func HandleRequests(port int) {
 
 	router.HandleFunc("/api/recensions", handlers.AddRecension).Methods("POST")
 	router.HandleFunc("/api/recensions", handlers.FindAllRecensions).Methods("GET")
-	router.HandleFunc("/api/recensions/{username}", handlers.FindAllRecensionsFromUser).Methods("GET")
-	router.HandleFunc("/api/recensions", handlers.CancelRecension).Methods("DELETE")
-	router.HandleFunc("/api/recensions/{recension_id}", handlers.BanRecension).Methods("DELETE")
+	router.HandleFunc("/api/recensions/{userId}", handlers.FindAllRecensionsFromUser).Methods("GET")
+	router.HandleFunc("/api/recensions/{id}", handlers.CancelRecension).Methods("DELETE")
+	router.HandleFunc("/api/recensions/{id}", handlers.BanRecension).Methods("POST")
 	router.HandleFunc("/api/recensions/charger/{charger_id}", handlers.FindAllRecensionsOfCharger).Methods("GET")
 
 	fmt.Println("RecensionService is running on port: " + strconv.Itoa(port))

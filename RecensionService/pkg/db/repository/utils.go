@@ -4,39 +4,38 @@ import (
 	"bytes"
 	"encoding/json"
 	"errors"
+	uuid "github.com/satori/go.uuid"
 	"io/ioutil"
 	"log"
 	"net/http"
-	"strconv"
 )
 
-func VerifyUserUsername(username string) error {
+const UserServiceURL = "http://localhost:50001/api/usr"
 
-	endpoint := "http://localhost:50001/api/users/exist/" + username
-	resp, err := http.Get(endpoint)
+const ChargerServiceURL = "http://localhost:50002/api"
 
+func VerifyUserUsername(userId uuid.UUID) error {
+	URL := UserServiceURL + "/users/exist/" + userId.String()
+	resp, err := http.Get(URL)
 	if resp.StatusCode != http.StatusOK || err != nil {
 		defer resp.Body.Close()
 		body, err := ioutil.ReadAll(resp.Body)
-
 		if err != nil {
 			log.Fatalln(err)
 		}
 
 		var errorMessage string
 		json.Unmarshal(body, &errorMessage)
+
+		log.Fatalln(errorMessage)
 		return errors.New(errorMessage)
 	}
-
 	return nil
 }
 
-func VerifyCharger(chargerId uint) error {
-	chargerIdStr := strconv.Itoa(int(chargerId))
-
-	endpoint := "http://localhost:50002/api/chargers/exist/" + chargerIdStr
-	resp, err := http.Get(endpoint)
-
+func VerifyCharger(chargerId uuid.UUID) error {
+	URL := ChargerServiceURL + "/chargers/exist/" + chargerId.String()
+	resp, err := http.Get(URL)
 	if resp.StatusCode != http.StatusOK || err != nil {
 		defer resp.Body.Close()
 		body, err := ioutil.ReadAll(resp.Body)
@@ -47,9 +46,10 @@ func VerifyCharger(chargerId uint) error {
 
 		var errorMessage string
 		json.Unmarshal(body, &errorMessage)
+
+		log.Fatalln(errorMessage)
 		return errors.New(errorMessage)
 	}
-
 	return nil
 }
 

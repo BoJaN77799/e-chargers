@@ -2,7 +2,6 @@ package handlers
 
 import (
 	"encoding/json"
-	"fmt"
 	"github.com/gorilla/mux"
 	"net/http"
 	"strconv"
@@ -62,7 +61,6 @@ func CheckIfUserExist(w http.ResponseWriter, r *http.Request) {
 	}
 
 	utils.OKResponse(w)
-	json.NewEncoder(w).Encode(fmt.Sprintf("user with id: %s exist", id))
 }
 
 func GetUsersInfo(w http.ResponseWriter, r *http.Request) {
