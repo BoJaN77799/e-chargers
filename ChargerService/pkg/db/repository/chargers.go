@@ -2,12 +2,16 @@ package repository
 
 import (
 	"charger_service/pkg/db"
-	"charger_service/pkg/models"
+	"charger_service/pkg/entities"
 	"charger_service/pkg/utils"
+	"fmt"
+	uuid "github.com/satori/go.uuid"
 	"math"
 )
 
-func CreateCharger(charger models.Charger) (models.Charger, error) {
+const MinDistance = 500.0
+
+func CreateCharger(charger entities.Charger) (entities.Charger, error) {
 
 	err := utils.CheckChargersInfo(&charger)
 	if err != nil {
@@ -21,17 +25,17 @@ func CreateCharger(charger models.Charger) (models.Charger, error) {
 	return charger, nil
 }
 
-func GetAllChargers() []models.Charger {
-	var chargers []models.Charger
+func GetAllChargers() []entities.Charger {
+	var chargers []entities.Charger
 
 	db.Db.Preload("Address").Find(&chargers)
 
 	return chargers
 }
 
-func SearchChargers(search models.SearchDTO) []models.Charger {
+func SearchChargers(search entities.SearchDTO) []entities.Charger {
 
-	var chargers []models.Charger
+	var chargers []entities.Charger
 
 	db.Db.Preload("Address").Where(
 		"name like ?"+
@@ -55,32 +59,34 @@ func SearchChargers(search models.SearchDTO) []models.Charger {
 	return chargers
 }
 
-func GetChargerById(chargerId uint) models.Charger {
-	var charger models.Charger
-
-	db.Db.Preload("Address").Where("id = ?", chargerId).Find(&charger)
-
-	return charger
+func GetChargerById(id uuid.UUID) (entities.Charger, error) {
+	var charger entities.Charger
+	err := db.Db.Preload("Address").Where("id = ?", id).Find(&charger).Error
+	return charger, err
 }
 
-func GetClosestChargerToCoordinates(lon float32, lat float32) models.Charger {
-	var chargers []models.Charger
+func GetClosestChargerToCoordinates(longitude float64, latitude float64) (*entities.Charger, error) {
+	var chargers []entities.Charger
 
-	db.Db.Preload("Address").Find(&chargers)
+	var closestCharger *entities.Charger
+	var minDistance = MinDistance
+	chargerFound := false
 
-	var closestCharger models.Charger
-	var minDistance float64
-	minDistance = 500.0
 	for _, charger := range chargers {
-		var distance float64
-		distance = math.Sqrt(
-			math.Pow(float64(charger.Address.Longitude-lon), 2) +
-				math.Pow(float64(charger.Address.Latitude-lat), 2))
+		distance := math.Sqrt(
+			math.Pow(charger.Address.Longitude-longitude, 2) +
+				math.Pow(charger.Address.Latitude-latitude, 2))
 
 		if distance < minDistance {
 			minDistance = distance
-			closestCharger = charger
+			closestCharger = &charger
+			chargerFound = true
 		}
 	}
-	return closestCharger
+
+	if !chargerFound {
+		return nil, fmt.Errorf("no charger found within %fm diameter", MinDistance)
+	}
+
+	return closestCharger, nil
 }

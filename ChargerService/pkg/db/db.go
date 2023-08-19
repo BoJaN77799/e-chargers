@@ -1,8 +1,9 @@
 package db
 
 import (
-	"charger_service/pkg/models"
+	"charger_service/pkg/entities"
 	"fmt"
+	uuid "github.com/satori/go.uuid"
 	"log"
 
 	"github.com/jinzhu/gorm"
@@ -18,16 +19,17 @@ type Configuration struct {
 }
 
 var (
-	addresses = []models.Address{
-		{Street: "Bulevar cara Lazara 7", City: "Novi Sad", Country: "Serbia", PostalCode: 21000, Latitude: 45.244630, Longitude: 19.845820},
-		{Street: "Bulevar Oslobođenja 119", City: "Novi Sad", Country: "Serbia", PostalCode: 21000, Latitude: 45.245199, Longitude: 19.842804},
-		{Street: "Sentandrejski put 24a", City: "Novi Sad", Country: "Serbia", PostalCode: 21000, Latitude: 45.270740, Longitude: 19.832450},
+	addresses = []entities.Address{
+		{Id: uuid.NewV4(), Street: "Bulevar cara Lazara 7", City: "Novi Sad", Country: "Serbia", PostalCode: 21000, Latitude: 45.244630, Longitude: 19.845820},
+		{Id: uuid.NewV4(), Street: "Bulevar Oslobođenja 119", City: "Novi Sad", Country: "Serbia", PostalCode: 21000, Latitude: 45.245199, Longitude: 19.842804},
+		{Id: uuid.NewV4(), Street: "Sentandrejski put 24a", City: "Novi Sad", Country: "Serbia", PostalCode: 21000, Latitude: 45.270740, Longitude: 19.832450},
 	}
 )
 
 var (
-	chargers = []models.Charger{
+	chargers = []entities.Charger{
 		{
+			Id:                     uuid.NewV4(),
 			Name:                   "Procredit Bank",
 			Address:                addresses[0],
 			WorkTimeFrom:           7,
@@ -40,6 +42,7 @@ var (
 			ChargingSpeedPerMinute: 22,
 		},
 		{
+			Id:                     uuid.NewV4(),
 			Name:                   "Promenada",
 			Address:                addresses[1],
 			WorkTimeFrom:           10,
@@ -52,6 +55,7 @@ var (
 			ChargingSpeedPerMinute: 26,
 		},
 		{
+			Id:                     uuid.NewV4(),
 			Name:                   "JKP Cistoca",
 			Address:                addresses[2],
 			WorkTimeFrom:           7,
@@ -113,8 +117,8 @@ func DropTables() {
 }
 
 func AutoMigrateTables() {
-	Db.AutoMigrate(&models.Address{})
-	Db.AutoMigrate(&models.Charger{})
+	Db.AutoMigrate(&entities.Address{})
+	Db.AutoMigrate(&entities.Charger{})
 }
 
 func InitializeData() {

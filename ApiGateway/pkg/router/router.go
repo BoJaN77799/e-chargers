@@ -1,6 +1,7 @@
 package router
 
 import (
+	"ApiGateway/pkg/handlers/ChargerService"
 	"ApiGateway/pkg/handlers/UserService"
 	"fmt"
 	"github.com/gorilla/mux"
@@ -16,21 +17,9 @@ const (
 )
 
 func HandleRequests(port int) {
-	//router := mux.NewRouter()
-
-	//
-	//// ChargerService
-	//// ADMIN - AUTH
-	//router.HandleFunc("/api/chargers", ChargerService.AddCharger).Methods("POST")
-	//// FREE
-	//router.HandleFunc("/api/chargers", ChargerService.GetAllChargers).Methods("GET")
-	//// FREE
-	//router.HandleFunc("/api/chargers/search", ChargerService.SearchChargers).Methods("POST")
 	//// NO-USE
 	//router.HandleFunc("/api/chargers/{chargerId}", ChargerService.GetChargerById).Methods("GET")
-	//// FREE
-	//router.HandleFunc("/api/chargers/{lon}/{lat}", ChargerService.FindClosestCharger).Methods("GET")
-	//
+
 	//// ReservationService
 	//// USER - AUTH
 	//router.HandleFunc("/api/reservations", ReservationService.AddReservation).Methods("POST")
@@ -55,8 +44,11 @@ func HandleRequests(port int) {
 
 	router := mux.NewRouter()
 
-	router.HandleFunc("/api/auth/login", UserService.Login).Methods("POST")           // login
-	router.HandleFunc("/api/auth/register", UserService.Registration).Methods("POST") // register
+	router.HandleFunc("/api/auth/login", UserService.Login).Methods("POST")
+	router.HandleFunc("/api/auth/register", UserService.Registration).Methods("POST")
+	router.HandleFunc("/api/chargers", ChargerService.GetAllChargers).Methods("GET")
+	router.HandleFunc("/api/chargers/search", ChargerService.SearchChargers).Methods("POST")
+	router.HandleFunc("/api/chargers/{lon}/{lat}", ChargerService.FindClosestCharger).Methods("GET")
 
 	router.Use(authenticationMiddleware)
 
@@ -64,6 +56,7 @@ func HandleRequests(port int) {
 	// Administrator
 	router.HandleFunc("/api/users", authorizationMiddleware(UserService.FindAllUsers, []string{Administrator})).Methods("GET")
 	router.HandleFunc("/api/users/strike/{id}/{recension_id}", authorizationMiddleware(UserService.StrikeUser, []string{Administrator})).Methods("POST")
+	router.HandleFunc("/api/chargers", authorizationMiddleware(ChargerService.AddCharger, []string{Administrator})).Methods("POST")
 
 	// Registered User
 	router.HandleFunc("/api/users/{id}", authorizationMiddleware(UserService.GetUserInfo, []string{RegisteredUser})).Methods("GET")

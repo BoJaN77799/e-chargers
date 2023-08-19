@@ -2,14 +2,12 @@ package handlers
 
 import (
 	"charger_service/pkg/db/repository"
-	"charger_service/pkg/models"
+	"charger_service/pkg/entities"
 	"charger_service/pkg/utils"
 	"encoding/json"
-	"github.com/gorilla/mux"
 	"io/ioutil"
 	"log"
 	"net/http"
-	"strconv"
 )
 
 func HelloWorld(w http.ResponseWriter, r *http.Request) {
@@ -20,14 +18,14 @@ func HelloWorld(w http.ResponseWriter, r *http.Request) {
 func AddCharger(w http.ResponseWriter, r *http.Request) {
 
 	defer r.Body.Close()
-	body, err := ioutil.ReadAll(r.Body)
+	data, err := ioutil.ReadAll(r.Body)
 
 	if err != nil {
 		log.Fatalln(err)
 	}
 
-	var charger models.Charger
-	json.Unmarshal(body, &charger)
+	var charger entities.Charger
+	json.Unmarshal(data, &charger)
 
 	_, err = repository.CreateCharger(charger)
 	if err != nil {
@@ -41,7 +39,7 @@ func AddCharger(w http.ResponseWriter, r *http.Request) {
 
 func FindAllChargers(w http.ResponseWriter, r *http.Request) {
 
-	var chargersDTO []models.ChargerDTO
+	var chargersDTO []entities.ChargerDTO
 
 	chargers := repository.GetAllChargers()
 
@@ -62,10 +60,10 @@ func SearchChargers(w http.ResponseWriter, r *http.Request) {
 		log.Fatalln(err)
 	}
 
-	var searchDTO models.SearchDTO
+	var searchDTO entities.SearchDTO
 	json.Unmarshal(body, &searchDTO)
 
-	var chargersDTO []models.ChargerDTO
+	var chargersDTO []entities.ChargerDTO
 
 	chargers := repository.SearchChargers(searchDTO)
 
@@ -78,19 +76,11 @@ func SearchChargers(w http.ResponseWriter, r *http.Request) {
 }
 
 func CheckIfExistCharger(w http.ResponseWriter, r *http.Request) {
+	id, _ := utils.GetIdFromPathParams(r)
 
-	params := mux.Vars(r)
-	chargerId, _ := params["chargerId"]
+	charger, err := repository.GetChargerById(id)
 
-	chargerIdUint, err := strconv.ParseUint(chargerId, 10, 32)
 	if err != nil {
-		utils.BadRequestResponse(w, "chargerId isn't proper uint")
-		return
-	}
-
-	charger := repository.GetChargerById(uint(chargerIdUint))
-
-	if charger.ID == 0 {
 		utils.BadRequestResponse(w, "charger with given id doesn't exist")
 		return
 	}
@@ -100,19 +90,11 @@ func CheckIfExistCharger(w http.ResponseWriter, r *http.Request) {
 }
 
 func FindChargerReport(w http.ResponseWriter, r *http.Request) {
+	id, _ := utils.GetIdFromPathParams(r)
 
-	params := mux.Vars(r)
-	chargerId, _ := params["chargerId"]
+	charger, err := repository.GetChargerById(id)
 
-	chargerIdUint, err := strconv.ParseUint(chargerId, 10, 32)
 	if err != nil {
-		utils.BadRequestResponse(w, "chargerId isn't proper uint")
-		return
-	}
-
-	charger := repository.GetChargerById(uint(chargerIdUint))
-
-	if charger.ID == 0 {
 		utils.BadRequestResponse(w, "charger with given id doesn't exist")
 		return
 	}
@@ -122,19 +104,11 @@ func FindChargerReport(w http.ResponseWriter, r *http.Request) {
 }
 
 func GetChargerByID(w http.ResponseWriter, r *http.Request) {
+	id, _ := utils.GetIdFromPathParams(r)
 
-	params := mux.Vars(r)
-	chargerId, _ := params["chargerId"]
+	charger, err := repository.GetChargerById(id)
 
-	chargerIdUint, err := strconv.ParseUint(chargerId, 10, 32)
 	if err != nil {
-		utils.BadRequestResponse(w, "chargerId isn't proper uint")
-		return
-	}
-
-	charger := repository.GetChargerById(uint(chargerIdUint))
-
-	if charger.ID == 0 {
 		utils.BadRequestResponse(w, "charger with given id doesn't exist")
 		return
 	}
@@ -145,26 +119,13 @@ func GetChargerByID(w http.ResponseWriter, r *http.Request) {
 
 func FindClosestCharger(w http.ResponseWriter, r *http.Request) {
 
-	params := mux.Vars(r)
-	lon, _ := params["lon"]
+	longitude, _ := utils.GetLonFromPathParams(r)
+	latitude, _ := utils.GetLatFromPathParams(r)
 
-	lonFloat, err := strconv.ParseFloat(lon, 32)
+	charger, err := repository.GetClosestChargerToCoordinates(longitude, latitude)
+
 	if err != nil {
-		utils.BadRequestResponse(w, "longitude isn't proper float32")
-		return
-	}
-	lat, _ := params["lat"]
-
-	latFloat, err := strconv.ParseFloat(lat, 32)
-	if err != nil {
-		utils.BadRequestResponse(w, "latitude isn't proper float32")
-		return
-	}
-
-	charger := repository.GetClosestChargerToCoordinates(float32(lonFloat), float32(latFloat))
-
-	if charger.ID == 0 {
-		utils.BadRequestResponse(w, "charger not found")
+		utils.BadRequestResponse(w, err.Error())
 		return
 	}
 

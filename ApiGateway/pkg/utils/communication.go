@@ -13,7 +13,7 @@ var BaseUserServicePath, _ = roundRobinScheduler.New(
 )
 
 var BaseChargerServicePath, _ = roundRobinScheduler.New(
-	&url.URL{Host: "http://localhost:50002/api/chargers"},
+	&url.URL{Host: "http://localhost:50002/api/chr"},
 )
 
 var BaseReservationServicePath, _ = roundRobinScheduler.New(

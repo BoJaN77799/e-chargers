@@ -1,39 +1,20 @@
 package ChargerService
 
 import (
-	"ApiGateway/pkg/models/ChargerService"
+	"ApiGateway/pkg/handlers"
 	"ApiGateway/pkg/utils"
-	"bytes"
-	"encoding/json"
 	"github.com/gorilla/mux"
-	"io/ioutil"
 	"net/http"
 )
 
 func AddCharger(w http.ResponseWriter, r *http.Request) {
-
-	// auth
-	if err := utils.Authorize(r, "admin"); err != nil {
-		w.Header().Set("Content-Type", "application/json")
-		w.WriteHeader(http.StatusUnauthorized)
-		json.NewEncoder(w).Encode(err.Error())
-		return
-	}
-
 	utils.SetupResponse(&w, r)
 	if r.Method == "OPTIONS" {
 		return
 	}
 
-	var chargerDTO ChargerService.ChargerDTO
-	data, _ := ioutil.ReadAll(r.Body)
-	json.NewDecoder(bytes.NewReader(data)).Decode(&chargerDTO)
-
-	req, _ := http.NewRequest(http.MethodPost, utils.BaseChargerServicePath.Next().Host, bytes.NewReader(data))
-	req.Header.Set("Accept", "application/json")
-	req.Header.Set("Content-Type", "application/json")
-	client := &http.Client{}
-	response, err := client.Do(req)
+	URL := utils.BaseChargerServicePath.Next().Host + "/chargers"
+	response, err := handlers.DoRequestWithToken(r, http.MethodPost, URL, r.Body)
 
 	if err != nil {
 		w.WriteHeader(http.StatusGatewayTimeout)
@@ -50,7 +31,8 @@ func GetAllChargers(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	response, err := http.Get(utils.BaseChargerServicePath.Next().Host)
+	URL := utils.BaseChargerServicePath.Next().Host + "/chargers"
+	response, err := handlers.DoRequestWithToken(r, http.MethodGet, URL, nil)
 
 	if err != nil {
 		w.WriteHeader(http.StatusGatewayTimeout)
@@ -67,15 +49,8 @@ func SearchChargers(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	var searchDTO ChargerService.SearchDTO
-	data, _ := ioutil.ReadAll(r.Body)
-	json.NewDecoder(bytes.NewReader(data)).Decode(&searchDTO)
-
-	req, _ := http.NewRequest(http.MethodPost, utils.BaseChargerServicePath.Next().Host+"/search", bytes.NewReader(data))
-	req.Header.Set("Accept", "application/json")
-	req.Header.Set("Content-Type", "application/json")
-	client := &http.Client{}
-	response, err := client.Do(req)
+	URL := utils.BaseChargerServicePath.Next().Host + "/chargers/search"
+	response, err := handlers.DoRequestWithToken(r, http.MethodPost, URL, r.Body)
 
 	if err != nil {
 		w.WriteHeader(http.StatusGatewayTimeout)
@@ -93,9 +68,10 @@ func GetChargerById(w http.ResponseWriter, r *http.Request) {
 	}
 
 	params := mux.Vars(r)
-	chargerId, _ := params["chargerId"]
+	id, _ := params["id"]
 
-	response, err := http.Get(utils.BaseChargerServicePath.Next().Host + "/" + chargerId)
+	URL := utils.BaseChargerServicePath.Next().Host + "/chargers/" + id
+	response, err := handlers.DoRequestWithToken(r, http.MethodGet, URL, nil)
 
 	if err != nil {
 		w.WriteHeader(http.StatusGatewayTimeout)
@@ -116,7 +92,8 @@ func FindClosestCharger(w http.ResponseWriter, r *http.Request) {
 	lon, _ := params["lon"]
 	lat, _ := params["lat"]
 
-	response, err := http.Get(utils.BaseChargerServicePath.Next().Host + "/" + lon + "/" + lat)
+	URL := utils.BaseChargerServicePath.Next().Host + "/" + lon + "/" + lat
+	response, err := handlers.DoRequestWithToken(r, http.MethodGet, URL, nil)
 
 	if err != nil {
 		w.WriteHeader(http.StatusGatewayTimeout)

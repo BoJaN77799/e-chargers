@@ -1,14 +1,14 @@
 package utils
 
 import (
-	"charger_service/pkg/models"
+	"charger_service/pkg/entities"
 	"errors"
 	"fmt"
 )
 
 const MaxChargerCapacity = 10
 
-func CheckChargersInfo(charger *models.Charger) error {
+func CheckChargersInfo(charger *entities.Charger) error {
 
 	err := CheckAddressInfo(charger.Address)
 
@@ -39,7 +39,7 @@ func CheckChargersInfo(charger *models.Charger) error {
 	return nil
 }
 
-func CheckAddressInfo(address models.Address) error {
+func CheckAddressInfo(address entities.Address) error {
 
 	if len(address.Street) == 0 {
 		return errors.New("address street is empty")

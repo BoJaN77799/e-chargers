@@ -1,16 +1,19 @@
-package models
+package entities
+
+import uuid "github.com/satori/go.uuid"
 
 type AddressDTO struct {
-	Street     string  `json:"street"`
-	City       string  `json:"city"`
-	Country    string  `json:"country"`
-	PostalCode uint    `json:"postal_code"`
-	Longitude  float32 `json:"longitude"`
-	Latitude   float32 `json:"latitude"`
+	Id         uuid.UUID `json:"id"`
+	Street     string    `json:"street"`
+	City       string    `json:"city"`
+	Country    string    `json:"country"`
+	PostalCode uint      `json:"postal_code"`
+	Longitude  float64   `json:"longitude"`
+	Latitude   float64   `json:"latitude"`
 }
 
 type ChargerDTO struct {
-	Id                     uint       `json:"id"`
+	Id                     uuid.UUID  `json:"id"`
 	Name                   string     `json:"name"`
 	Address                AddressDTO `json:"address"`
 	WorkTime               string     `json:"work_time"`
@@ -44,7 +47,7 @@ type ChargerReportDTO struct {
 }
 
 type ChargerReservationDTO struct {
-	Id       uint   `json:"id"`
-	Name     string `json:"charger_name"`
-	Capacity uint   `json:"capacity"`
+	Id       uuid.UUID `json:"id"`
+	Name     string    `json:"charger_name"`
+	Capacity uint      `json:"capacity"`
 }
