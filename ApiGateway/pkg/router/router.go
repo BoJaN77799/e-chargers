@@ -2,6 +2,7 @@ package router
 
 import (
 	"ApiGateway/pkg/handlers/ChargerService"
+	"ApiGateway/pkg/handlers/ReservationService"
 	"ApiGateway/pkg/handlers/UserService"
 	"fmt"
 	"github.com/gorilla/mux"
@@ -19,17 +20,9 @@ const (
 func HandleRequests(port int) {
 	//// NO-USE
 	//router.HandleFunc("/api/chargers/{chargerId}", ChargerService.GetChargerById).Methods("GET")
-
-	//// ReservationService
-	//// USER - AUTH
-	//router.HandleFunc("/api/reservations", ReservationService.AddReservation).Methods("POST")
 	//// NO-USE
 	//router.HandleFunc("/api/reservations", ReservationService.FindAllReservations).Methods("GET")
-	//// USER - AUTH
-	//router.HandleFunc("/api/reservations/{username}", ReservationService.FindAllReservationsFromUser).Methods("GET")
-	//// USER - AUTH
-	//router.HandleFunc("/api/reservations/{id}", ReservationService.CancelReservation).Methods("DELETE")
-	//
+
 	//// ReportsService
 	//// ADMIN - AUTH
 	//router.HandleFunc("/api/reports/{date_from}/{date_to}", ReportsService.FindAllReservationsInPeriod).Methods("GET")
@@ -44,6 +37,7 @@ func HandleRequests(port int) {
 
 	router := mux.NewRouter()
 
+	// Public routes
 	router.HandleFunc("/api/auth/login", UserService.Login).Methods("POST")
 	router.HandleFunc("/api/auth/register", UserService.Registration).Methods("POST")
 	router.HandleFunc("/api/chargers", ChargerService.GetAllChargers).Methods("GET")
@@ -63,6 +57,9 @@ func HandleRequests(port int) {
 	router.HandleFunc("/api/vehicles", authorizationMiddleware(UserService.GetVehicles, []string{RegisteredUser})).Methods("GET")
 	router.HandleFunc("/api/vehicles", authorizationMiddleware(UserService.AddVehicle, []string{RegisteredUser})).Methods("POST")
 	router.HandleFunc("/api/vehicles/{id}", authorizationMiddleware(UserService.DeleteVehicle, []string{RegisteredUser})).Methods("DELETE")
+	router.HandleFunc("/api/reservations", authorizationMiddleware(ReservationService.AddReservation, []string{RegisteredUser})).Methods("POST")
+	router.HandleFunc("/api/reservations/{userId}", authorizationMiddleware(ReservationService.FindAllReservationsFromUser, []string{RegisteredUser})).Methods("GET")
+	router.HandleFunc("/api/reservations/{id}", authorizationMiddleware(ReservationService.CancelReservation, []string{RegisteredUser})).Methods("DELETE")
 
 	fmt.Println("ApiGateway is running on port: " + strconv.Itoa(port))
 	log.Fatal(http.ListenAndServe(":"+strconv.Itoa(port), router))
