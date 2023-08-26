@@ -21,7 +21,7 @@ var BaseReservationServicePath, _ = roundRobinScheduler.New(
 )
 
 var BaseRecensionsServicePath, _ = roundRobinScheduler.New(
-	&url.URL{Host: "http://localhost:50004/api/recensions"},
+	&url.URL{Host: "http://localhost:50004/api/rec"},
 )
 
 var BaseReportsServicePath, _ = roundRobinScheduler.New(

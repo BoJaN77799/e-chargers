@@ -2,6 +2,7 @@ package router
 
 import (
 	"ApiGateway/pkg/handlers/ChargerService"
+	"ApiGateway/pkg/handlers/RecensionService"
 	"ApiGateway/pkg/handlers/ReservationService"
 	"ApiGateway/pkg/handlers/UserService"
 	"fmt"
@@ -29,11 +30,6 @@ func HandleRequests(port int) {
 	//// ADMIN - AUTH
 	//router.HandleFunc("/api/reports/users", ReportsService.FindAllUsersReport).Methods("GET")
 	//
-	////RecensionsService
-	//// USER - AUTH
-	//router.HandleFunc("/api/recensions", RecensionService.AddRecension).Methods("POST")
-	//// FREE
-	//router.HandleFunc("/api/recensions/charger/{charger_id}", RecensionService.FindAllRecensionsOfCharger).Methods("GET")
 
 	router := mux.NewRouter()
 
@@ -42,7 +38,8 @@ func HandleRequests(port int) {
 	router.HandleFunc("/api/auth/register", UserService.Registration).Methods("POST")
 	router.HandleFunc("/api/chargers", ChargerService.GetAllChargers).Methods("GET")
 	router.HandleFunc("/api/chargers/search", ChargerService.SearchChargers).Methods("POST")
-	router.HandleFunc("/api/chargers/{lon}/{lat}", ChargerService.FindClosestCharger).Methods("GET")
+	router.HandleFunc("/api/chargers/closest/{lon}/{lat}", ChargerService.FindClosestCharger).Methods("GET")
+	router.HandleFunc("/api/recensions/charger/{charger_id}", RecensionService.FindAllRecensionsOfCharger).Methods("GET")
 
 	router.Use(authenticationMiddleware)
 
@@ -60,6 +57,7 @@ func HandleRequests(port int) {
 	router.HandleFunc("/api/reservations", authorizationMiddleware(ReservationService.AddReservation, []string{RegisteredUser})).Methods("POST")
 	router.HandleFunc("/api/reservations/{userId}", authorizationMiddleware(ReservationService.FindAllReservationsFromUser, []string{RegisteredUser})).Methods("GET")
 	router.HandleFunc("/api/reservations/{id}", authorizationMiddleware(ReservationService.CancelReservation, []string{RegisteredUser})).Methods("DELETE")
+	router.HandleFunc("/api/recensions", authorizationMiddleware(RecensionService.AddRecension, []string{RegisteredUser})).Methods("POST")
 
 	fmt.Println("ApiGateway is running on port: " + strconv.Itoa(port))
 	log.Fatal(http.ListenAndServe(":"+strconv.Itoa(port), router))

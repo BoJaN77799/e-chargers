@@ -12,7 +12,8 @@ var publicRoutes = []string{
 	"/api/auth/register",
 	"/api/chargers",
 	"/api/chargers/search",
-	"/api/chargers/{lon}/{lat}",
+	"/api/chargers/closest",
+	"/api/recensions/charger",
 }
 
 func isRoutePublic(route string) bool {
