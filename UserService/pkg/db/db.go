@@ -18,15 +18,15 @@ type Configuration struct {
 }
 
 var (
-	adminUUID, _ = uuid.FromString("bada76ea-7bfc-4d4a-9e96-32755c9eb3f7")
-	boksiUUID, _ = uuid.FromString("602ec829-89de-49b4-b96f-873ff8c819af")
-	baneUUID, _  = uuid.FromString("14e0d726-1b6f-4cdc-a520-b0ae7e812b2a")
+	admin, _ = uuid.FromString("bada76ea-7bfc-4d4a-9e96-32755c9eb3f7")
+	boksi, _ = uuid.FromString("602ec829-89de-49b4-b96f-873ff8c819af")
+	bane, _  = uuid.FromString("14e0d726-1b6f-4cdc-a520-b0ae7e812b2a")
 )
 
 var (
 	users = []entities.User{
 		{
-			Id:          adminUUID,
+			Id:          admin,
 			Email:       "admin@example.com",
 			Role:        entities.Administrator,
 			Firstname:   "Adminko",
@@ -38,7 +38,7 @@ var (
 			BannedUntil: 0,
 		},
 		{
-			Id:          boksiUUID,
+			Id:          boksi,
 			Email:       "boksimus@example.com",
 			Role:        entities.RegisteredUser,
 			Firstname:   "Boksi",
@@ -50,7 +50,7 @@ var (
 			BannedUntil: 0,
 		},
 		{
-			Id:          baneUUID,
+			Id:          bane,
 			Email:       "bane_kralj@example.com",
 			Role:        entities.RegisteredUser,
 			Firstname:   "Bane",
@@ -65,18 +65,18 @@ var (
 )
 
 var (
-	vehicle1UUID, _ = uuid.FromString("20d1789f-218b-4b6a-9731-7a599aa7b53c")
-	vehicle2UUID, _ = uuid.FromString("c1d6eaed-33ef-4b0c-bd2e-3dfc14f88d29")
-	vehicle3UUID, _ = uuid.FromString("5d16ce02-9a6a-4602-aa6a-25e16016112e")
-	vehicle4UUID, _ = uuid.FromString("e1bb84c6-570c-4cf7-9df5-bb5bb0d13e78")
+	vehicle1, _ = uuid.FromString("20d1789f-218b-4b6a-9731-7a599aa7b53c")
+	vehicle2, _ = uuid.FromString("c1d6eaed-33ef-4b0c-bd2e-3dfc14f88d29")
+	vehicle3, _ = uuid.FromString("5d16ce02-9a6a-4602-aa6a-25e16016112e")
+	vehicle4, _ = uuid.FromString("e1bb84c6-570c-4cf7-9df5-bb5bb0d13e78")
 )
 
 var (
 	vehicles = []entities.Vehicle{
-		{Id: vehicle1UUID, Name: "Skutercic", VehicleType: entities.SCOOTER, UserID: boksiUUID},
-		{Id: vehicle2UUID, Name: "Tesla Model 2", VehicleType: entities.CAR, UserID: boksiUUID},
-		{Id: vehicle3UUID, Name: "Tesla Model 3", VehicleType: entities.CAR, UserID: boksiUUID},
-		{Id: vehicle4UUID, Name: "Tesla Model 4", VehicleType: entities.CAR, UserID: baneUUID},
+		{Id: vehicle1, Name: "Skutercic", VehicleType: entities.SCOOTER, UserID: boksi},
+		{Id: vehicle2, Name: "Tesla Model 2", VehicleType: entities.CAR, UserID: boksi},
+		{Id: vehicle3, Name: "Tesla Model 3", VehicleType: entities.CAR, UserID: boksi},
+		{Id: vehicle4, Name: "Tesla Model 4", VehicleType: entities.CAR, UserID: bane},
 	}
 )
 

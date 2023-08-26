@@ -27,10 +27,22 @@ var (
 )
 
 var (
+	chargerOne, _   = uuid.FromString("2b223f7f-87e3-4724-bc3c-5d1bb71e88db")
+	chargerTwo, _   = uuid.FromString("927ac833-e699-4764-bbc2-543500ca7965")
+	chargerThree, _ = uuid.FromString("37e96e47-e764-4d37-a95c-1b267140502f")
+)
+
+var (
+	chargerOneName   = "Procredit Bank"
+	chargerTwoName   = "Promenada Shopping Mall"
+	chargerThreeName = "JKP Cistoca"
+)
+
+var (
 	chargers = []entities.Charger{
 		{
-			Id:                     uuid.NewV4(),
-			Name:                   "Procredit Bank",
+			Id:                     chargerOne,
+			Name:                   chargerOneName,
 			Address:                addresses[0],
 			WorkTimeFrom:           7,
 			WorkTimeTo:             20,
@@ -42,8 +54,8 @@ var (
 			ChargingSpeedPerMinute: 22,
 		},
 		{
-			Id:                     uuid.NewV4(),
-			Name:                   "Promenada",
+			Id:                     chargerTwo,
+			Name:                   chargerTwoName,
 			Address:                addresses[1],
 			WorkTimeFrom:           10,
 			WorkTimeTo:             22,
@@ -55,8 +67,8 @@ var (
 			ChargingSpeedPerMinute: 26,
 		},
 		{
-			Id:                     uuid.NewV4(),
-			Name:                   "JKP Cistoca",
+			Id:                     chargerThree,
+			Name:                   chargerThreeName,
 			Address:                addresses[2],
 			WorkTimeFrom:           7,
 			WorkTimeTo:             16,

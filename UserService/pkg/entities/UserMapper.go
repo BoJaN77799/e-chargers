@@ -1,8 +1,10 @@
 package entities
 
-func (user *User) ToDTO() UserReservationDTO {
+func (user *User) ToUserReservationDTO() UserReservationDTO {
 	return UserReservationDTO{
-		Vehicles: vehiclesToDto(user.Vehicles),
+		Id:          user.Id,
+		VehicleId:   user.Vehicles[0].Id,
+		VehicleName: user.Vehicles[0].Name,
 	}
 }
 func (user *User) ToUserProfileDTO() UserProfileDTO {

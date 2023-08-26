@@ -68,13 +68,13 @@ func FindUserById(id uuid.UUID) (entities.User, error) {
 	return user, nil
 }
 
-func CheckUserOwnership(id uuid.UUID, vehicleId uuid.UUID) (entities.User, error) {
+func GetUserVehicleByIdAndUserId(id uuid.UUID, userId uuid.UUID) (entities.User, error) {
 	user, err := FindUserById(id)
 	if err != nil {
 		return user, err
 	}
 
-	vehicle, err := GetVehicleByIdAndUserId(id, vehicleId)
+	vehicle, err := GetVehicleByIdAndUserId(id, userId)
 	if err != nil {
 		return user, err
 	}

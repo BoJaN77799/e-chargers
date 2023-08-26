@@ -19,8 +19,9 @@ type VehicleDto struct {
 }
 
 type UserReservationDTO struct {
-	Id       string `json:"id"`
-	Vehicles []VehicleDto
+	Id          uuid.UUID `json:"id"`
+	VehicleId   uuid.UUID `json:"vehicle_id"`
+	VehicleName string    `json:"vehicle_name"`
 }
 
 type UserProfileDTO struct {

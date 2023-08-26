@@ -3,26 +3,29 @@ package repository
 import (
 	"encoding/json"
 	"errors"
+	uuid "github.com/satori/go.uuid"
 	"io/ioutil"
 	"log"
 	"net/http"
-	"reservation_service/pkg/models"
-	"strconv"
+	"reservation_service/pkg/entities"
 )
 
-func VerifyUserUsernameAndVehicle(username string, vehicleId uint) (models.UserReservationDTO, error) {
+const UserServiceUrl = "http://localhost:50001/api/usr"
+const ChargerServiceUrl = "http://localhost:50002/api/chr"
 
-	endpoint := "http://localhost:50001/api/users/exist/" + username + "/" + strconv.Itoa(int(vehicleId))
-	resp, err := http.Get(endpoint)
+func VerifyUserUsernameAndVehicle(userId uuid.UUID, vehicleId uuid.UUID) (entities.UserReservationDTO, error) {
 
-	var user models.UserReservationDTO
+	URL := UserServiceUrl + "/users/exist/" + userId.String() + "/" + vehicleId.String()
+	response, err := http.Get(URL)
 
-	if resp.StatusCode != http.StatusOK || err != nil {
-		return user, errors.New("user doesn't exist or isn't owner of vehicle")
+	var user entities.UserReservationDTO
+
+	if response.StatusCode != http.StatusOK || err != nil {
+		return user, errors.New("user doesn't exist or user isn't owner of vehicle")
 	}
 
-	defer resp.Body.Close()
-	body, err := ioutil.ReadAll(resp.Body)
+	defer response.Body.Close()
+	body, err := ioutil.ReadAll(response.Body)
 
 	if err != nil {
 		log.Fatalln(err)
@@ -33,13 +36,11 @@ func VerifyUserUsernameAndVehicle(username string, vehicleId uint) (models.UserR
 	return user, nil
 }
 
-func VerifyChargerId(chargerId uint) (models.ChargerReservationDTO, error) {
-	chargerIdStr := strconv.Itoa(int(chargerId))
+func GetChargerById(id uuid.UUID) (entities.ChargerReservationDTO, error) {
+	URL := ChargerServiceUrl + "/chargers/reservation/" + id.String()
+	resp, err := http.Get(URL)
 
-	endpoint := "http://localhost:50002/api/chargers/exist/" + chargerIdStr
-	resp, err := http.Get(endpoint)
-
-	var charger models.ChargerReservationDTO
+	var charger entities.ChargerReservationDTO
 
 	if resp.StatusCode != http.StatusOK || err != nil {
 

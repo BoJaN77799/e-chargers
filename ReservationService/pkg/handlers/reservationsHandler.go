@@ -7,9 +7,8 @@ import (
 	"log"
 	"net/http"
 	"reservation_service/pkg/db/repository"
-	"reservation_service/pkg/models"
+	"reservation_service/pkg/entities"
 	"reservation_service/pkg/utils"
-	"strconv"
 )
 
 func AddReservation(w http.ResponseWriter, r *http.Request) {
@@ -21,7 +20,7 @@ func AddReservation(w http.ResponseWriter, r *http.Request) {
 		log.Fatalln(err)
 	}
 
-	var reservationDTO models.ReservationDTO
+	var reservationDTO entities.ReservationDTO
 	json.Unmarshal(body, &reservationDTO)
 
 	_, err = repository.CreateReservation(reservationDTO)
@@ -35,7 +34,7 @@ func AddReservation(w http.ResponseWriter, r *http.Request) {
 
 func FindAllReservations(w http.ResponseWriter, r *http.Request) {
 
-	var reservationsDTO []models.ReservationDTO
+	var reservationsDTO []entities.ReservationDTO
 
 	reservations := repository.GetAllReservations()
 
@@ -49,12 +48,15 @@ func FindAllReservations(w http.ResponseWriter, r *http.Request) {
 
 func FindAllReservationsFromUser(w http.ResponseWriter, r *http.Request) {
 
-	var reservationsDTO []models.ReservationDTO
+	var reservationsDTO []entities.ReservationDTO
 
-	params := mux.Vars(r)
-	username, _ := params["username"]
+	userId, err := utils.GetIdFromPathParams(r)
+	if err != nil {
+		utils.BadRequestResponse(w, err.Error())
+		return
+	}
 
-	reservations := repository.GetAllReservationsFromUser(username)
+	reservations := repository.GetAllReservationsFromUser(userId)
 
 	for _, reservation := range reservations {
 		reservationsDTO = append(reservationsDTO, reservation.ToDTO())
@@ -66,18 +68,13 @@ func FindAllReservationsFromUser(w http.ResponseWriter, r *http.Request) {
 
 func CancelReservation(w http.ResponseWriter, r *http.Request) {
 
-	params := mux.Vars(r)
-	id, _ := params["id"]
-
-	idUint, err := strconv.ParseUint(id, 10, 32)
-
+	id, err := utils.GetIdFromPathParams(r)
 	if err != nil {
 		utils.BadRequestResponse(w, err.Error())
 		return
 	}
 
-	err = repository.CancelReservation(uint(idUint))
-
+	err = repository.CancelReservation(id)
 	if err != nil {
 		utils.BadRequestResponse(w, err.Error())
 		return
@@ -89,25 +86,19 @@ func CancelReservation(w http.ResponseWriter, r *http.Request) {
 
 func FindAllReservationsInPeriod(w http.ResponseWriter, r *http.Request) {
 
-	var reservationsDTO []models.ReservationDTO
+	var reservationsDTO []entities.ReservationDTO
 
 	params := mux.Vars(r)
 	dateFrom, _ := params["date_from"]
 	dateTo, _ := params["date_to"]
 
-	dateFromUInt64, err := strconv.ParseUint(dateFrom, 10, 64)
-
+	dates, err := utils.ConvertDateFromAndDateTo(dateFrom, dateTo)
 	if err != nil {
-		utils.BadRequestResponse(w, "dateFrom is not valid")
+		utils.BadRequestResponse(w, err.Error())
 		return
 	}
-	dateToUInt64, err := strconv.ParseUint(dateTo, 10, 64)
 
-	if err != nil {
-		utils.BadRequestResponse(w, "dateTo is not valid")
-		return
-	}
-	reservations := repository.GetAllReservationsInPeriod(dateFromUInt64, dateToUInt64)
+	reservations := repository.GetAllReservationsInPeriod(dates.DateFrom, dates.DateFrom)
 
 	for _, reservation := range reservations {
 		reservationsDTO = append(reservationsDTO, reservation.ToDTO())

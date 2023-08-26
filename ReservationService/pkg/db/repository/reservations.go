@@ -2,56 +2,56 @@ package repository
 
 import (
 	"errors"
+	uuid "github.com/satori/go.uuid"
 	"reservation_service/pkg/db"
-	"reservation_service/pkg/models"
+	"reservation_service/pkg/entities"
 	"reservation_service/pkg/utils"
+	"time"
 )
 
-func CreateReservation(reservationDTO models.ReservationDTO) (models.Reservation, error) {
+func CreateReservation(reservationDTO entities.ReservationDTO) (entities.Reservation, error) {
 
-	var reservation models.Reservation
+	dates, err := utils.ConvertDateFromAndDateTo(reservationDTO.DateFrom, reservationDTO.DateTo)
+	if err != nil {
+		return entities.Reservation{}, err
+	}
 
-	err := utils.CheckReservationsInfo(&reservationDTO)
+	err = utils.CheckReservationsInfo(&reservationDTO, dates)
+	if err != nil {
+		return entities.Reservation{}, err
+	}
+
+	userWithVehicle, err := VerifyUserUsernameAndVehicle(reservationDTO.UserId, reservationDTO.VehicleId)
+	if err != nil {
+		return entities.Reservation{}, err
+	}
+
+	charger, err := GetChargerById(reservationDTO.ChargerId)
+	if err != nil {
+		return entities.Reservation{}, err
+	}
+
+	var reservation = entities.Reservation{
+		UserId:      reservationDTO.UserId,
+		ChargerId:   charger.Id,
+		ChargerName: charger.Name,
+		VehicleId:   userWithVehicle.VehicleId,
+		VehicleName: userWithVehicle.VehicleName,
+		DateFrom:    dates.DateFrom,
+		DateTo:      dates.DateTo,
+	}
+
+	err = checkIfReservationExist(&reservation)
 	if err != nil {
 		return reservation, err
 	}
 
-	var user models.UserReservationDTO
-	// verify user username and his vehicle id
-	user, err = VerifyUserUsernameAndVehicle(reservationDTO.Username, reservationDTO.VehicleId)
+	err = checkIfReservationOnOtherChargersExist(&reservation)
 	if err != nil {
 		return reservation, err
 	}
 
-	// verify charger id and get charger capacity
-	var charger models.ChargerReservationDTO
-	charger, err = VerifyChargerId(reservationDTO.ChargerId)
-	if err != nil {
-		return reservation, err
-	}
-
-	reservation.Username = reservationDTO.Username
-	reservation.ChargerId = charger.Id
-	reservation.ChargerName = charger.Name
-	reservation.VehicleId = reservationDTO.VehicleId
-	reservation.VehicleName = user.Vehicles[0].Name
-	reservation.DateFrom = reservationDTO.DateFrom
-	reservation.DateTo = reservationDTO.DateFrom + reservationDTO.Duration*1000*60
-
-	err = CheckIfReservationExist(&reservation)
-
-	if err != nil {
-		return reservation, err
-	}
-
-	err = CheckIfReservationOnOtherChargersExist(&reservation)
-
-	if err != nil {
-		return reservation, err
-	}
-
-	err = CheckChargerCapacity(&reservation, charger.Capacity)
-
+	err = checkChargerCapacity(&reservation, charger.Capacity)
 	if err != nil {
 		return reservation, err
 	}
@@ -63,98 +63,75 @@ func CreateReservation(reservationDTO models.ReservationDTO) (models.Reservation
 	return reservation, nil
 }
 
-func CheckIfReservationExist(reservation *models.Reservation) error {
-	var reservationDB models.Reservation
+func checkIfReservationExist(reservation *entities.Reservation) error {
+	var count int64
 
-	db.Db.Table("reservations").Where(
-		"username = ? "+
-			"AND charger_id = ? "+
-			"AND vehicle_id = ?"+
-			"AND NOT ((date_from >= ? AND date_from >= ?) OR (date_to <= ? AND date_to <= ?))",
-		reservation.Username,
-		reservation.ChargerId,
-		reservation.VehicleId,
-		reservation.DateFrom,
-		reservation.DateTo,
-		reservation.DateFrom,
-		reservation.DateTo,
-	).Find(&reservationDB)
+	db.Db.Table("reservations").
+		Where("user_id = ?", reservation.UserId).
+		Where("charger_id = ?", reservation.ChargerId).
+		Where("vehicle_id = ?", reservation.VehicleId).
+		Where("NOT (date_from >= ? OR date_to <= ?)", reservation.DateTo, reservation.DateFrom).
+		Count(&count)
 
-	if reservationDB.ID != 0 {
-		return errors.New("user has 2 reservation on same charger with same vehicle (charging periods overlaps)")
+	if count > 0 {
+		return errors.New("user has another reservation on the same charger with the same vehicle (charging periods overlap)")
 	}
-
-	// TODO user with vehicle on another charger
-	// TODO provjeri da li je korisnik rezervisao na nekom drugom mjestu u isto vrijeme
-
 	return nil
 }
 
-func CheckIfReservationOnOtherChargersExist(reservation *models.Reservation) error {
-	var reservationDB models.Reservation
+func checkIfReservationOnOtherChargersExist(reservation *entities.Reservation) error {
+	var count int64
 
 	db.Db.Table("reservations").Where(
-		"username = ? "+
-			"AND vehicle_id = ?"+
-			"AND NOT ((date_from >= ? AND date_from >= ?) OR (date_to <= ? AND date_to <= ?))",
-		reservation.Username,
+		"user_id = ? AND vehicle_id = ?"+
+			"AND NOT (date_from >= ? OR date_to <= ?)",
+		reservation.UserId,
 		reservation.VehicleId,
-		reservation.DateFrom,
 		reservation.DateTo,
 		reservation.DateFrom,
-		reservation.DateTo,
-	).Find(&reservationDB)
+	).Count(&count)
 
-	if reservationDB.ID != 0 {
-		// TODO nadji tacno koji charger
-		return errors.New("the user has already reserved the charging of this vehicle at other charger")
+	if count > 0 {
+		return errors.New("the user has already reserved the charging of this vehicle at another charger")
 	}
 
 	return nil
 }
 
-func CheckChargerCapacity(reservation *models.Reservation, chargerCapacity uint) error {
-	var reservationsDB []models.Reservation
+func checkChargerCapacity(reservation *entities.Reservation, chargerCapacity uint) error {
+	var count int64
 
 	db.Db.Table("reservations").Where(
-		"charger_id = ? "+
-			"AND NOT ((date_from >= ? AND date_from >= ?) OR (date_to <= ? AND date_to <= ?))",
+		"charger_id = ? AND NOT (date_from >= ? OR date_to <= ?)",
 		reservation.ChargerId,
-		reservation.DateFrom,
 		reservation.DateTo,
 		reservation.DateFrom,
-		reservation.DateTo,
-	).Find(&reservationsDB)
+	).Count(&count)
 
-	if uint(len(reservationsDB))+1 > chargerCapacity {
-		// TODO vrati prijedlog prvog slobodnog termina i ponudi da zakaze tad
+	if uint(count)+1 > chargerCapacity {
 		return errors.New("there is no free slot on this charger right now")
 	}
 	return nil
 }
 
-func GetAllReservations() []models.Reservation {
-	var reservations []models.Reservation
-
+func GetAllReservations() []entities.Reservation {
+	var reservations []entities.Reservation
 	db.Db.Table("reservations").Find(&reservations)
-
 	return reservations
 }
 
-func GetAllReservationsFromUser(username string) []models.Reservation {
-	var reservations []models.Reservation
-
-	db.Db.Table("reservations").Where("username = ?", username).Find(&reservations)
-
+func GetAllReservationsFromUser(userId uuid.UUID) []entities.Reservation {
+	var reservations []entities.Reservation
+	db.Db.Table("reservations").Where("user_id = ?", userId).Find(&reservations)
 	return reservations
 }
 
-func CancelReservation(id uint) error {
-	var reservation models.Reservation
+func CancelReservation(id uuid.UUID) error {
+	var reservation entities.Reservation
 
-	db.Db.Table("reservations").Where("id = ?", id).Find(&reservation)
+	err := db.Db.Table("reservations").Where("id = ?", id).Find(&reservation).Error
 
-	if reservation.ID == 0 {
+	if err != nil {
 		return errors.New("user with given username doesn't have any reservations on charger with given id with this vehicle")
 	}
 
@@ -163,16 +140,15 @@ func CancelReservation(id uint) error {
 	return nil
 }
 
-func GetAllReservationsInPeriod(dateFromUInt64 uint64, dateToUInt64 uint64) []models.Reservation {
-
-	var reservations []models.Reservation
+func GetAllReservationsInPeriod(dateFrom, dateTo time.Time) []entities.Reservation {
+	var reservations []entities.Reservation
 
 	db.Db.Table("reservations").Where(
 		"NOT ((date_from >= ? AND date_from >= ?) OR (date_to <= ? AND date_to <= ?))",
-		dateFromUInt64,
-		dateToUInt64,
-		dateFromUInt64,
-		dateToUInt64,
+		dateFrom,
+		dateTo,
+		dateFrom,
+		dateTo,
 	).Find(&reservations)
 
 	return reservations

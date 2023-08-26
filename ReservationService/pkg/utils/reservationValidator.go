@@ -2,38 +2,23 @@ package utils
 
 import (
 	"errors"
-	"reservation_service/pkg/models"
-	"time"
+	"reservation_service/pkg/entities"
 )
 
-func CheckReservationsInfo(reservation *models.ReservationDTO) error {
+const (
+	minReservationDuration = 15
+	maxReservationDuration = 90
+)
 
-	if len(reservation.Username) == 0 {
-		return errors.New("reservation username is empty")
-	}
+func CheckReservationsInfo(reservation *entities.ReservationDTO, dates DateFromTo) error {
+	duration := dates.DateTo.Sub(dates.DateFrom)
+	minutes := int(duration.Minutes())
 
-	if reservation.ChargerId <= 0 {
-		return errors.New("reservation chargerId is empty")
-	}
-
-	if reservation.VehicleId <= 0 {
-		return errors.New("reservation vehicleId is empty")
-	}
-
-	// can't make reservation in past and 1 and half hour from now
-	if reservation.DateFrom < uint64(time.Now().UnixMilli()+5400000) {
-		return errors.New("invalid reservation date (less than 1h 30min from now)")
-	}
-
-	if reservation.DateFrom == 0 {
-		return errors.New("reservation date is empty")
-	}
-
-	if reservation.Duration < 15 {
+	if minutes < minReservationDuration {
 		return errors.New("minimum charging duration is 15 minutes")
 	}
 
-	if reservation.Duration > 90 {
+	if minutes > maxReservationDuration {
 		return errors.New("maximum charging duration is 90 minutes")
 	}
 

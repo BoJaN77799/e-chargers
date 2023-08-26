@@ -21,9 +21,9 @@ func FindAllUsers(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(usersDTO)
 }
 
-func CheckIfUserExistWithVehicle(w http.ResponseWriter, r *http.Request) {
+func GetUserWithVehicle(w http.ResponseWriter, r *http.Request) {
 
-	id, err := utils.GetIdFromPathParams(r)
+	userId, err := utils.GetIdFromPathParams(r)
 	if err != nil {
 		utils.BadRequestResponse(w, err.Error())
 		return
@@ -35,8 +35,7 @@ func CheckIfUserExistWithVehicle(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	var user entities.User
-	user, err = repository.CheckUserOwnership(id, vehicleId)
+	user, err := repository.GetUserVehicleByIdAndUserId(vehicleId, userId)
 
 	if err != nil {
 		utils.BadRequestResponse(w, err.Error())
@@ -44,7 +43,7 @@ func CheckIfUserExistWithVehicle(w http.ResponseWriter, r *http.Request) {
 	}
 
 	utils.OKResponse(w)
-	json.NewEncoder(w).Encode(user)
+	json.NewEncoder(w).Encode(user.ToUserReservationDTO())
 }
 
 func CheckIfUserExist(w http.ResponseWriter, r *http.Request) {
