@@ -90,6 +90,12 @@ func GetAllRegisteredUsers() []entities.User {
 	return users
 }
 
+func GetUsersByIds(userIds []string) []entities.User {
+	var users []entities.User
+	db.Db.Table("users").Where("role = ? AND id IN (?)", entities.RegisteredUser, userIds).Find(&users)
+	return users
+}
+
 func StrikeUser(id uuid.UUID) (string, error) {
 	user, err := FindUserById(id)
 	if err != nil {

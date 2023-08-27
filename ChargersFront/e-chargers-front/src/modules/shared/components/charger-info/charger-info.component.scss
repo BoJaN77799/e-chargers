@@ -1,18 +1,25 @@
-th,
-td {
-    border: 1px solid
-}
-
 .not-selected {
-    height: 600px;
-    line-height: 600px;
     text-align: center;
 }
 
 .cover-img {
-    width: 99%;
-    height: 110px;
+    width: 100%;
+    max-height: 120px;
     object-fit: cover;
+}
+
+.charger-name {
+    font-size: 32px;
+    color: green;
+    font-weight: 500;
+}
+
+.reviews-btn {
+    color: green;
+    border: none;
+    background-color: transparent;
+    font-style: italic;
+    margin-bottom: 12px;
 }
 
 .label {
@@ -22,51 +29,18 @@ td {
     font-weight: 500;
 }
 
-.smirk-content {
-    padding: 0;
-    margin: 0;
+.price-speed {
+    display: flex;
+    justify-content: flex-start;
+
+    .item {
+        flex: 1;
+    }
+
 }
 
-.charger-name {
-    font-size: 32px;
-    color: green;
-    font-weight: 500;
-    margin: 0;
-}
-
-.reviews-btn {
-    color: green;
-    margin: 0;
-    height: max-content;
-    padding: 0;
-    border: none;
-    background-color: transparent;
-    font-style: italic;
-}
-
-
-.scroll-div {
-    overflow-y: hidden;
-    overflow-x: hidden;
-}
-
-.box {
-    padding: 0;
-    margin: 0;
-    position: relative;
-    vertical-align: top;
-}
-
-.inline-div {
-    margin-top: 0;
-    padding-top: 0;
-    display: inline-block;
-    position: relative;
-    vertical-align: top;
-    width: 49%;
-}
-
-.target-btn {
-    margin-top: 7px;
-
+.resevation-button {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
 }

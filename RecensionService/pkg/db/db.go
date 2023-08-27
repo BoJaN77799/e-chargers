@@ -20,15 +20,22 @@ type Configuration struct {
 }
 
 var (
-	boksiUUID, _ = uuid.FromString("602ec829-89de-49b4-b96f-873ff8c819af")
+	boksi, _ = uuid.FromString("602ec829-89de-49b4-b96f-873ff8c819af")
+	bane, _  = uuid.FromString("14e0d726-1b6f-4cdc-a520-b0ae7e812b2a")
+)
+
+var (
+	chargerOne, _   = uuid.FromString("2b223f7f-87e3-4724-bc3c-5d1bb71e88db")
+	chargerTwo, _   = uuid.FromString("927ac833-e699-4764-bbc2-543500ca7965")
+	chargerThree, _ = uuid.FromString("37e96e47-e764-4d37-a95c-1b267140502f")
 )
 
 var (
 	recensions = []entities.Recension{
 		{
 			Id:        uuid.NewV4(),
-			UserId:    boksiUUID,
-			ChargerId: uuid.NewV4(),
+			UserId:    boksi,
+			ChargerId: chargerOne,
 			Date:      time.Now(),
 			Content:   "Charger is awesome, but speed is low",
 			Rate:      2,
@@ -37,8 +44,8 @@ var (
 		},
 		{
 			Id:        uuid.NewV4(),
-			UserId:    boksiUUID,
-			ChargerId: uuid.NewV4(),
+			UserId:    boksi,
+			ChargerId: chargerOne,
 			Date:      time.Now().Add(10 * time.Minute),
 			Content:   "This is the coolest charger I have ever seen.",
 			Rate:      5,
@@ -47,8 +54,8 @@ var (
 		},
 		{
 			Id:        uuid.NewV4(),
-			UserId:    boksiUUID,
-			ChargerId: uuid.NewV4(),
+			UserId:    boksi,
+			ChargerId: chargerTwo,
 			Date:      time.Now().Add(40 * time.Minute),
 			Content:   "Fine charger. Speed can be better",
 			Rate:      4,
@@ -57,8 +64,8 @@ var (
 		},
 		{
 			Id:        uuid.NewV4(),
-			UserId:    boksiUUID,
-			ChargerId: uuid.NewV4(),
+			UserId:    bane,
+			ChargerId: chargerThree,
 			Date:      time.Now().Add(time.Hour),
 			Content:   "Stupid bastards, fix this charger",
 			Rate:      1,

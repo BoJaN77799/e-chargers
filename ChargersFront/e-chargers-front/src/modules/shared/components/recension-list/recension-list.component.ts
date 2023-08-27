@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ReviewDTO } from '../../model/reviewDTO';
+import { RecensionWithUserDTO } from '../../model/reviewDTO';
 
 @Component({
   selector: 'app-recension-list',
@@ -9,7 +9,7 @@ import { ReviewDTO } from '../../model/reviewDTO';
 export class RecensionListComponent implements OnInit {
 
   @Input()
-  recensions: ReviewDTO[] = [];
+  recensions: RecensionWithUserDTO[] = [];
 
   constructor() { }
 

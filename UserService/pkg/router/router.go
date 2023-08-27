@@ -25,6 +25,7 @@ func HandleRequests(port int) {
 
 	// User endpoints
 	router.HandleFunc(UrlBase+"/users", handlers.FindAllUsers).Methods("GET")
+	router.HandleFunc(UrlBase+"/users/batch", handlers.FindUsersByUserIds).Methods("POST")
 
 	router.HandleFunc(UrlBase+"/users/exist/{id}/{vehicleId}", handlers.GetUserWithVehicle).Methods("GET")
 	router.HandleFunc(UrlBase+"/users/exist/{id}", handlers.CheckIfUserExist).Methods("GET")

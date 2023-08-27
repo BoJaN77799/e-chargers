@@ -4,7 +4,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import * as moment from 'moment';
 import { ReservationDTO } from 'src/modules/reservation/model/reservationDTO';
 import { UserReservationsComponent } from 'src/modules/reservation/pages/user-reservations/user-reservations.component';
-import { ReviewDTO } from '../../model/reviewDTO';
+import { RecensionDTO } from '../../model/reviewDTO';
 import { ReviewService } from '../../service/reviewService';
 import { SnackBarService } from '../../service/snack-bar.service';
 import { UtilService } from '../../service/utils-service';
@@ -42,9 +42,9 @@ export class CreateReviewComponent implements OnInit {
       return
     }
 
-    let review: ReviewDTO = {
+    let review: RecensionDTO = {
       "id": 0,
-      "username": this.utilService.getLoggedUsername(),
+      "user_id": this.utilService.getLoggedUsername(),
       "charger_id": this.reservation.charger_id,
       "content": this.reviewForm.get("content")?.value,
       "date": moment().unix(),

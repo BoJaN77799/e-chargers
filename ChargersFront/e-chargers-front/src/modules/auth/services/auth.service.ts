@@ -16,7 +16,7 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   login(auth: Login): Observable<Token> {
-    return this.http.post<Token>("echargers/api/users/login", auth, {
+    return this.http.post<Token>("echargers/api/auth/login", auth, {
       headers: this.headers,
       responseType: "json",
     });

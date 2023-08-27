@@ -25,14 +25,13 @@ func AddCharger(w http.ResponseWriter, r *http.Request) {
 }
 
 func GetAllChargers(w http.ResponseWriter, r *http.Request) {
-
 	utils.SetupResponse(&w, r)
 	if r.Method == "OPTIONS" {
 		return
 	}
 
 	URL := utils.BaseChargerServicePath.Next().Host + "/chargers"
-	response, err := handlers.DoRequestWithToken(r, http.MethodGet, URL, nil)
+	response, err := http.Get(URL)
 
 	if err != nil {
 		w.WriteHeader(http.StatusGatewayTimeout)

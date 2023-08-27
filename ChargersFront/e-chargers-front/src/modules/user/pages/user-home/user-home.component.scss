@@ -1,53 +1,57 @@
-.search-button {
-    margin-top: 2%;
-    width: 65%;
-    border: 2px solid green;
-    background-color: white;
-    color: green;
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%, 0);
+.top-content-wrapper {
+    display: flex;
+    gap: 10px;
+    margin: 20px 0px;
+
+    .search-button-wrapper {
+        flex: 0 0 25%;
+
+        display: flex;
+        justify-content: center;
+
+        .search-button {
+            min-width: 150px;
+        }
+
+        .search-button:hover {
+            background-color: green;
+            color: white;
+        }
+    }
+
+    .map-buttons {
+        display: flex;
+
+        .map-button {
+            margin-right: 10px;
+            max-width: 220px;
+        }
+
+        .map-button:hover {
+            background-color: green;
+            color: white;
+        }
+    }
 }
 
-.search-button:hover {
-    border: 3px solid green;
-    background-color: green;
-    color: white;
+.content-wrapper {
+    display: flex;
 
-}
+    .left-wrapper {
+        flex: 0 0 25%;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-right: 10px;
+    }
 
-.inline-div {
-    display: inline-block;
-    position: relative;
-    overflow-y: hidden;
-    height: 100%;
-}
+    .right-wrapper {
+        flex: 1;
+        margin-right: 10px;
 
-.map {
-    padding: 0;
-    margin: 0;
-    padding-top: 16px;
-    padding-left: 15px;
-    position: absolute;
-    max-width: 72%;
-    max-height: 90%;
-    overflow: hidden;
-}
-
-.content {
-    margin-top: 55px;
-    overflow: hidden;
-    height: 90%;
-}
-
-.map-top {
-    background-color: transparent;
-    margin: 0px 15px;
-    color: green;
-    border: none;
-    margin-bottom: 12px;
-}
-
-.map-top:hover {
-    color: black
+        .map {
+            max-height: 95%;
+            overflow: hidden;
+        }
+    }
 }

@@ -36,6 +36,13 @@ type UserProfileDTO struct {
 	Vehicles    []VehicleDto
 }
 
+type UserBaseInfoDTO struct {
+	Id        uuid.UUID `json:"id"`
+	Email     string    `json:"email"`
+	Firstname string    `json:"firstname"`
+	Lastname  string    `json:"lastname"`
+}
+
 type UserReportDTO struct {
 	Id          uuid.UUID `json:"id" `
 	Email       string    `json:"email"  `
@@ -46,4 +53,8 @@ type UserReportDTO struct {
 	Banned      bool      `json:"banned"`
 	BannedAt    uint64    `json:"banned_at"`
 	BannedUntil uint64    `json:"banned_until"`
+}
+
+type UsersBatchDTO struct {
+	UserIds []string `json:"userIds"`
 }

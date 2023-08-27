@@ -15,7 +15,7 @@ export class AdminHomeComponent implements OnInit {
   chargers: ChargerDTO[]
   chargersToMap: ChargerDTO[]
 
-  selectedCharger: ChargerDTO | undefined
+  selectedCharger: ChargerDTO
 
   @ViewChild(MapPageComponent)
   child!: MapPageComponent;
@@ -26,6 +26,7 @@ export class AdminHomeComponent implements OnInit {
   searchOpened: boolean = false
 
   constructor(private chargerService: ChargerService, private snackBarService: SnackBarService) {
+    this.selectedCharger = {} as ChargerDTO
     this.chargers = []
     this.chargersToMap = []
   }

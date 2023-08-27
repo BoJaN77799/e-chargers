@@ -15,7 +15,7 @@ export class UserHomeComponent implements OnInit {
   chargers: ChargerDTO[]
   chargersToMap: ChargerDTO[]
 
-  selectedCharger: ChargerDTO | undefined
+  selectedCharger: ChargerDTO
 
   // search
   searchOpened: boolean = false
@@ -26,12 +26,17 @@ export class UserHomeComponent implements OnInit {
   @ViewChild(ChargerInfoComponent) chargerInfoComponent!: ChargerInfoComponent;
 
   constructor(private chargerService: ChargerService) {
+    this.selectedCharger = {} as ChargerDTO
     this.chargers = []
     this.chargersToMap = []
   }
 
   ngOnInit(): void {
     this.loadChargers();
+  }
+
+  toggleSearch() {
+    this.searchOpened = !this.searchOpened;
   }
 
   loadChargers() {
@@ -43,8 +48,6 @@ export class UserHomeComponent implements OnInit {
         this.chargers.forEach(chargerForMap => {
           this.chargersToMap.push(chargerForMap)
         });
-
-        console.log(this.mapComponent.userLocation)
         // set user location
         navigator.geolocation.getCurrentPosition((position) => {
           console.log(position.coords)
@@ -65,10 +68,6 @@ export class UserHomeComponent implements OnInit {
     this.searchOpened = false;
     this.chargerInfoComponent.recensions = [];
     this.chargerInfoComponent.reviewsVisible = false;
-  }
-
-  toggleSearch() {
-    this.searchOpened = !this.searchOpened;
   }
 
   changeChargers(chargers: ChargerDTO[]) {

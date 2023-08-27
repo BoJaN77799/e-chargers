@@ -6,32 +6,20 @@
       <fieldset>
         <p class="login-label">Login</p>
         <div class="form-group row">
-          <div id="username-div" class="col-md">
-            <input type="text" class="form-control" id="username" name="username" placeholder="Username"
-              formControlName="username" />
-            <small id='danger-label-username' class="text-danger danger-label" *ngIf="
-          form.controls['username'].touched &&
-          form.controls['username'].errors?.['required']
+          <div id="email-div" class="col-md">
+            <input type="text" class="form-control" id="email" name="email" placeholder="Email"
+              formControlName="email" />
+            <small id='danger-label-email' class="text-danger danger-label" *ngIf="
+          form.controls['email'].touched &&
+          form.controls['email'].errors?.['required']
           ">
-              Username can't be empty!
+              Email can't be empty!
             </small>
-            <small id='danger-label-username' class="text-danger danger-label" *ngIf="
-          form.controls['username'].touched &&
-          form.controls['username'].errors?.['invalidUsername']
+            <small id='danger-label-email' class="text-danger danger-label" *ngIf="
+          form.controls['email'].touched &&
+          form.controls['email'].errors?.['invalidEmail']
           ">
-              Username should contain only digits and letters!
-            </small>
-            <small id='danger-label-username' class="text-danger danger-label" *ngIf="
-          form.controls['username'].touched &&
-          form.controls['username'].errors?.['invalidMinLength']
-          ">
-              Minimum length is 3 characters!
-            </small>
-            <small id='danger-label-username' class="text-danger danger-label" *ngIf="
-          form.controls['username'].touched &&
-          form.controls['username'].errors?.['invalidMaxLength']
-          ">
-              Maximum length is 20 characters!
+              Email has invalid format!
             </small>
           </div>
         </div>

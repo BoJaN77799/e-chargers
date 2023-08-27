@@ -17,8 +17,9 @@ func HandleRequests(port int) {
 	db.Init()
 
 	router := mux.NewRouter()
-	router.HandleFunc(UrlBase+"/chargers", handlers.AddCharger).Methods("POST")
 	router.HandleFunc(UrlBase+"/chargers", handlers.FindAllChargers).Methods("GET")
+
+	router.HandleFunc(UrlBase+"/chargers", handlers.AddCharger).Methods("POST")
 	router.HandleFunc(UrlBase+"/chargers/search", handlers.SearchChargers).Methods("POST")
 	router.HandleFunc(UrlBase+"/chargers/{id}", handlers.GetChargerByID).Methods("GET")
 	router.HandleFunc(UrlBase+"/chargers/{lon}/{lat}", handlers.FindClosestCharger).Methods("GET")

@@ -24,7 +24,7 @@ func HandleRequests(port int) {
 	router.HandleFunc(UrlBase+"/recensions/{userId}", handlers.FindAllRecensionsFromUser).Methods("GET")
 	router.HandleFunc(UrlBase+"/recensions/{id}", handlers.CancelRecension).Methods("DELETE")
 	router.HandleFunc(UrlBase+"/recensions/{id}", handlers.BanRecension).Methods("POST")
-	router.HandleFunc(UrlBase+"/recensions/charger/{charger_id}", handlers.FindAllRecensionsOfCharger).Methods("GET")
+	router.HandleFunc(UrlBase+"/recensions/charger/{chargerId}", handlers.FindAllRecensionsOfCharger).Methods("GET")
 
 	fmt.Println("RecensionService is running on port: " + strconv.Itoa(port))
 	log.Fatal(http.ListenAndServe(":"+strconv.Itoa(port), router))

@@ -21,6 +21,20 @@ func FindAllUsers(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(usersDTO)
 }
 
+func FindUsersByUserIds(w http.ResponseWriter, r *http.Request) {
+	var usersBatch entities.UsersBatchDTO
+	json.NewDecoder(r.Body).Decode(&usersBatch)
+
+	var usersDTO []entities.UserBaseInfoDTO
+	users := repository.GetUsersByIds(usersBatch.UserIds)
+	for _, user := range users {
+		usersDTO = append(usersDTO, user.ToUserBaseInfoDTO())
+	}
+
+	utils.OKResponse(w)
+	json.NewEncoder(w).Encode(usersDTO)
+}
+
 func GetUserWithVehicle(w http.ResponseWriter, r *http.Request) {
 
 	userId, err := utils.GetIdFromPathParams(r)

@@ -1,9 +1,24 @@
 package RecensionService
 
+import (
+	uuid "github.com/satori/go.uuid"
+	"time"
+)
+
 type RecensionDTO struct {
-	Username  string `json:"username"`
-	ChargerId uint   `json:"charger_id"`
-	Date      uint64 `json:"date"`
-	Content   string `json:"content"`
-	Rate      uint   `json:"rate"`
+	Id        uuid.UUID `json:"id"`
+	UserId    uuid.UUID `json:"user_id"`
+	ChargerId uuid.UUID `json:"charger_id"`
+	Date      time.Time `json:"date"`
+	Content   string    `json:"content"`
+	Rate      uint      `json:"rate"`
+	Toxic     float32   `json:"toxic"`
+	Banned    bool      `json:"banned"`
+}
+
+type RecensionWithUserDTO struct {
+	RecensionDTO
+	Email     string `json:"email"`
+	Firstname string `json:"firstname"`
+	Lastname  string `json:"lastname"`
 }

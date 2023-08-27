@@ -39,7 +39,7 @@ func HandleRequests(port int) {
 	router.HandleFunc("/api/chargers", ChargerService.GetAllChargers).Methods("GET")
 	router.HandleFunc("/api/chargers/search", ChargerService.SearchChargers).Methods("POST")
 	router.HandleFunc("/api/chargers/closest/{lon}/{lat}", ChargerService.FindClosestCharger).Methods("GET")
-	router.HandleFunc("/api/recensions/charger/{charger_id}", RecensionService.FindAllRecensionsOfCharger).Methods("GET")
+	router.HandleFunc("/api/recensions/charger/{chargerId}", RecensionService.FindAllRecensionsOfCharger).Methods("GET")
 
 	router.Use(authenticationMiddleware)
 

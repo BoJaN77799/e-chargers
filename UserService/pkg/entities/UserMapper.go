@@ -18,6 +18,15 @@ func (user *User) ToUserProfileDTO() UserProfileDTO {
 	}
 }
 
+func (user *User) ToUserBaseInfoDTO() UserBaseInfoDTO {
+	return UserBaseInfoDTO{
+		Id:        user.Id,
+		Email:     user.Email,
+		Firstname: user.Firstname,
+		Lastname:  user.Lastname,
+	}
+}
+
 func (user *User) ToReportDTO() UserReportDTO {
 	return UserReportDTO{
 		Id:          user.Id,

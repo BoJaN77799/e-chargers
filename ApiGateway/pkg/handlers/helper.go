@@ -18,3 +18,11 @@ func DoRequestWithToken(r *http.Request, method string, URL string, body io.Read
 	request.Header.Set("Authorization", "Bearer "+tokenString)
 	return client.Do(request)
 }
+
+func DoRequest(method string, URL string, body io.Reader) (*http.Response, error) {
+	client := http.Client{Timeout: 5 * time.Second}
+	request, _ := http.NewRequest(method, URL, body)
+	request.Header.Set("Accept", "application/json")
+	request.Header.Set("Content-Type", "application/json")
+	return client.Do(request)
+}

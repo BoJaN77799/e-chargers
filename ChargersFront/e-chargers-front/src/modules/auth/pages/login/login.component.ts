@@ -11,6 +11,7 @@ import { MinLengthPasswordValidator } from 'src/modules/shared/validators/MinLen
 import { PasswordValidator } from 'src/modules/shared/validators/PasswordValidator';
 import { Login } from '../../models/login';
 import * as moment from 'moment';
+import { EmailValidator } from 'src/modules/shared/validators/EmailValidator';
 
 @Component({
   selector: 'app-login',
@@ -29,7 +30,7 @@ export class LoginComponent implements OnInit {
     private utilService: UtilService
   ) {
     this.form = this.fb.group({
-      username: [null, [Validators.required, UsernameValidator, MinLengthValidator, MaxLengthValidator]],
+      email: [null, [Validators.required, EmailValidator]],
       password: [null, [Validators.required, PasswordValidator, MinLengthPasswordValidator, MaxLengthValidator]],
     });
   }
@@ -39,23 +40,22 @@ export class LoginComponent implements OnInit {
 
   submit() {
     const auth: Login = {
-      username: this.form.value.username,
+      email: this.form.value.email,
       password: this.form.value.password,
     };
 
-    this.authService.login(auth).subscribe((result: any) => {
-      this.snackBarService.openSnackBar("Successful login!");
+    this.authService.login(auth).subscribe(
+      (response: any) => {
+        const token = JSON.stringify(response);
+        sessionStorage.setItem("user", token);
 
-      const token = JSON.stringify(result);
-      sessionStorage.setItem("user", token);
-
-      if (this.utilService.isRole("Administrator")) {
-        this.router.navigate(["myapp/admin/homepage"]);
-      }
-      if (this.utilService.isRole("RegisteredUser")) {
-        this.router.navigate(["myapp/user/homepage"])
-      }
-    },
+        if (this.utilService.isRole("Administrator")) {
+          this.router.navigate(["myapp/admin/homepage"]);
+        }
+        if (this.utilService.isRole("RegisteredUser")) {
+          this.router.navigate(["myapp/user/homepage"])
+        }
+      },
       (err: any) => {
         if ((err.error as string).includes("banned")) {
           let banned_until_index = (err.error as string).lastIndexOf('l')

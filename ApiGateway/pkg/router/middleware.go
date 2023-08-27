@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-var publicRoutes = []string{
+var publicRouteParts = []string{
 	"/api/auth/login",
 	"/api/auth/register",
 	"/api/chargers",
@@ -17,8 +17,8 @@ var publicRoutes = []string{
 }
 
 func isRoutePublic(route string) bool {
-	for _, publicRoute := range publicRoutes {
-		if strings.Contains(publicRoute, route) {
+	for _, publicRoutePart := range publicRouteParts {
+		if strings.Contains(route, publicRoutePart) {
 			return true
 		}
 	}
@@ -35,6 +35,7 @@ func authenticationMiddleware(next http.Handler) http.Handler {
 
 		if isRoutePublic(r.URL.String()) {
 			next.ServeHTTP(w, r)
+			return
 		}
 
 		accessToken, err := utils.ExtractAccessTokenFromHeader(r)

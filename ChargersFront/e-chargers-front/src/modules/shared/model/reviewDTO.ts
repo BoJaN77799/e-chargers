@@ -1,9 +1,16 @@
-export interface ReviewDTO {
+export interface RecensionDTO {
     id: number
-    username: string
+    user_id: string
     charger_id: number
     date: number
     content: string
     rate: number,
     toxic: number
 }
+
+export type RecensionWithUserDTO = RecensionDTO & {
+    banned: boolean,
+    email: string,
+    firstname: string,
+    lastname: string
+} 
